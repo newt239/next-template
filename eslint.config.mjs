@@ -25,8 +25,13 @@ export default antfu({
             group: "builtin",
             position: "before",
           },
+          {
+            pattern: "#/**",
+            group: "parent",
+            position: "before",
+          },
         ],
-        "pathGroupsExcludedImportTypes": ["builtin"],
+        "pathGroupsExcludedImportTypes": ["builtin", "object"],
         "alphabetize": {
           order: "asc",
         },
