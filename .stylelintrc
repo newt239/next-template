@@ -1,7 +1,8 @@
 {
   "extends": [
     "stylelint-config-standard",
-    "stylelint-config-recess-order"
+    "stylelint-config-recess-order",
+    "@css-modules-kit/stylelint-plugin/recommended"
   ],
   "plugins": ["stylelint-plugin-use-baseline"],
   "rules": {
