@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        task: [tsc, eslint]
+        task: [tsc, eslint, stylelint]
 
     steps:
       - name: Checkout target branch
@@ -31,4 +31,5 @@ jobs:
           case "${{ matrix.task }}" in
             tsc)       pnpm tsc --noEmit ;;
             eslint)    pnpm lint ;;
+            stylelint) pnpm stylelint ;;
           esac
