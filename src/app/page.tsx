@@ -1,5 +1,5 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Image from 'next/image'
+import styles from './page.module.css'
 
 export default function Home() {
   return (
@@ -15,7 +15,10 @@ export default function Home() {
         />
         <ol>
           <li>
-            Get started by editing <code>src/app/page.tsx</code>.
+            Get started by editing
+            {' '}
+            <code>src/app/page.tsx</code>
+            .
           </li>
           <li>Save and see your changes instantly.</li>
         </ol>
@@ -91,5 +94,5 @@ export default function Home() {
         </a>
       </footer>
     </div>
-  );
+  )
 }
