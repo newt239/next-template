@@ -1,4 +1,5 @@
 pre-commit:
+  parallel: true
   commands:
     lint-fix:
       run: pnpm run lint:fix
