@@ -49,4 +49,11 @@ export default antfu({
     ],
     "unused-imports/no-unused-imports": "error",
   },
+}, {
+  files: ["**/*.{ts,tsx}"],
+  rules: {
+    "complexity": ["error", 10],
+    "max-lines": ["error", { max: 300, skipBlankLines: false, skipComments: false }],
+    "max-lines-per-function": ["error", { max: 100 }],
+  },
 });
