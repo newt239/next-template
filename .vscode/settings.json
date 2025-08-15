@@ -24,5 +24,6 @@
     "toml",
     "xml"
   ],
-  "css.validate": false
+  "css.validate": false,
+  "files.insertFinalNewline": true
 }
