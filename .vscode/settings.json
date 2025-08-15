@@ -25,5 +25,6 @@
     "xml"
   ],
   "css.validate": false,
+  "biome.enabled": false,
   "files.insertFinalNewline": true
 }

@@ -38,5 +38,15 @@ export default antfu({
   rules: {
     "style/quotes": ["error", "double"],
     "style/semi": ["error", "always"],
+    "ts/no-explicit-any": "error",
+    "ts/no-unused-vars": [
+      "error",
+      {
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_",
+        caughtErrorsIgnorePattern: "^_",
+      },
+    ],
+    "unused-imports/no-unused-imports": "error",
   },
 });
