@@ -5,5 +5,5 @@ pre-commit:
       stage_fixed: true
       fail_text: リントエラーがあります
     type-check:
-      run: npx tsc --noEmit
+      run: pnpm run type-check
       fail_text: 型エラーがあります

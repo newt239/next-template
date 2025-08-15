@@ -36,7 +36,7 @@
 - **フレームワーク**: Next.js 15 with App Router
 - **言語**: TypeScript
 - **スタイリング**: CSS Modules
-- **コード品質**: ESlint, Prettier
+- **コード品質**: ESlint, Stylelint
 - **Git hooks**: Lefthook
 
 ### プロジェクト構造
