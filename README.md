@@ -2,7 +2,6 @@
 
 - TypeScript
 - Next.js App Router
-- React
 - ESLint Flat Config
   - @antfu/eslint-config
 - Stylelint
@@ -11,6 +10,12 @@
   - stylelint-plugin-use-baseline
   - @css-modules-kit/stylelint-plugin
 - CSS Modules Kit
+- Vitest
+- Playwright
+- Storybook
+- Vercel
+- Turso DB (SQLite)
+- Drizzle
 
 ## Development
 

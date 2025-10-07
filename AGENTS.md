@@ -10,7 +10,7 @@
 ## 基本原則
 
 - 常に日本語でコミュニケーションを行ってください。すべてのコミットメッセージ、コメント、エラーメッセージ、ユーザーとのやり取りは日本語で行ってください。
-- ファイルの作成、編集、削除を行う前に、必ず以下を報告し、明示的なユーザー承認を得てください。
+- ファイルの削除を行う場合は、必ず実行前に以下を報告し、明示的なユーザー承認を得てください。
   - 対象ファイルのリスト
   - 実行する変更の詳細説明
   - 影響範囲の説明
@@ -33,24 +33,36 @@
 
 ### 技術スタック
 
-- **フレームワーク**: Next.js 15 with App Router
 - **言語**: TypeScript
+- **フレームワーク**: Next.js 15 with App Router
 - **スタイリング**: CSS Modules
-- **コード品質**: ESlint, Stylelint
+- **コード品質**: ESlint, Prettier, Stylelint
 - **Git hooks**: Lefthook
+- **テスト**: Vitest, Playwright
+- **コンポーネント管理**: Storybook
+- **デプロイ**: Vercel
+- **データベース**: Turso DB (SQLite)
+- **ORM**: Drizzle
 
 ### プロジェクト構造
 
-```
+```bash
 src/
 ├── app/                    # Next.js App Router
 │   ├── globals.css        # グローバルスタイル
 │   ├── layout.tsx         # ルートレイアウト
 │   └── page.tsx           # ホームページ
-├── components/
-│   ├── ui/                # 最小単位のコンポーネント
-│   └── features/          # 機能固有のコンポーネント
-├── lib/                   # グローバルユーティリティ関数
+├── features/
+│   └─ {name}/
+│      ├─ actions/            # 機能固有のアクション
+│      ├─ types/              # 機能固有の型定義
+│      ├─ hooks/              # 機能固有のカスタムフック
+│      ├─ {name}.tsx          # 機能固有のコンポーネント
+│      ├─ {name}.module.css   # 機能固有のスタイル
+│      ├─ {name}.spec.tsx     # 機能固有のユニットテスト
+│      ├─ {name}.stories.tsx  # 機能固有のストーリー
+│      └─ index.ts            # 機能固有のインデックスファイル
+├── libs/                   # グローバルユーティリティ関数
 └── hooks/                 # グローバルカスタムフック
 ```
 
