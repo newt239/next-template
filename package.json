@@ -13,6 +13,9 @@
     "type-check": "npx tsc --noEmit",
     "test": "vitest",
     "test:run": "vitest run",
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
     "eslint": "eslint",
     "eslint:fix": "eslint --fix",
     "stylelint": "stylelint \"src/**/*.css\"",
@@ -20,6 +23,9 @@
     "gen": "cmk"
   },
   "dependencies": {
+    "@libsql/client": "^0.15.15",
+    "drizzle-orm": "^0.44.6",
+    "nanoid": "^5.1.6",
     "next": "15.4.6",
     "react": "19.1.1",
     "react-dom": "19.1.1"
@@ -36,6 +42,7 @@
     "@types/react": "19.1.10",
     "@types/react-dom": "19.1.7",
     "@vitest/ui": "^3.2.4",
+    "drizzle-kit": "^0.31.5",
     "eslint": "9.33.0",
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-react-refresh": "0.4.20",
