@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(bun add:*)",
+      "Bash(bun run:*)",
+      "Bash(bun update:*)",
+      "mcp__serena__search_for_pattern",
+      "mcp__serena__activate_project",
+      "Bash(bun tsc:*)",
+      "Bash(grep:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": ["deepwiki", "playwright", "context7", "serena"]
+}
