@@ -1,59 +1,72 @@
-import antfu from "@antfu/eslint-config";
+import { FlatCompat } from "@eslint/eslintrc";
+import eslintConfigPrettier from "eslint-config-prettier";
 
-export default antfu({
-  css: false,
-  react: true,
-  typescript: true,
-  imports: {
-    order: {
-      "groups": [
-        "builtin",
-        "external",
-        "parent",
-        "sibling",
-        "index",
-        "object",
-        "type",
-      ],
-      "pathGroups": [
+const compat = new FlatCompat({
+  // import.meta.dirname is available after Node.js v20.11.0
+  baseDirectory: import.meta.dirname,
+});
+
+const eslintConfig = [
+  {
+    ignores: ["node_modules/", ".next/", "public/", "playwright-report/"],
+  },
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  eslintConfigPrettier,
+  {
+    rules: {
+      "react-hooks/exhaustive-deps": "off",
+      "@typescript-eslint/no-explicit-any": "error",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
         {
-          pattern: "{react,react-dom/**,react-router-dom,next,next/**}",
-          group: "builtin",
-          position: "before",
-        },
-        {
-          pattern: "#/**",
-          group: "parent",
-          position: "before",
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          caughtErrorsIgnorePattern: "^_",
         },
       ],
-      "pathGroupsExcludedImportTypes": ["builtin", "object"],
-      "alphabetize": {
-        order: "asc",
-      },
-      "newlines-between": "always",
+      "react/function-component-definition": [
+        "error",
+        {
+          namedComponents: "arrow-function",
+          unnamedComponents: "arrow-function",
+        },
+      ],
+      "@typescript-eslint/consistent-type-imports": [
+        "error",
+        {
+          prefer: "type-imports",
+          fixStyle: "separate-type-imports",
+          disallowTypeAnnotations: false,
+        },
+      ],
+      "import/order": [
+        "error",
+        {
+          "groups": [
+            "builtin",
+            "external",
+            "parent",
+            "sibling",
+            "index",
+            "object",
+            "type",
+          ],
+          "pathGroups": [
+            {
+              pattern: "{react,react-dom/**,react-router-dom,next,next/**}",
+              group: "builtin",
+              position: "before",
+            },
+          ],
+          "pathGroupsExcludedImportTypes": ["builtin"],
+          "alphabetize": {
+            order: "asc",
+          },
+          "newlines-between": "always",
+        },
+      ],
     },
   },
-}, {
-  rules: {
-    "style/quotes": ["error", "double"],
-    "style/semi": ["error", "always"],
-    "ts/no-explicit-any": "error",
-    "ts/no-unused-vars": [
-      "error",
-      {
-        argsIgnorePattern: "^_",
-        varsIgnorePattern: "^_",
-        caughtErrorsIgnorePattern: "^_",
-      },
-    ],
-    "unused-imports/no-unused-imports": "error",
-  },
-}, {
-  files: ["**/*.{ts,tsx}"],
-  rules: {
-    "complexity": ["error", 10],
-    "max-lines": ["error", { max: 300, skipBlankLines: false, skipComments: false }],
-    "max-lines-per-function": ["error", { max: 100 }],
-  },
-});
+];
+
+export default eslintConfig;

@@ -1,53 +1,57 @@
-import type { CreateTodoRequest, Todo, UpdateTodoRequest } from "@/types/todo";
+import createApiClient from "./hono/browser";
+import type { Todo, CreateTodoRequest, UpdateTodoRequest } from "@/types/todo";
+
+const apiClient = createApiClient();
 
 export const todoApi = {
   async getTodos(): Promise<Todo[]> {
-    const response = await fetch("/api/todos");
-    if (!response.ok) {
-      throw new Error("TODO一覧の取得に失敗しました");
+    const response = await apiClient.todos.$get({ query: {} });
+    const data = await response.json();
+    if ("error" in data) {
+      throw new Error(data.error);
     }
-    return response.json();
+    return data.todos.map(todo => ({
+      ...todo,
+      createdAt: new Date(todo.createdAt)
+    }));
   },
 
-  async createTodo(data: CreateTodoRequest): Promise<Todo> {
-    const response = await fetch("/api/todos", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
+  async createTodo(todo: CreateTodoRequest): Promise<Todo> {
+    const response = await apiClient.todos.$post({
+      json: todo,
     });
-
-    if (!response.ok) {
-      throw new Error("TODOの追加に失敗しました");
+    const data = await response.json();
+    if ("error" in data) {
+      throw new Error(data.error);
     }
-
-    return response.json();
+    return {
+      ...data,
+      createdAt: new Date(data.createdAt)
+    };
   },
 
-  async updateTodo(id: number, data: UpdateTodoRequest): Promise<Todo> {
-    const response = await fetch(`/api/todos/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
+  async updateTodo(id: number, todo: UpdateTodoRequest): Promise<Todo> {
+    const response = await apiClient.todos[":id"].$put({
+      param: { id: id.toString() },
+      json: todo,
     });
-
-    if (!response.ok) {
-      throw new Error("TODOの更新に失敗しました");
+    const data = await response.json();
+    if ("error" in data) {
+      throw new Error(data.error);
     }
-
-    return response.json();
+    return {
+      ...data,
+      createdAt: new Date(data.createdAt)
+    };
   },
 
   async deleteTodo(id: number): Promise<void> {
-    const response = await fetch(`/api/todos/${id}`, {
-      method: "DELETE",
+    const response = await apiClient.todos[":id"].$delete({
+      param: { id: id.toString() },
     });
-
-    if (!response.ok) {
-      throw new Error("TODOの削除に失敗しました");
+    const data = await response.json();
+    if ("error" in data) {
+      throw new Error(data.error);
     }
   },
 };

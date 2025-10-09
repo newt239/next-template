@@ -1,15 +1,15 @@
-export interface Todo {
+export type Todo = {
   id: number
   title: string
   isCompleted: boolean
   createdAt: Date
 }
 
-export interface CreateTodoRequest {
+export type CreateTodoRequest = {
   title: string
 }
 
-export interface UpdateTodoRequest {
+export type UpdateTodoRequest = {
   title?: string
   isCompleted?: boolean
 }
