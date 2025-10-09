@@ -15,13 +15,11 @@ if (!tursoToken) {
   throw new Error("TURSO_AUTH_TOKEN environment variable is required");
 }
 
-// Turso接続設定
 const sqlClient = createClient({
   url: tursoUrl,
   authToken: tursoToken,
 });
 
-// Drizzleクライアント初期化
 export const DBClient = drizzle(sqlClient, { schema });
 
 export type DrizzleDB = typeof DBClient;

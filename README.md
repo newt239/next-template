@@ -19,9 +19,23 @@
 
 ## Development
 
+### 1. 依存関係のインストール
+
 ```bash
 pnpm install
 ```
+
+### 2. DBマイグレーション
+
+```bash
+pnpm run db:generate
+```
+
+```bash
+pnpm run db:push
+```
+
+### 3. 開発サーバーの起動
 
 ```bash
 pnpm run dev

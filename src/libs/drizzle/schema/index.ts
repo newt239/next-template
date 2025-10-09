@@ -27,47 +27,6 @@ export const user = sqliteTable("user", {
     .notNull(),
 });
 
-export const themeEnum = ["light", "dark"] as const;
-
-// ユーザー環境設定テーブル
-export const userPreference = sqliteTable("user_preference", {
-  id: text("id")
-    .primaryKey()
-    .$defaultFn(() => nanoid()),
-  userId: text("user_id").references(() => user.id),
-  // 表示設定
-  theme: text("theme", { enum: themeEnum }).notNull().default("light"),
-  showWinthroughPopup: integer("show_winthrough_popup", { mode: "boolean" })
-    .notNull()
-    .default(true),
-  showBoardHeader: integer("show_board_header", { mode: "boolean" })
-    .notNull()
-    .default(true),
-  showQn: integer("show_qn", { mode: "boolean" }).notNull().default(false),
-  showSignString: integer("show_sign_string", { mode: "boolean" })
-    .notNull()
-    .default(true),
-  reversePlayerInfo: integer("reverse_player_info", { mode: "boolean" })
-    .notNull()
-    .default(false),
-  wrongNumber: integer("wrong_number", { mode: "boolean" })
-    .notNull()
-    .default(true),
-  // Webhook設定
-  webhookUrl: text("webhook_url"),
-  createdAt: integer("created_at", { mode: "timestamp" })
-    .default(sql`(unixepoch())`)
-    .notNull(),
-  updatedAt: integer("updated_at", { mode: "timestamp" })
-    .default(sql`(unixepoch())`)
-    .notNull(),
-});
-
-// ユーザー環境設定テーブルのユーザーごとのインデックス
-export const userPreferenceUserIdIdx = index("idx_user_preference_user_id").on(
-  userPreference.userId,
-);
-
 // セッションテーブル
 export const session = sqliteTable("session", {
   id: text("id").primaryKey(),
@@ -134,4 +93,15 @@ export const verification = sqliteTable("verification", {
   updatedAt: integer("updated_at", { mode: "timestamp" }).default(
     sql`(unixepoch())`,
   ),
+});
+
+export const todoItems = sqliteTable("todo_items", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  title: text("title").notNull(),
+  isCompleted: integer("is_completed", { mode: "boolean" })
+    .notNull()
+    .default(false),
+  createdAt: integer("created_at", { mode: "timestamp" })
+    .notNull()
+    .default(sql`(strftime('%s','now'))`),
 });
