@@ -49,21 +49,29 @@
 ```bash
 src/
 ├── app/                    # Next.js App Router
-│   ├── globals.css        # グローバルスタイル
-│   ├── layout.tsx         # ルートレイアウト
-│   └── page.tsx           # ホームページ
-├── features/
-│   └─ {name}/
-│      ├─ actions/            # 機能固有のアクション
-│      ├─ types/              # 機能固有の型定義
-│      ├─ hooks/              # 機能固有のカスタムフック
-│      ├─ {name}.tsx          # 機能固有のコンポーネント
-│      ├─ {name}.module.css   # 機能固有のスタイル
-│      ├─ {name}.spec.tsx     # 機能固有のユニットテスト
-│      ├─ {name}.stories.tsx  # 機能固有のストーリー
-│      └─ index.ts            # 機能固有のインデックスファイル
+│   ├── api/               # APIルーティング
+│   ├── (public)/          # ログイン前のページ
+│   │   ├── login/
+│   │   └── register/
+│   ├── (protected)/          # ログイン後のページ
+│   │   ├── dashboard/
+│   │   │   ├── _components/
+│   │   │   │   └── {name}.tsx
+│   │   │   └── page.tsx
+│   │   └── page.tsx
+│   ├── globals.css           # グローバルスタイル
+│   ├── layout.tsx            # ルートレイアウト
+│   └── page.tsx              # ホームページ
+├── components/{name}/         # 汎用的に使用するコンポーネント
+│    ├─ {name}.tsx          # 機能固有のコンポーネント
+│    ├─ {name}.module.css   # 機能固有のスタイル
+│    ├─ {name}.spec.tsx     # 機能固有のユニットテスト
+│    ├─ {name}.stories.tsx  # 機能固有のストーリー
+│    └─ index.ts            # 機能固有のインデックスファイル
 ├── libs/                   # グローバルユーティリティ関数
-└── hooks/                 # グローバルカスタムフック
+│    └─ drizzle/            # Drizzleの設定
+├── types/                  # グローバル型定義
+└── hooks/                  # グローバルカスタムフック
 ```
 
 ## コーディングガイドライン
