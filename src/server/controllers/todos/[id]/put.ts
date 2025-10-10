@@ -1,8 +1,8 @@
+import { zValidator } from "@hono/zod-validator";
 import { createFactory } from "hono/factory";
 
-import { zValidator } from "@hono/zod-validator";
-import { z } from "zod";
 import { eq } from "drizzle-orm";
+import { z } from "zod";
 
 import { DBClient } from "@/libs/drizzle/client";
 import { todoItems } from "@/libs/drizzle/schema";

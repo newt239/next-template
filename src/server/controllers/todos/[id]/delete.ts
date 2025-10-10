@@ -4,7 +4,6 @@ import { eq } from "drizzle-orm";
 
 import { DBClient } from "@/libs/drizzle/client";
 import { todoItems } from "@/libs/drizzle/schema";
-import { TodoResponseSchema } from "@/models/todo";
 
 const factory = createFactory();
 

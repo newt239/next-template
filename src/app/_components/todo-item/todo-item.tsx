@@ -6,7 +6,6 @@ import styles from "./todo-item.module.css";
 
 import type { Todo } from "../todo-list/types";
 
-
 import createApiClientOnBrowser from "@/libs/hono/browser";
 
 type TodoItemProps = {
