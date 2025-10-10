@@ -53,7 +53,7 @@ const eslintConfig = [
           ],
           "pathGroups": [
             {
-              pattern: "{react,react-dom/**,react-router-dom,next,next/**}",
+              pattern: "{react,react-dom/**,react-router-dom,next,next/**,hono,hono/**,@hono/**}",
               group: "builtin",
               position: "before",
             },

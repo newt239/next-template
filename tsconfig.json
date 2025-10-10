@@ -3,13 +3,24 @@
     "incremental": true,
     "target": "ES2017",
     "jsx": "preserve",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "rootDirs": [".", "generated"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "rootDirs": [
+      ".",
+      "generated"
+    ],
     "module": "esnext",
     "moduleResolution": "bundler",
     "paths": {
-      "#/*": ["./src/*"],
-      "@/*": ["./src/*"]
+      "#/*": [
+        "./src/*"
+      ],
+      "@/*": [
+        "./src/*"
+      ]
     },
     "resolveJsonModule": true,
     "allowJs": true,
@@ -24,6 +35,12 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", "src/**/*"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "src/**/*",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

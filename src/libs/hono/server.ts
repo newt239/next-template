@@ -1,19 +1,20 @@
-import type { APIRouteType } from "#/server";
+
+
+import { hc } from "hono/client";
+import { headers } from "next/headers";
 
 import process from "node:process";
 
-import { hc } from "hono/client";
-
-import { headers } from "next/headers";
-
 import { getUser } from "../better-auth/helper";
+
+import type { APIRouteType } from "#/server";
 
 /**
  * サーバーサイドで使用するAPIクライアント
  * ユーザーがログインしている場合はx-user-idヘッダーを追加
  * @returns APIクライアント
  */
-export async function createApiClientOnServer() {
+const createApiClientOnServer = async () => {
   // サーバーサイドでのベースURL決定
   const headersList = await headers();
   const host = headersList.get("host") || "localhost:3000";
@@ -36,4 +37,6 @@ export async function createApiClientOnServer() {
       headers: requestHeaders,
     },
   });
-}
+};
+
+export default createApiClientOnServer;

@@ -1,9 +1,14 @@
-import TodoAppServer from "./_components/TodoAppServer";
-import { getTodosFromServer } from "@/libs/serverTodoApi";
+import TodoForm from "./_components/todo-form";
+import TodoListFetcher from "./_components/todo-list/todo-list-fetcher";
+import styles from "./_components/todo-list/todo-list.module.css";
 
-export default async function HomePage() {
-  // サーバーコンポーネントでデータ取得
-  const initialTodos = await getTodosFromServer();
-  
-  return <TodoAppServer initialTodos={initialTodos} />;
-}
+const HomePage = () => {
+  return (
+    <div className={styles.container}>
+      <TodoForm />
+      <TodoListFetcher />
+    </div>
+  );
+};
+
+export default HomePage;

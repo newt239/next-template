@@ -1,8 +1,8 @@
-import type { APIRouteType } from "#/server";
+import { hc } from "hono/client";
 
 import process from "node:process";
 
-import { hc } from "hono/client";
+import type { APIRouteType } from "#/server";
 
 const baseUrl = process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL
   ? `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`
@@ -11,7 +11,7 @@ const baseUrl = process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL
 /**
  * ブラウザ上で動作するAPIクライアントを作成
  */
-function createApiClient() {
+function createApiClientOnBrowser() {
   return hc<APIRouteType>(`${baseUrl}/api`, {
     init: {
       credentials: "include",
@@ -19,4 +19,4 @@ function createApiClient() {
   });
 }
 
-export default createApiClient;
+export default createApiClientOnBrowser;

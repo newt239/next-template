@@ -1,7 +1,7 @@
-import app from "#/server";
 import { Hono } from "hono";
-
 import { handle } from "hono/vercel";
+
+import app from "#/server";
 
 const hono = new Hono({
   strict: false,

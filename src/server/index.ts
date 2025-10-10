@@ -1,8 +1,9 @@
 import { Hono } from "hono";
-import getTodosHandler from "./controllers/todos/get-list";
-import createTodoHandler from "./controllers/todos/post-create";
-import updateTodoHandler from "./controllers/todos/put-update";
-import deleteTodoHandler from "./controllers/todos/delete-remove";
+
+import deleteTodoHandler from "./controllers/todos/[id]/delete";
+import updateTodoHandler from "./controllers/todos/[id]/put";
+import getTodosHandler from "./controllers/todos/get";
+import createTodoHandler from "./controllers/todos/post";
 
 const app = new Hono()
   .get("/todos", ...getTodosHandler)

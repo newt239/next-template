@@ -1,8 +1,14 @@
 import { createFactory } from "hono/factory";
+
 import { zValidator } from "@hono/zod-validator";
+import { z } from "zod";
+
 import { DBClient } from "@/libs/drizzle/client";
 import { todoItems } from "@/libs/drizzle/schema";
-import { CreateTodoRequestSchema } from "@/models/todo";
+
+const CreateTodoRequestSchema = z.object({
+  title: z.string().min(1, "タイトルは必須です").max(100, "タイトルは100文字以内で入力してください").trim(),
+});
 
 const factory = createFactory();
 
@@ -15,7 +21,7 @@ const handler = factory.createHandlers(
     try {
       const body = c.req.valid("json");
 
-      const [newTodo] = await DBClient
+      const [todo] = await DBClient
         .insert(todoItems)
         .values({
           title: body.title,
@@ -23,10 +29,10 @@ const handler = factory.createHandlers(
         })
         .returning();
 
-      return c.json(newTodo, 201);
+      return c.json({todo} as const, 201);
     } catch (error) {
       console.error("TODO作成エラー:", error);
-      return c.json({ error: "TODOの作成に失敗しました" }, 500);
+      return c.json({ error: "TODOの作成に失敗しました" } as const, 500);
     }
   }
 );
