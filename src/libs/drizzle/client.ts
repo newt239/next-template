@@ -5,11 +5,11 @@ import { drizzle } from "drizzle-orm/libsql";
 
 import * as schema from "./schema/index";
 
-const tursoUrl = process.env.TURSO_DATABASE_URL!;
+const tursoUrl = process.env.TURSO_CONNECTION_URL!;
 const tursoToken = process.env.TURSO_AUTH_TOKEN!;
 
 if (!tursoUrl) {
-  throw new Error("TURSO_DATABASE_URL environment variable is required");
+  throw new Error("TURSO_CONNECTION_URL environment variable is required");
 }
 
 if (!tursoToken) {
