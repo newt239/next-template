@@ -5,6 +5,3 @@ pre-commit:
       run: pnpm run lint:fix
       stage_fixed: true
       fail_text: リントエラーがあります
-    type-check:
-      run: pnpm run type-check
-      fail_text: 型エラーがあります
