@@ -13,7 +13,9 @@ const TodoForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!title.trim()) return;
+    if (!title.trim()) {
+      return;
+    }
 
     startTransition(async () => {
       try {

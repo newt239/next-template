@@ -1,4 +1,4 @@
-name: Lint (TypeScript, ESLint, Prettier)
+name: Lint (TypeScript, Oxlint, Prettier)
 
 on:
   pull_request:
@@ -21,7 +21,5 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Type check
         run: pnpm tsc --noEmit
-      - name: ESLint
-        run: pnpm eslint
-      - name: Prettier
-        run: pnpm prettier --check './**/*.{ts,tsx,css,yml}'
+      - name: Oxlint
+        run: pnpm oxlint

@@ -1,30 +1,14 @@
 {
   "editor.tabSize": 2,
-  "eslint.format.enable": false,
-  "eslint.useFlatConfig": true,
   "prettier.enable": false,
   "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
     "source.fixAll.stylelint": "explicit",
-    "source.fixAll.eslint": "explicit",
+    "source.fixAll.oxc": "explicit",
     "source.organizeImports": "never"
   },
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "vue",
-    "html",
-    "markdown",
-    "json",
-    "json5",
-    "jsonc",
-    "yaml",
-    "toml",
-    "xml"
-  ],
   "css.validate": false,
   "biome.enabled": false,
-  "files.insertFinalNewline": true
+  "files.insertFinalNewline": true,
+  "oxc.enable": true
 }
