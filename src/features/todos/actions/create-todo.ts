@@ -9,8 +9,7 @@ export const createTodo = async (data: { title: string }) => {
   try {
     const body = CreateTodoRequestSchema.parse(data);
 
-    const [todo] = await DBClient
-      .insert(todoItems)
+    const [todo] = await DBClient.insert(todoItems)
       .values({
         title: body.title,
         isCompleted: false,

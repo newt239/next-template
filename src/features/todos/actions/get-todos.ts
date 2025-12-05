@@ -17,8 +17,7 @@ export const getTodos = async (options?: GetTodosOptions) => {
       offset: options?.offset,
     });
 
-    const todos = await DBClient
-      .select()
+    const todos = await DBClient.select()
       .from(todoItems)
       .orderBy(todoItems.createdAt)
       .limit(query.limit ?? 100)

@@ -6,7 +6,6 @@ import { TodoList } from "./todo-list";
 
 export const TodoListFetcher = async () => {
   const response = await getTodos();
-  
+
   return <TodoList todos={response.todos} />;
 };
-

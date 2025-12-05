@@ -8,13 +8,13 @@ export const metadata: Metadata = {
 const RootLayout = ({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) => {
   return (
     <html lang="ja">
       <body>{children}</body>
     </html>
   );
-}
+};
 
 export default RootLayout;

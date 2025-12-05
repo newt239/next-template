@@ -9,7 +9,6 @@ import styles from "./todo-item.module.css";
 
 import type { Todo } from "../../types/todo";
 
-
 type TodoItemProps = {
   todo: Todo;
 };
@@ -21,7 +20,7 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
     startTransition(async () => {
       try {
         const result = await updateTodo(todo.id, { isCompleted: !todo.isCompleted });
-        
+
         if (result.success) {
           window.location.reload();
         } else {
@@ -39,7 +38,7 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
     startTransition(async () => {
       try {
         const result = await deleteTodo(todo.id);
-        
+
         if (result.success) {
           window.location.reload();
         } else {
@@ -64,9 +63,7 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
         </button>
         <div className={styles.text}>
           <h3 className={styles.title}>{todo.title}</h3>
-          <p className={styles.date}>
-            {todo.createdAt.toLocaleString("ja-JP")}
-          </p>
+          <p className={styles.date}>{todo.createdAt.toLocaleString("ja-JP")}</p>
         </div>
       </div>
       <button

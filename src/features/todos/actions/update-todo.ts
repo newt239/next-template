@@ -23,8 +23,7 @@ export const updateTodo = async (id: number, data: { title?: string; isCompleted
       updateData.isCompleted = body.isCompleted;
     }
 
-    const [todo] = await DBClient
-      .update(todoItems)
+    const [todo] = await DBClient.update(todoItems)
       .set(updateData)
       .where(eq(todoItems.id, id))
       .returning();
