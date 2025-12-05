@@ -23,3 +23,5 @@ jobs:
         run: pnpm tsc --noEmit
       - name: Oxlint
         run: pnpm oxlint
+      - name: Oxfmt
+        run: pnpm oxfmt
