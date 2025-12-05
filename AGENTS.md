@@ -18,7 +18,7 @@
 - 実装後の必須作業として、以下のコマンドを実行してください。
     - `npx tsc --noEmit && pnpm run lint:fix`
     - 型エラーやリンターのエラーが出た場合は、コミット前に必ず修正してください。
-    - エラーを解消するために`eslint.config.mjs`や`tsconfig.json`を変更してはなりません。
+    - エラーを解消するために`oxlintrc.json`や`tsconfig.json`を変更してはなりません。
 
 ## 開発コマンド
 
@@ -36,7 +36,7 @@
 - **言語**: TypeScript
 - **フレームワーク**: Next.js 15 with App Router
 - **スタイリング**: CSS Modules
-- **コード品質**: ESlint, Prettier, Stylelint
+- **コード品質**: Oxlint, Stylelint
 - **Git hooks**: Lefthook
 - **テスト**: Vitest, Playwright
 - **コンポーネント管理**: Storybook
@@ -120,7 +120,6 @@ src/
 
 ```ts
 "use server";
-import "server-only";
 
 import { z } from "zod";
 import { CreateTodoRequestSchema } from "../types/todo";

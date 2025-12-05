@@ -6,8 +6,7 @@ import { createTodo } from "../../actions/create-todo";
 
 import styles from "./todo-form.module.css";
 
-
-const TodoForm = () => {
+export const TodoForm = () => {
   const [title, setTitle] = useState("");
   const [isPending, startTransition] = useTransition();
 
@@ -20,7 +19,7 @@ const TodoForm = () => {
     startTransition(async () => {
       try {
         const result = await createTodo({ title: title.trim() });
-        
+
         if (result.success) {
           setTitle("");
           window.location.reload();
@@ -44,17 +43,10 @@ const TodoForm = () => {
           className={styles.input}
           disabled={isPending}
         />
-        <button
-          type="submit"
-          disabled={isPending || !title.trim()}
-          className={styles.button}
-        >
+        <button type="submit" disabled={isPending || !title.trim()} className={styles.button}>
           {isPending ? "追加中..." : "追加"}
         </button>
       </div>
     </form>
   );
 };
-
-export default TodoForm;
-

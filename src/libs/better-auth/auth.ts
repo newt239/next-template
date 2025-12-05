@@ -47,6 +47,6 @@ export type Session = typeof auth.$Infer.Session;
 export type User = typeof auth.$Infer.Session.user;
 
 export interface AuthType {
-  user: User | null
-  session: Session | null
+  user: User | null;
+  session: Session | null;
 }

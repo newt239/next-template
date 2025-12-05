@@ -2,7 +2,8 @@
 
 - TypeScript
 - Next.js App Router
-- ESLint Flat Config
+- Oxlint
+- Oxfmt
 - Stylelint
   - stylelint-config-recess-order
   - stylelint-config-standard
@@ -42,7 +43,7 @@ pnpm run dev
 
 ## 環境変数
 
-`.env.example` を基に `.env.local` などの環境ファイルを作成し、以下の値を設定してください。
+`.env.example` を基に `.env` などの環境ファイルを作成し、以下の値を設定してください。
 
 - `TURSO_CONNECTION_URL`: Turso もしくは libsql の接続 URL。
 - `TURSO_AUTH_TOKEN`: 認証が必要な場合のみ設定するアクセストークン。

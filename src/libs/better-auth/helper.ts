@@ -8,8 +8,7 @@ export async function getSession() {
       headers: await headers(),
     });
     return session;
-  }
-  catch (error) {
+  } catch (error) {
     console.error("Failed to get session:", error);
     return null;
   }
@@ -19,8 +18,7 @@ export async function getUser() {
   try {
     const session = await getSession();
     return session?.user || null;
-  }
-  catch (error) {
+  } catch (error) {
     console.error("Failed to get user:", error);
     return null;
   }
