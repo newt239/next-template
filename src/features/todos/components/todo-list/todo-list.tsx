@@ -2,7 +2,7 @@ import TodoItem from "../todo-item";
 
 import styles from "./todo-list.module.css";
 
-import type { Todo } from "./types";
+import type { Todo } from "../../types/todo";
 
 type TodoListProps = {
   todos: Todo[];
@@ -25,3 +25,4 @@ const TodoList = ({ todos }: TodoListProps) => {
 };
 
 export default TodoList;
+

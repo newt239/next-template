@@ -2,14 +2,14 @@
 
 import { useState, useTransition } from "react";
 
+import { createTodo } from "../../actions/create-todo";
+
 import styles from "./todo-form.module.css";
 
-import createApiClientOnBrowser from "@/libs/hono/browser";
 
 const TodoForm = () => {
   const [title, setTitle] = useState("");
   const [isPending, startTransition] = useTransition();
-  const client = createApiClientOnBrowser();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,15 +17,14 @@ const TodoForm = () => {
 
     startTransition(async () => {
       try {
-        await client.todos.$post({
-          json: { title: title.trim() }
-        });
+        const result = await createTodo({ title: title.trim() });
         
-        // フォームをリセット
-        setTitle("");
-        
-        // ページをリロードして最新のデータを表示
-        window.location.reload();
+        if (result.success) {
+          setTitle("");
+          window.location.reload();
+        } else {
+          console.error("Todoの作成に失敗しました:", result.error);
+        }
       } catch (error) {
         console.error("Todoの作成に失敗しました:", error);
       }
@@ -56,3 +55,4 @@ const TodoForm = () => {
 };
 
 export default TodoForm;
+

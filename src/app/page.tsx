@@ -1,6 +1,6 @@
-import TodoForm from "./_components/todo-form";
-import TodoListFetcher from "./_components/todo-list/todo-list-fetcher";
-import styles from "./_components/todo-list/todo-list.module.css";
+import TodoForm from "@/features/todos/components/todo-form";
+import TodoListFetcher from "@/features/todos/components/todo-list/todo-list-fetcher";
+import styles from "@/features/todos/components/todo-list/todo-list.module.css";
 
 const HomePage = () => {
   return (

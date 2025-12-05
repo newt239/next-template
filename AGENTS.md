@@ -49,24 +49,27 @@
 ```bash
 src/
 ├── app/                    # Next.js App Router
-│   ├── api/               # APIルーティング
 │   ├── (public)/          # ログイン前のページ
 │   │   ├── login/
 │   │   └── register/
 │   ├── (protected)/          # ログイン後のページ
 │   │   ├── {pathname}/
-│   │   │   ├── _components/
-│   │   │   │   └── {name}
-│   │   │   │       ├── {name}.tsx
-│   │   │   │       ├── {name}.module.css
-│   │   │   │       ├── {name}.spec.tsx
-│   │   │   │       ├── {name}.stories.tsx
-│   │   │   │       └── index.ts
 │   │   │   └── page.tsx
 │   │   └── page.tsx
 │   ├── globals.css           # グローバルスタイル
 │   ├── layout.tsx            # ルートレイアウト
 │   └── page.tsx              # ホームページ
+├── features/               # 機能ベースのディレクトリ構成
+│   └── {feature-name}/
+│       ├── actions/        # Server Actions（フォーム操作用）
+│       ├── components/     # 機能固有のコンポーネント
+│       │   └── {component-name}/
+│       │       ├── {component-name}.tsx
+│       │       ├── {component-name}.module.css
+│       │       ├── {component-name}.spec.tsx
+│       │       ├── {component-name}.stories.tsx
+│       │       └── index.ts
+│       └── types/           # 機能固有の型定義
 ├── components/{name}/         # 汎用的に使用するコンポーネント
 │    ├─ {name}.tsx          # 機能固有のコンポーネント
 │    ├─ {name}.module.css   # 機能固有のスタイル
@@ -106,62 +109,58 @@ src/
 - データ取得はpage.tsxでサーバーコンポーネントとして実装し、propsで子コンポーネントに渡してください。
 - ブラウザAPIアクセスやイベントリスナー登録など、真に必要な場合のみuseEffectを使用を許可します。この場合は明確な理由をコメントアウトとして記述すべきです。
 
-### API Routes
+### Server Actionsとデータフェッチ
 
-- **Server Actionsは使用禁止とします** 
-- API RoutesのルートはすべてHonoで管理します
-- エントリーポイントは`src/server/index.ts`で管理します。ルートを追加する際は`src/server/index.ts`に追加してください
-- コントローラーの実装は`src/server/controllers/`に追加してください
-- **バリデーションには必ず`zValidator`を使用**してください（リクエストボディ、クエリパラメータ両方）
-- **APIクライアント**: クライアントサイドでは`createApiClientOnBrowser()`、サーバーサイドでは`createApiClientOnServer()`を使用してください。生の`fetch`は使用しないでください
+- **Server Actions**: フォーム操作などのクライアントからの操作には`"use server"`ディレクティブを使用したServer Actionsを使用します
+- **データフェッチ関数**: 初期レンダリングのためのデータ取得には`import "server-only"`のみを使用した通常のサーバー関数を使用します
+- **サーバーサイドファイル**: すべてのサーバーサイドで実行されるファイルには`import "server-only"`を付与してください
+- **バリデーション**: すべてのServer Actionsとデータフェッチ関数ではZodスキーマを使用したバリデーションを実装してください
 
-#### バリデーション実装例
+#### Server Actionsの実装例（フォーム操作用）
 
 ```ts
-import { zValidator } from "@hono/zod-validator";
+"use server";
+import "server-only";
+
 import { z } from "zod";
-import { createFactory } from "hono/factory";
+import { CreateTodoRequestSchema } from "../types/todo";
 
-const factory = createFactory();
-
-const GetPlayerRequestQuerySchema = z.object({
-  playerId: z.string().min(1),
-});
-
-const handler = factory.createHandlers(
-  zValidator("query", GetPlayerRequestQuerySchema), // クエリパラメータ
-  async (c) => {
-    const query = c.req.valid("query");
-    const body = c.req.valid("json");
+export async function createTodo(data: { title: string }) {
+  try {
+    const body = CreateTodoRequestSchema.parse(data);
     // 処理...
+    return { success: true, todo: result } as const;
+  } catch (error) {
+    return { success: false, error: "エラーメッセージ" } as const;
   }
-);
+}
 ```
 
-クエリパラメータとリクエストボディ両方のバリデーションを行う場合は、それぞれ別の引数で指定し、最後の引数に`async (c) => {`を記述してください。
+#### データフェッチ関数の実装例（初期レンダリング用）
 
 ```ts
-const handler = factory.createHandlers(
-  zValidator("query", GetPlayerRequestQuerySchema), // クエリパラメータ
-  zValidator("json", GetPlayerRequestBodySchema), // リクエストボディ
-  async (c) => {
-    const query = c.req.valid("query");
-    const body = c.req.valid("json");
+import "server-only";
+
+import { z } from "zod";
+import { GetTodosQuerySchema } from "../types/todo";
+
+export async function getTodos(options?: { limit?: number; offset?: number }) {
+  try {
+    const query = GetTodosQuerySchema.parse(options);
     // 処理...
+    return response;
+  } catch (error) {
+    throw new Error("エラーメッセージ");
   }
-);
+}
 ```
 
-#### Controllers構成ルール
+#### 構成ルール
 
-- `src/server/controllers/`以下のハンドラーは1ファイルにつき1個とします
-- パスとディレクトリを一致させてください。
-  - 例: `POST /api/todos` -> `src/server/controllers/todos/post.ts`
-  - 例: `PUT /api/todos/:id` -> `src/server/controllers/todos/[id]/put.ts`
-- 各ファイルではdefault exportでハンドラーをエクスポートしてください
-- `src/server/index.ts`でimportして使用してください
-- **必ず`factory.createHandlers`を使用してください**: 既存の実装パターンに合わせて、すべてのハンドラーで`createFactory()`から生成したfactoryの`createHandlers`メソッドを使用してください
-- レスポンスは`c.json`で返却し、必ずbodyには`as const`をつけてください
+- Server Actionsは`src/features/{feature-name}/actions/`に配置します
+- データフェッチ関数も`src/features/{feature-name}/actions/`に配置します（`"use server"`は不要）
+- 各ファイルでは名前付きエクスポートで関数をエクスポートしてください
+- エラーハンドリングを適切に実装し、エラー情報を返り値に含めてください
 
 ### ローディング表示
 

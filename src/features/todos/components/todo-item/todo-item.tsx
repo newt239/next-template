@@ -2,11 +2,13 @@
 
 import { useTransition } from "react";
 
+import { deleteTodo } from "../../actions/delete-todo";
+import { updateTodo } from "../../actions/update-todo";
+
 import styles from "./todo-item.module.css";
 
-import type { Todo } from "../todo-list/types";
+import type { Todo } from "../../types/todo";
 
-import createApiClientOnBrowser from "@/libs/hono/browser";
 
 type TodoItemProps = {
   todo: Todo;
@@ -14,18 +16,17 @@ type TodoItemProps = {
 
 const TodoItem = ({ todo }: TodoItemProps) => {
   const [isPending, startTransition] = useTransition();
-  const client = createApiClientOnBrowser();
 
   const handleToggle = async () => {
     startTransition(async () => {
       try {
-        await client.todos[":id"].$put({
-          param: { id: todo.id.toString() },
-          json: { isCompleted: !todo.isCompleted }
-        });
+        const result = await updateTodo(todo.id, { isCompleted: !todo.isCompleted });
         
-        // ページをリロードして最新のデータを表示
-        window.location.reload();
+        if (result.success) {
+          window.location.reload();
+        } else {
+          console.error("Todoの更新に失敗しました:", result.error);
+        }
       } catch (error) {
         console.error("Todoの更新に失敗しました:", error);
       }
@@ -37,13 +38,13 @@ const TodoItem = ({ todo }: TodoItemProps) => {
 
     startTransition(async () => {
       try {
-        const client = createApiClientOnBrowser();
-        await client.todos[":id"].$delete({
-          param: { id: todo.id.toString() }
-        });
+        const result = await deleteTodo(todo.id);
         
-        // ページをリロードして最新のデータを表示
-        window.location.reload();
+        if (result.success) {
+          window.location.reload();
+        } else {
+          console.error("Todoの削除に失敗しました:", result.error);
+        }
       } catch (error) {
         console.error("Todoの削除に失敗しました:", error);
       }
@@ -81,3 +82,4 @@ const TodoItem = ({ todo }: TodoItemProps) => {
 };
 
 export default TodoItem;
+
