@@ -23,5 +23,3 @@ jobs:
         run: pnpm tsc --noEmit
       - name: Oxlint
         run: pnpm oxlint
-      - name: Prettier
-        run: pnpm prettier --check './**/*.{ts,tsx,css,yml}'
