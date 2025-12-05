@@ -1,19 +1,42 @@
-import { FlatCompat } from "@eslint/eslintrc";
+import nextPlugin from "@next/eslint-plugin-next";
 import eslintConfigPrettier from "eslint-config-prettier";
-
-const compat = new FlatCompat({
-  // import.meta.dirname is available after Node.js v20.11.0
-  baseDirectory: import.meta.dirname,
-});
+import importPlugin from "eslint-plugin-import";
+import reactPlugin from "eslint-plugin-react";
+import reactHooksPlugin from "eslint-plugin-react-hooks";
+import tseslint from "typescript-eslint";
 
 const eslintConfig = [
   {
     ignores: ["node_modules/", ".next/", "public/", "playwright-report/"],
   },
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-  eslintConfigPrettier,
+  ...tseslint.configs.recommended,
   {
+    plugins: {
+      "@next/next": nextPlugin,
+      react: reactPlugin,
+      "react-hooks": reactHooksPlugin,
+      import: importPlugin,
+    },
+    languageOptions: {
+      parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
     rules: {
+      ...nextPlugin.configs.recommended.rules,
+      ...nextPlugin.configs["core-web-vitals"].rules,
+      ...reactPlugin.configs.recommended.rules,
+      ...reactPlugin.configs["jsx-runtime"].rules,
+      ...reactHooksPlugin.configs.recommended.rules,
       "react-hooks/exhaustive-deps": "off",
       "@typescript-eslint/no-explicit-any": "error",
       "@typescript-eslint/no-unused-vars": [
@@ -42,7 +65,7 @@ const eslintConfig = [
       "import/order": [
         "error",
         {
-          "groups": [
+          groups: [
             "builtin",
             "external",
             "parent",
@@ -51,15 +74,15 @@ const eslintConfig = [
             "object",
             "type",
           ],
-          "pathGroups": [
+          pathGroups: [
             {
               pattern: "{react,react-dom/**,react-router-dom,next,next/**,hono,hono/**,@hono/**}",
               group: "builtin",
               position: "before",
             },
           ],
-          "pathGroupsExcludedImportTypes": ["builtin"],
-          "alphabetize": {
+          pathGroupsExcludedImportTypes: ["builtin"],
+          alphabetize: {
             order: "asc",
           },
           "newlines-between": "always",
@@ -67,6 +90,7 @@ const eslintConfig = [
       ],
     },
   },
+  eslintConfigPrettier,
 ];
 
 export default eslintConfig;
