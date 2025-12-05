@@ -14,7 +14,7 @@ type TodoItemProps = {
   todo: Todo;
 };
 
-const TodoItem = ({ todo }: TodoItemProps) => {
+export const TodoItem = ({ todo }: TodoItemProps) => {
   const [isPending, startTransition] = useTransition();
 
   const handleToggle = async () => {
@@ -80,6 +80,3 @@ const TodoItem = ({ todo }: TodoItemProps) => {
     </div>
   );
 };
-
-export default TodoItem;
-

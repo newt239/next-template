@@ -6,8 +6,7 @@ import { createTodo } from "../../actions/create-todo";
 
 import styles from "./todo-form.module.css";
 
-
-const TodoForm = () => {
+export const TodoForm = () => {
   const [title, setTitle] = useState("");
   const [isPending, startTransition] = useTransition();
 
@@ -55,6 +54,3 @@ const TodoForm = () => {
     </form>
   );
 };
-
-export default TodoForm;
-

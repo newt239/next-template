@@ -1,12 +1,11 @@
 "use server";
-import "server-only";
 
 import { CreateTodoRequestSchema, TodoResponseSchema } from "../types/todo";
 
 import { DBClient } from "@/libs/drizzle/client";
 import { todoItems } from "@/libs/drizzle/schema";
 
-export async function createTodo(data: { title: string }) {
+export const createTodo = async (data: { title: string }) => {
   try {
     const body = CreateTodoRequestSchema.parse(data);
 
@@ -24,5 +23,4 @@ export async function createTodo(data: { title: string }) {
     console.error("TODO作成エラー:", error);
     return { success: false, error: "TODOの作成に失敗しました" } as const;
   }
-}
-
+};

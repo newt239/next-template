@@ -1,5 +1,4 @@
 "use server";
-import "server-only";
 
 import { eq } from "drizzle-orm";
 
@@ -8,7 +7,7 @@ import { TodoResponseSchema } from "../types/todo";
 import { DBClient } from "@/libs/drizzle/client";
 import { todoItems } from "@/libs/drizzle/schema";
 
-export async function deleteTodo(id: number) {
+export const deleteTodo = async (id: number) => {
   try {
     if (Number.isNaN(id)) {
       return { success: false, error: "無効なIDです" } as const;
@@ -29,5 +28,4 @@ export async function deleteTodo(id: number) {
     console.error("TODO削除エラー:", error);
     return { success: false, error: "TODOの削除に失敗しました" } as const;
   }
-}
-
+};

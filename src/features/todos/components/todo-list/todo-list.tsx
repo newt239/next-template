@@ -1,4 +1,4 @@
-import TodoItem from "../todo-item";
+import { TodoItem } from "../todo-item";
 
 import styles from "./todo-list.module.css";
 
@@ -8,7 +8,7 @@ type TodoListProps = {
   todos: Todo[];
 };
 
-const TodoList = ({ todos }: TodoListProps) => {
+export const TodoList = ({ todos }: TodoListProps) => {
   return (
     <div className={styles.container}>
         {todos.length === 0 ? (
@@ -23,6 +23,3 @@ const TodoList = ({ todos }: TodoListProps) => {
     </div>
   );
 };
-
-export default TodoList;
-

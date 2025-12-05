@@ -1,5 +1,4 @@
 "use server";
-import "server-only";
 
 import { eq } from "drizzle-orm";
 
@@ -8,7 +7,7 @@ import { UpdateTodoRequestSchema, TodoResponseSchema } from "../types/todo";
 import { DBClient } from "@/libs/drizzle/client";
 import { todoItems } from "@/libs/drizzle/schema";
 
-export async function updateTodo(id: number, data: { title?: string; isCompleted?: boolean }) {
+export const updateTodo = async (id: number, data: { title?: string; isCompleted?: boolean }) => {
   try {
     if (Number.isNaN(id)) {
       return { success: false, error: "無効なIDです" } as const;
@@ -40,5 +39,4 @@ export async function updateTodo(id: number, data: { title?: string; isCompleted
     console.error("TODO更新エラー:", error);
     return { success: false, error: "TODOの更新に失敗しました" } as const;
   }
-}
-
+};
