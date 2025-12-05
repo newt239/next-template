@@ -3,6 +3,7 @@
 - TypeScript
 - Next.js App Router
 - Oxlint
+- Oxfmt
 - Stylelint
   - stylelint-config-recess-order
   - stylelint-config-standard
