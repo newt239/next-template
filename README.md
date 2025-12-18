@@ -2,14 +2,9 @@
 
 - TypeScript
 - Next.js App Router
+- Tailwind CSS v4
 - Oxlint
 - Oxfmt
-- Stylelint
-  - stylelint-config-recess-order
-  - stylelint-config-standard
-  - stylelint-plugin-use-baseline
-  - @css-modules-kit/stylelint-plugin
-- CSS Modules Kit
 - Vitest
 - Playwright
 - Storybook
