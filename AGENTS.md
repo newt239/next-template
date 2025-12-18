@@ -16,9 +16,9 @@
   - 影響範囲の説明
 - 不明な点がある場合は常に質問し、推測で進めてはなりません。
 - 実装後の必須作業として、以下のコマンドを実行してください。
-    - `npx tsc --noEmit && pnpm run lint:fix`
-    - 型エラーやリンターのエラーが出た場合は、コミット前に必ず修正してください。
-    - エラーを解消するために`oxlintrc.json`や`tsconfig.json`を変更してはなりません。
+  - `pnpm run typecheck && pnpm run lint:fix && pnpm run format:fix`
+  - 型エラーやリンターのエラーが出た場合は、コミット前に必ず修正してください。
+  - エラーを解消するために`oxlintrc.json`や`tsconfig.json`を変更してはなりません。
 
 ## 開発コマンド
 
