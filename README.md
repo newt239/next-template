@@ -3,6 +3,7 @@
 - TypeScript
 - Next.js App Router
 - Tailwind CSS v4
+- [Intent UI](https://intentui.com/)
 - Oxlint
 - Oxfmt
 - Vercel
