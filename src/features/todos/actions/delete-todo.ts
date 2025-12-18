@@ -4,8 +4,8 @@ import { eq } from "drizzle-orm";
 
 import { TodoResponseSchema } from "../types/todo";
 
-import { DBClient } from "@/libs/drizzle/client";
-import { todoItems } from "@/libs/drizzle/schema";
+import { DBClient } from "#/libs/drizzle/client";
+import { todoItems } from "#/libs/drizzle/schema";
 
 export const deleteTodo = async (id: number) => {
   try {

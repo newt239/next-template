@@ -2,8 +2,8 @@ import "server-only";
 
 import { GetTodosQuerySchema, GetTodosResponseSchema } from "../types/todo";
 
-import { DBClient } from "@/libs/drizzle/client";
-import { todoItems } from "@/libs/drizzle/schema";
+import { DBClient } from "#/libs/drizzle/client";
+import { todoItems } from "#/libs/drizzle/schema";
 
 type GetTodosOptions = {
   limit?: number;

@@ -4,8 +4,8 @@ import { eq } from "drizzle-orm";
 
 import { UpdateTodoRequestSchema, TodoResponseSchema } from "../types/todo";
 
-import { DBClient } from "@/libs/drizzle/client";
-import { todoItems } from "@/libs/drizzle/schema";
+import { DBClient } from "#/libs/drizzle/client";
+import { todoItems } from "#/libs/drizzle/schema";
 
 export const updateTodo = async (id: number, data: { title?: string; isCompleted?: boolean }) => {
   try {
