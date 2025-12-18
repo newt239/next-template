@@ -5,9 +5,6 @@
 - Tailwind CSS v4
 - Oxlint
 - Oxfmt
-- Vitest
-- Playwright
-- Storybook
 - Vercel
 - Turso DB (SQLite)
 - Drizzle

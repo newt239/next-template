@@ -1,0 +1,7 @@
+packages:
+  - "./"
+onlyBuiltDependencies:
+  - "esbuild"
+  - "lefthook"
+  - "sharp"
+minimumReleaseAge: 1420

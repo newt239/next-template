@@ -1,4 +1,4 @@
-name: Lint (TypeScript, Oxlint, Prettier)
+name: Codecheck
 
 on:
   pull_request:
@@ -15,13 +15,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: "24"
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Type check
-        run: pnpm tsc --noEmit
+      - name: Typecheck
+        run: pnpm run typecheck
       - name: Oxlint
-        run: pnpm oxlint
+        run: pnpm run lint
       - name: Oxfmt
-        run: pnpm oxfmt
+        run: pnpm run format
