@@ -1,8 +1,3 @@
 {
-  "recommendations": [
-    "oxc.vscode-oxc",
-    "stylelint.vscode-stylelint",
-    "bradlc.vscode-tailwindcss",
-    "mizdra.css-modules-kit-vscode"
-  ]
+  "recommendations": ["oxc.vscode-oxc", "bradlc.vscode-tailwindcss"]
 }

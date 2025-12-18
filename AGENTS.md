@@ -15,8 +15,7 @@
   - 実行する変更の詳細説明
   - 影響範囲の説明
 - 不明な点がある場合は常に質問し、推測で進めてはなりません。
-- 実装後の必須作業として、以下のコマンドを実行してください。
-  - `pnpm run typecheck && pnpm run lint:fix && pnpm run format:fix`
+- 実装後の必須作業として、`pnpm run codecheck`を実行してください。
   - 型エラーやリンターのエラーが出た場合は、コミット前に必ず修正してください。
   - エラーを解消するために`oxlintrc.json`や`tsconfig.json`を変更してはなりません。
 
@@ -27,19 +26,17 @@
 - `pnpm run dev` - 開発サーバーを起動
 - `pnpm run build` - 本番アプリケーションをビルド
 - `pnpm run start` - 本番サーバーを開始
-- `npx tsc --noEmit` - TypeScript で型チェック
+- `pnpm run typecheck` - TypeScript で型チェック
 
 ## アーキテクチャ
 
 ### 技術スタック
 
 - **言語**: TypeScript
-- **フレームワーク**: Next.js 15 with App Router
+- **フレームワーク**: Next.js 16 with App Router
 - **スタイリング**: Tailwind CSS v4
-- **コード品質**: Oxlint (Tailwind CSSクラス名のソートを含む)
+- **コード品質**: Oxlint
 - **Git hooks**: Lefthook
-- **テスト**: Vitest, Playwright
-- **コンポーネント管理**: Storybook
 - **デプロイ**: Vercel
 - **データベース**: Turso DB (SQLite)
 - **ORM**: Drizzle

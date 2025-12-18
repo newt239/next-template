@@ -13,6 +13,7 @@
     "format": "oxfmt --check",
     "format:fix": "oxfmt",
     "typecheck": "npx tsc --noEmit",
+    "codecheck": "pnpm run typecheck && pnpm run lint && pnpm run format",
     "db:generate": "drizzle-kit generate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio"
