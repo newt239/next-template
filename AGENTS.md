@@ -35,8 +35,8 @@
 
 - **言語**: TypeScript
 - **フレームワーク**: Next.js 15 with App Router
-- **スタイリング**: CSS Modules
-- **コード品質**: Oxlint, Stylelint
+- **スタイリング**: Tailwind CSS v4
+- **コード品質**: Oxlint (Tailwind CSSクラス名のソートを含む)
 - **Git hooks**: Lefthook
 - **テスト**: Vitest, Playwright
 - **コンポーネント管理**: Storybook
@@ -65,14 +65,12 @@ src/
 │       ├── components/     # 機能固有のコンポーネント
 │       │   └── {component-name}/
 │       │       ├── {component-name}.tsx
-│       │       ├── {component-name}.module.css
 │       │       ├── {component-name}.spec.tsx
 │       │       ├── {component-name}.stories.tsx
 │       │       └── index.ts
 │       └── types/           # 機能固有の型定義
 ├── components/{name}/         # 汎用的に使用するコンポーネント
 │    ├─ {name}.tsx          # 機能固有のコンポーネント
-│    ├─ {name}.module.css   # 機能固有のスタイル
 │    ├─ {name}.spec.tsx     # 機能固有のユニットテスト
 │    ├─ {name}.stories.tsx  # 機能固有のストーリー
 │    └─ index.ts            # 機能固有のインデックスファイル

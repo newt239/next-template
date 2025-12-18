@@ -1,7 +1,5 @@
 import { TodoItem } from "../todo-item";
 
-import styles from "./todo-list.module.css";
-
 import type { Todo } from "../../types/todo";
 
 type TodoListProps = {
@@ -10,9 +8,9 @@ type TodoListProps = {
 
 export const TodoList = ({ todos }: TodoListProps) => {
   return (
-    <div className={styles.container}>
+    <div className="flex flex-col gap-4">
       {todos.length === 0 ? (
-        <div>
+        <div className="rounded-lg bg-white/10 p-8 text-center text-white">
           <p>タスクがありません。新しいタスクを追加してください。</p>
         </div>
       ) : (
