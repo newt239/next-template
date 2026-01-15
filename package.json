@@ -37,7 +37,7 @@
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "drizzle-kit": "0.31.8",
-    "lefthook": "2.0.13",
+    "lefthook": "2.0.15",
     "oxfmt": "0.23.0",
     "oxlint": "1.38.0",
     "oxlint-tsgolint": "0.10.1",
