@@ -39,7 +39,7 @@
     "drizzle-kit": "0.31.8",
     "lefthook": "2.0.13",
     "oxfmt": "0.23.0",
-    "oxlint": "1.38.0",
+    "oxlint": "1.39.0",
     "oxlint-tsgolint": "0.10.1",
     "postcss": "8.5.6",
     "tailwindcss": "4.1.18",
