@@ -2,7 +2,7 @@
 
 import { eq } from "drizzle-orm";
 
-import { UpdateTodoRequestSchema, TodoResponseSchema } from "../types/todo";
+import { UpdateTodoRequestSchema, TodoResponseSchema } from "../schemas/todo";
 
 import { DBClient } from "#/libs/drizzle/client";
 import { todoItems } from "#/libs/drizzle/schema";

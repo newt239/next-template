@@ -1,6 +1,6 @@
 import "server-only";
 
-import { GetTodosQuerySchema, GetTodosResponseSchema } from "../types/todo";
+import { GetTodosQuerySchema, GetTodosResponseSchema } from "../schemas/todo";
 
 import { DBClient } from "#/libs/drizzle/client";
 import { todoItems } from "#/libs/drizzle/schema";

@@ -1,6 +1,6 @@
 "use server";
 
-import { CreateTodoRequestSchema, TodoResponseSchema } from "../types/todo";
+import { CreateTodoRequestSchema, TodoResponseSchema } from "../schemas/todo";
 
 import { DBClient } from "#/libs/drizzle/client";
 import { todoItems } from "#/libs/drizzle/schema";
