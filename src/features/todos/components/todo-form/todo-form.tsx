@@ -2,7 +2,11 @@
 
 import { useState, useTransition } from "react";
 
-import { createTodo } from "../../actions/create-todo";
+import { Button } from "#/components/ui/button";
+import { Input } from "#/components/ui/input";
+import { Label } from "#/components/ui/field";
+import { TextField } from "#/components/ui/text-field";
+import { createTodo } from "#/features/todos/actions/create-todo";
 
 export const TodoForm = () => {
   const [title, setTitle] = useState("");
@@ -31,23 +35,21 @@ export const TodoForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-8">
-      <div className="flex items-center gap-2">
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="新しいタスクを入力してください"
-          className="flex-1 rounded-md border border-gray-300 p-3 text-base transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-3 focus:ring-blue-500/10 disabled:cursor-not-allowed disabled:bg-gray-50"
-          disabled={isPending}
-        />
-        <button
-          type="submit"
-          disabled={isPending || !title.trim()}
-          className="rounded-md bg-blue-500 px-6 py-3 text-base font-medium text-white transition-colors duration-200 ease-in-out hover:bg-blue-600 disabled:cursor-not-allowed disabled:bg-gray-400"
-        >
+    <form onSubmit={handleSubmit}>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
+        <TextField className="min-w-0 flex-1">
+          <Label>新しいタスク</Label>
+          <Input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="新しいタスクを入力してください"
+            disabled={isPending}
+          />
+        </TextField>
+        <Button type="submit" isDisabled={isPending || !title.trim()} className="shrink-0">
           {isPending ? "追加中..." : "追加"}
-        </button>
+        </Button>
       </div>
     </form>
   );

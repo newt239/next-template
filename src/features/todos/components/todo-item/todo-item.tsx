@@ -2,10 +2,12 @@
 
 import { useTransition } from "react";
 
-import { deleteTodo } from "../../actions/delete-todo";
-import { updateTodo } from "../../actions/update-todo";
-
-import type { Todo } from "../../types/todo";
+import { Button } from "#/components/ui/button";
+import { Card, CardContent, CardTitle } from "#/components/ui/card";
+import { Text } from "#/components/ui/text";
+import { deleteTodo } from "#/features/todos/actions/delete-todo";
+import { updateTodo } from "#/features/todos/actions/update-todo";
+import type { Todo } from "#/features/todos/types/todo";
 
 type TodoItemProps = {
   todo: Todo;
@@ -49,35 +51,39 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
   };
 
   return (
-    <div
-      className={`flex items-center justify-between rounded-lg border border-gray-200 p-4 transition-all duration-200 ease-in-out hover:border-gray-300 hover:shadow-sm ${todo.isCompleted ? "bg-gray-50 opacity-70" : "bg-white"}`}
-    >
-      <div className="flex flex-1 items-center gap-3">
-        <button
-          onClick={handleToggle}
-          disabled={isPending}
-          className="flex h-6 w-6 items-center justify-center rounded border-2 border-gray-300 bg-white text-sm font-bold text-emerald-600 transition-all duration-200 ease-in-out hover:border-blue-500 hover:bg-blue-50 disabled:cursor-not-allowed disabled:opacity-50"
+    <Card className={todo.isCompleted ? "opacity-70" : undefined}>
+      <CardContent className="flex items-center gap-3 py-4">
+        <Button
+          type="button"
+          intent="outline"
+          size="sq-sm"
+          onPress={handleToggle}
+          isDisabled={isPending}
           aria-label={todo.isCompleted ? "未完了にマーク" : "完了にマーク"}
+          className="shrink-0 min-w-9 min-h-9"
         >
-          {todo.isCompleted && "✓"}
-        </button>
-        <div className="flex-1">
-          <h3
-            className={`text-base font-medium leading-relaxed text-gray-900 ${todo.isCompleted ? "text-gray-500 line-through" : ""}`}
+          {todo.isCompleted ? "✓" : ""}
+        </Button>
+        <div className="min-w-0 flex-1">
+          <CardTitle
+            className={todo.isCompleted ? "font-normal text-muted-fg line-through" : undefined}
           >
             {todo.title}
-          </h3>
-          <p className="mt-1 text-sm text-gray-500">{todo.createdAt.toLocaleString("ja-JP")}</p>
+          </CardTitle>
+          <Text className="mt-1 text-sm">{todo.createdAt.toLocaleString("ja-JP")}</Text>
         </div>
-      </div>
-      <button
-        onClick={handleDelete}
-        disabled={isPending}
-        className="flex h-8 w-8 items-center justify-center rounded bg-red-500 text-xl font-bold text-white transition-colors duration-200 ease-in-out hover:bg-red-600 disabled:cursor-not-allowed disabled:bg-gray-400"
-        aria-label="削除"
-      >
-        ×
-      </button>
-    </div>
+        <Button
+          type="button"
+          intent="danger"
+          size="sq-sm"
+          onPress={handleDelete}
+          isDisabled={isPending}
+          aria-label="削除"
+          className="shrink-0"
+        >
+          ×
+        </Button>
+      </CardContent>
+    </Card>
   );
 };
