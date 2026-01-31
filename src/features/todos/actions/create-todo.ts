@@ -2,8 +2,8 @@
 
 import { CreateTodoRequestSchema, TodoResponseSchema } from "../schemas/todo";
 
-import { DBClient } from "#/libs/drizzle/client";
-import { todoItems } from "#/libs/drizzle/schema";
+import { DBClient } from "#/lib/drizzle/client";
+import { todoItems } from "#/lib/drizzle/schema";
 
 export const createTodo = async (data: { title: string }) => {
   try {
