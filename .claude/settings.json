@@ -7,10 +7,9 @@
       "Bash(grep:*)",
       "Bash(gh pr create:*)"
     ],
-    "ask": ["Bash(git add:*)", "Bash(git commit:*)"],
+    "ask": ["Bash(git add:*)", "Bash(git commit:*)", "Bash(git push:*)"],
     "deny": [
       "Bash(rm:*)",
-      "Bash(git push:*)",
       "Bash(git reset:*)",
       "Bash(git checkout:*)",
       "Bash(git merge:*)",
