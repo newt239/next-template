@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader } from "#/components/ui/card";
 import { Heading } from "#/components/ui/heading";
-import { TodoForm } from "#/features/todos/components/todo-form";
-import { TodoListFetcher } from "#/features/todos/components/todo-list/todo-list-fetcher";
+import { TodoForm } from "#/features/todo/components/todo-form";
+import { TodoListFetcher } from "#/features/todo/components/todo-list/todo-list-fetcher";
 
 const HomePage = () => {
   return (

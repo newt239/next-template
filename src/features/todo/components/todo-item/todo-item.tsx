@@ -5,9 +5,9 @@ import { useTransition } from "react";
 import { Button } from "#/components/ui/button";
 import { Card, CardContent, CardTitle } from "#/components/ui/card";
 import { Text } from "#/components/ui/text";
-import { deleteTodo } from "#/features/todos/actions/delete-todo";
-import { updateTodo } from "#/features/todos/actions/update-todo";
-import type { Todo } from "#/features/todos/types/todo";
+import { deleteTodo } from "#/features/todo/actions/delete-todo";
+import { updateTodo } from "#/features/todo/actions/update-todo";
+import type { Todo } from "#/features/todo/types/todo";
 
 type TodoItemProps = {
   todo: Todo;

@@ -5,7 +5,7 @@ import type {
   GetTodosResponseSchema,
   TodoResponseSchema,
   UpdateTodoRequestSchema,
-} from "#/features/todos/schemas/todo";
+} from "#/features/todo/schemas/todo";
 
 export type Todo = {
   id: number;

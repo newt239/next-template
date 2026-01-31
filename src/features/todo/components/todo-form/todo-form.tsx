@@ -6,7 +6,7 @@ import { Button } from "#/components/ui/button";
 import { Input } from "#/components/ui/input";
 import { Label } from "#/components/ui/field";
 import { TextField } from "#/components/ui/text-field";
-import { createTodo } from "#/features/todos/actions/create-todo";
+import { createTodo } from "#/features/todo/actions/create-todo";
 
 export const TodoForm = () => {
   const [title, setTitle] = useState("");

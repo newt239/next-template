@@ -1,6 +1,6 @@
 import { Card, CardContent } from "#/components/ui/card";
 import { Text } from "#/components/ui/text";
-import type { Todo } from "#/features/todos/types/todo";
+import type { Todo } from "#/features/todo/types/todo";
 
 import { TodoItem } from "../todo-item";
 

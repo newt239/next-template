@@ -1,6 +1,6 @@
 import "server-only";
 
-import { getTodos } from "#/features/todos/actions/get-todos";
+import { getTodos } from "#/features/todo/actions/get-todos";
 
 import { TodoList } from "./todo-list";
 
