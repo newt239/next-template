@@ -13,7 +13,7 @@ if (typeof authToken !== "string" || authToken.length === 0) {
 }
 
 export default defineConfig({
-  schema: "./src/libs/drizzle/schema/index.ts",
+  schema: "./src/lib/drizzle/schema/index.ts",
   out: "./drizzle",
   dialect: "turso",
   dbCredentials: { url: databaseUrl, authToken },
