@@ -9,16 +9,16 @@ importers:
   .:
     dependencies:
       '@heroicons/react':
-        specifier: ^2.2.0
+        specifier: 2.2.0
         version: 2.2.0(react@19.2.4)
       '@internationalized/date':
-        specifier: ^3.10.1
+        specifier: 3.10.1
         version: 3.10.1
       '@libsql/client':
         specifier: 0.17.0
         version: 0.17.0
       '@react-aria/i18n':
-        specifier: ^3.12.14
+        specifier: 3.12.14
         version: 3.12.14(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       better-auth:
         specifier: 1.4.17
@@ -27,7 +27,7 @@ importers:
         specifier: 0.45.1
         version: 0.45.1(@libsql/client@0.17.0)(kysely@0.28.10)
       motion:
-        specifier: ^12.29.2
+        specifier: 12.29.2
         version: 12.29.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       nanoid:
         specifier: 5.1.6
@@ -39,7 +39,7 @@ importers:
         specifier: 19.2.4
         version: 19.2.4
       react-aria-components:
-        specifier: ^1.14.0
+        specifier: 1.14.0
         version: 1.14.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react-dom:
         specifier: 19.2.4
@@ -48,13 +48,13 @@ importers:
         specifier: 0.0.1
         version: 0.0.1
       sonner:
-        specifier: ^2.0.7
+        specifier: 2.0.7
         version: 2.0.7(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       tailwind-merge:
-        specifier: ^3.4.0
+        specifier: 3.4.0
         version: 3.4.0
       tailwind-variants:
-        specifier: ^3.2.2
+        specifier: 3.2.2
         version: 3.2.2(tailwind-merge@3.4.0)(tailwindcss@4.1.18)
       tailwindcss-react-aria-components:
         specifier: 2.0.1
@@ -64,19 +64,19 @@ importers:
         version: 4.3.6
     devDependencies:
       '@playwright/test':
-        specifier: ^1.58.0
+        specifier: 1.58.0
         version: 1.58.0
       '@tailwindcss/postcss':
         specifier: 4.1.18
         version: 4.1.18
       '@testing-library/dom':
-        specifier: ^10.4.1
+        specifier: 10.4.1
         version: 10.4.1
       '@testing-library/jest-dom':
-        specifier: ^6.9.1
+        specifier: 6.9.1
         version: 6.9.1
       '@testing-library/react':
-        specifier: ^16.3.2
+        specifier: 16.3.2
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@types/node':
         specifier: 25.1.0
@@ -88,13 +88,13 @@ importers:
         specifier: 19.2.3
         version: 19.2.3(@types/react@19.2.10)
       '@vitejs/plugin-react':
-        specifier: ^5.1.2
+        specifier: 5.1.2
         version: 5.1.2(vite@7.3.1(@types/node@25.1.0)(jiti@2.6.1)(lightningcss@1.30.2))
       drizzle-kit:
         specifier: 0.31.8
         version: 0.31.8
       jsdom:
-        specifier: ^27.4.0
+        specifier: 27.4.0
         version: 27.4.0(@noble/hashes@2.0.1)
       lefthook:
         specifier: 2.0.16
@@ -118,10 +118,10 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
       vite-tsconfig-paths:
-        specifier: ^6.0.5
+        specifier: 6.0.5
         version: 6.0.5(typescript@5.9.3)(vite@7.3.1(@types/node@25.1.0)(jiti@2.6.1)(lightningcss@1.30.2))
       vitest:
-        specifier: ^4.0.18
+        specifier: 4.0.18
         version: 4.0.18(@types/node@25.1.0)(jiti@2.6.1)(jsdom@27.4.0(@noble/hashes@2.0.1))(lightningcss@1.30.2)
 
 packages:
