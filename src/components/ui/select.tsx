@@ -1,9 +1,12 @@
-import type {
-  ListBoxProps,
-  PopoverProps,
-  SelectProps as SelectPrimitiveProps,
+import {
+  type ListBoxProps,
+  type PopoverProps,
+  type SelectProps as SelectPrimitiveProps,
+  Button,
+  ListBox,
+  Select as SelectPrimitive,
+  SelectValue,
 } from "react-aria-components";
-import { Button, ListBox, Select as SelectPrimitive, SelectValue } from "react-aria-components";
 
 import { cx } from "#/lib/primitive";
 import { ChevronUpDownIcon } from "@heroicons/react/20/solid";

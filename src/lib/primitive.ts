@@ -2,9 +2,7 @@
 
 import { composeRenderProps } from "react-aria-components";
 
-import { twMerge } from "tailwind-merge";
-
-import type { ClassNameValue } from "tailwind-merge";
+import { type ClassNameValue, twMerge } from "tailwind-merge";
 
 type Render<T> = string | ((v: T) => string) | undefined;
 

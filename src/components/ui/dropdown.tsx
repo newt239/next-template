@@ -1,12 +1,10 @@
 "use client";
 
-import type {
-  ListBoxItemProps,
-  ListBoxSectionProps,
-  SeparatorProps,
-  TextProps,
-} from "react-aria-components";
 import {
+  type ListBoxItemProps,
+  type ListBoxSectionProps,
+  type SeparatorProps,
+  type TextProps,
   Collection,
   Header,
   ListBoxItem as ListBoxItemPrimitive,
@@ -118,7 +116,7 @@ const DropdownItem = ({ className, children, intent, ...props }: DropdownItemPro
     <ListBoxItemPrimitive
       textValue={textValue}
       className={composeRenderProps(className, (className, renderProps) =>
-        dropdownItemStyles({ ...renderProps, intent, className }),
+        dropdownItemStyles({ className, intent, ...renderProps }),
       )}
       {...props}
     >

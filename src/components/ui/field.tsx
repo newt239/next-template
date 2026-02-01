@@ -1,7 +1,9 @@
 "use client";
 
-import type { FieldErrorProps, LabelProps, TextProps } from "react-aria-components";
 import {
+  type FieldErrorProps,
+  type LabelProps,
+  type TextProps,
   FieldError as FieldErrorPrimitive,
   Label as LabelPrimitive,
   Text,

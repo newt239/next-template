@@ -1,7 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import { tv } from "tailwind-variants";
-
-import type { VariantProps } from "tailwind-variants";
+import { type VariantProps, tv } from "tailwind-variants";
 
 const buttonGroupStyles = tv({
   base: "flex w-fit items-stretch *:focus-visible:relative *:focus-visible:z-10 has-[>[data-slot=button-group]]:gap-2 has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-e-md [&>[data-slot=select-trigger]:not([class*='w-'])]:w-fit [&>input]:flex-1",

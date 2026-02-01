@@ -10,7 +10,6 @@ export async function getSession() {
     return session;
   } catch (error) {
     console.error("Failed to get session:", error);
-    return;
   }
 }
 
@@ -20,7 +19,6 @@ export async function getUser() {
     return session?.user || undefined;
   } catch (error) {
     console.error("Failed to get user:", error);
-    return;
   }
 }
 

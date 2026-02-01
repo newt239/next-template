@@ -2,6 +2,8 @@
 
 import { use } from "react";
 import {
+  type CalendarProps as CalendarPrimitiveProps,
+  type DateValue,
   CalendarCell,
   CalendarGrid,
   CalendarGridBody,
@@ -14,17 +16,14 @@ import {
   composeRenderProps,
   useLocale,
 } from "react-aria-components";
-import type { CalendarProps as CalendarPrimitiveProps, DateValue } from "react-aria-components";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-import { getLocalTimeZone, today } from "@internationalized/date";
+import { type CalendarDate, getLocalTimeZone, today } from "@internationalized/date";
 import { useDateFormatter } from "@react-aria/i18n";
 import { twMerge } from "tailwind-merge";
 
 import { Button } from "./button";
 import { Select, SelectContent, SelectItem, SelectLabel, SelectTrigger } from "./select";
-
-import type { CalendarDate } from "@internationalized/date";
 
 interface CalendarProps<T extends DateValue> extends Omit<
   CalendarPrimitiveProps<T>,

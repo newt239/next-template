@@ -1,7 +1,6 @@
 "use client";
 
-import { createContext, useContext } from "react";
-import type { ReactElement, ReactNode } from "react";
+import { type ReactElement, type ReactNode, createContext, useContext } from "react";
 
 type Theme = "light" | "dark" | "system";
 
@@ -9,7 +8,7 @@ interface ThemeContextValue {
   theme: Theme;
 }
 
-const ThemeContext = createContext<ThemeContextValue | null>(undefined);
+const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 const defaultTheme: Theme = "system";
 

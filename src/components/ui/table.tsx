@@ -1,16 +1,14 @@
 "use client";
 
 import { createContext, use } from "react";
-import type {
-  CellProps,
-  ColumnProps,
-  ColumnResizerProps,
-  TableHeaderProps as HeaderProps,
-  RowProps,
-  TableBodyProps,
-  TableProps as TablePrimitiveProps,
-} from "react-aria-components";
 import {
+  type CellProps,
+  type ColumnProps,
+  type ColumnResizerProps,
+  type TableHeaderProps as HeaderProps,
+  type RowProps,
+  type TableBodyProps,
+  type TableProps as TablePrimitiveProps,
   Button,
   Cell,
   Collection,

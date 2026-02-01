@@ -1,7 +1,8 @@
 "use client";
 
-import type { CheckboxGroupProps, CheckboxProps } from "react-aria-components";
 import {
+  type CheckboxGroupProps,
+  type CheckboxProps,
   CheckboxGroup as CheckboxGroupPrimitive,
   Checkbox as CheckboxPrimitive,
   composeRenderProps,
@@ -42,9 +43,9 @@ export function Checkbox({ className, children, ...props }: CheckboxProps) {
           const isStringChild = typeof children === "string";
           const indicator = isIndeterminate ? (
             <MinusIcon data-slot="check-indicator" />
-          ) : (isSelected ? (
+          ) : isSelected ? (
             <CheckIcon data-slot="check-indicator" />
-          ) : null);
+          ) : null;
 
           const content = isStringChild ? <CheckboxLabel>{children}</CheckboxLabel> : children;
 

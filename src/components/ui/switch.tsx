@@ -1,7 +1,6 @@
 "use client";
 
-import { Switch as SwitchPrimitive } from "react-aria-components";
-import type { SwitchProps } from "react-aria-components";
+import { type SwitchProps, Switch as SwitchPrimitive } from "react-aria-components";
 
 import { cx } from "#/lib/primitive";
 import { twJoin, twMerge } from "tailwind-merge";
@@ -59,11 +58,11 @@ export function Switch({ children, className, ...props }: SwitchProps) {
           </span>
           {typeof children === "function" ? (
             children(values)
-          ) : (typeof children === "string" ? (
+          ) : typeof children === "string" ? (
             <SwitchLabel>{children}</SwitchLabel>
           ) : (
             children
-          ))}
+          )}
         </>
       )}
     </SwitchPrimitive>

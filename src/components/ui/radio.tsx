@@ -1,7 +1,8 @@
 "use client";
 
-import type { RadioGroupProps, RadioProps } from "react-aria-components";
 import {
+  type RadioGroupProps,
+  type RadioProps,
   RadioGroup as RadioGroupPrimitive,
   Radio as RadioPrimitive,
   composeRenderProps,

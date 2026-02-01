@@ -1,7 +1,8 @@
 "use client";
 
-import type { DialogTriggerProps, PopoverProps } from "react-aria-components";
 import {
+  type DialogTriggerProps,
+  type PopoverProps,
   DialogTrigger as DialogTriggerPrimitive,
   OverlayArrow,
   Popover as PopoverPrimitive,

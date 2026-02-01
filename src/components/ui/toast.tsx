@@ -1,10 +1,8 @@
 "use client";
 
 import { useTheme } from "#/components/providers/theme-provider";
-import { Toaster as ToasterPrimitive } from "sonner";
+import { type ToasterProps, Toaster as ToasterPrimitive } from "sonner";
 import { twJoin } from "tailwind-merge";
-
-import type { ToasterProps } from "sonner";
 
 export function Toast(props: ToasterProps) {
   const { theme = "system" } = useTheme();

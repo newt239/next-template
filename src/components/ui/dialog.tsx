@@ -1,7 +1,8 @@
 "use client";
 
-import type { HeadingProps, TextProps } from "react-aria-components";
 import {
+  type HeadingProps,
+  type TextProps,
   Heading,
   Button as PrimitiveButton,
   Dialog as PrimitiveDialog,
@@ -11,9 +12,7 @@ import { cx } from "#/lib/primitive";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { twMerge } from "tailwind-merge";
 
-import { Button } from "./button";
-
-import type { ButtonProps } from "./button";
+import { type ButtonProps, Button } from "./button";
 
 const Dialog = ({
   role = "dialog",

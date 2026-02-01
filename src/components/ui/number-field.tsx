@@ -1,7 +1,12 @@
 "use client";
 
-import type { ButtonProps, InputProps, NumberFieldProps } from "react-aria-components";
-import { Button, NumberField as NumberFieldPrimitive } from "react-aria-components";
+import {
+  type ButtonProps,
+  type InputProps,
+  type NumberFieldProps,
+  Button,
+  NumberField as NumberFieldPrimitive,
+} from "react-aria-components";
 
 import { Input, InputGroup } from "#/components/ui/input";
 import { cx } from "#/lib/primitive";

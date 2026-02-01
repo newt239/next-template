@@ -1,14 +1,12 @@
 "use client";
 
 import { use } from "react";
-import type {
-  DialogProps,
-  DialogTriggerProps,
-  HeadingProps,
-  ModalOverlayProps,
-  TextProps,
-} from "react-aria-components";
 import {
+  type DialogProps,
+  type DialogTriggerProps,
+  type HeadingProps,
+  type ModalOverlayProps,
+  type TextProps,
   Button as ButtonPrimitive,
   Dialog,
   DialogTrigger,
@@ -22,9 +20,7 @@ import {
 import { AnimatePresence, motion } from "motion/react";
 import { twJoin, twMerge } from "tailwind-merge";
 
-import { Button } from "./button";
-
-import type { ButtonProps } from "./button";
+import { type ButtonProps, Button } from "./button";
 
 const DrawerRoot = motion.create(ModalPrimitive);
 const DrawerOverlay = motion.create(ModalOverlay);
@@ -91,12 +87,12 @@ const DrawerContent = ({
               )}
               animate={{ x: 0, y: 0 }}
               initial={{
-                x: side === "left" ? "-100%" : (side === "right" ? "100%" : 0),
-                y: side === "top" ? "-100%" : (side === "bottom" ? "100%" : 0),
+                x: side === "left" ? "-100%" : side === "right" ? "100%" : 0,
+                y: side === "top" ? "-100%" : side === "bottom" ? "100%" : 0,
               }}
               exit={{
-                x: side === "left" ? "-100%" : (side === "right" ? "100%" : 0),
-                y: side === "top" ? "-100%" : (side === "bottom" ? "100%" : 0),
+                x: side === "left" ? "-100%" : side === "right" ? "100%" : 0,
+                y: side === "top" ? "-100%" : side === "bottom" ? "100%" : 0,
               }}
               drag={side === "left" || side === "right" ? "x" : "y"}
               whileDrag={{ cursor: "grabbing" }}
