@@ -46,44 +46,64 @@
 ```bash
 src/
 ├── app/                    # Next.js App Router
-│   ├── (public)/          # ログイン前のページ
+│   ├── (public)/           # ログイン前のページ（認証実装時に追加）
 │   │   ├── login/
 │   │   └── register/
-│   ├── (protected)/          # ログイン後のページ
+│   ├── (protected)/        # ログイン後のページ（認証実装時に追加）
 │   │   ├── {pathname}/
 │   │   │   └── page.tsx
 │   │   └── page.tsx
-│   ├── globals.css           # グローバルスタイル
-│   ├── layout.tsx            # ルートレイアウト
-│   └── page.tsx              # ホームページ
+│   ├── favicon.ico
+│   ├── globals.css         # グローバルスタイル
+│   ├── layout.tsx          # ルートレイアウト
+│   └── page.tsx            # ホームページ
 ├── features/               # 機能ベースのディレクトリ構成
 │   └── {feature-name}/
-│       ├── actions/        # Server Actions（フォーム操作用）
+│       ├── actions/        # Server Actions およびデータフェッチ関数
 │       ├── components/     # 機能固有のコンポーネント
 │       │   └── {component-name}/
 │       │       ├── {component-name}.tsx
 │       │       ├── {component-name}.spec.tsx
 │       │       ├── {component-name}.stories.tsx
 │       │       └── index.ts
-│       └── types/           # 機能固有の型定義
-├── components/{name}/         # 汎用的に使用するコンポーネント
-│    ├─ {name}.tsx          # 機能固有のコンポーネント
-│    ├─ {name}.spec.tsx     # 機能固有のユニットテスト
-│    ├─ {name}.stories.tsx  # 機能固有のストーリー
-│    └─ index.ts            # 機能固有のインデックスファイル
-├── libs/                   # グローバルユーティリティ関数
-│    └─ drizzle/            # Drizzleの設定
-├── types/                  # グローバル型定義
-└── hooks/                  # グローバルカスタムフック
+│       ├── schemas/        # Zod スキーマ（バリデーション用）
+│       └── types/          # 機能固有の型定義
+├── components/             # 汎用的に使用するコンポーネント
+│   └── {category}/        # 例: ui/
+│       ├── {name}.tsx
+│       ├── {name}.spec.tsx
+│       ├── {name}.stories.tsx
+│       └── index.ts
+├── lib/                    # グローバルユーティリティ・設定
+│   ├── better-auth/        # 認証設定（認証実装時に使用）
+│   ├── drizzle/            # Drizzle の設定・スキーマ
+│   └── primitive.ts        # 共通プリミティブ
+├── types/                  # グローバル型定義（必要に応じて追加）
+└── hooks/                  # グローバルカスタムフック（必要に応じて追加）
 ```
 
-- コンポーネントの名前はUpperCamelCaseで命名し、ディレクトリ名はkebab-caseで命名してください。
+- コンポーネントの名前はPascalCaseで命名し、ディレクトリ名はkebab-caseで命名してください。
+
+### Feature 内モジュールの参照制限
+
+- 各 feature 内の **actions**・**lib**（feature 内に配置した場合）・**hooks**（feature 内に配置した場合）は、**その feature の外から呼び出してはなりません**。
+- 別の feature や、app・components などから、他 feature の actions / lib / hooks をインポートしたり呼び出したりしないでください。
+- 共通化したい処理は、`src/lib/` や `src/hooks/` などグローバルな層に配置し、必要な feature や app から参照してください。
+
+### インポートとパスエイリアス
+
+- 同階層でないモジュールをインポートする場合は、**相対パスではなくパスエイリアスを使用してください**。
+- プロジェクトでは `#/` が `src/` にマップされています。例: `#/components/ui/button` → `src/components/ui/button`。
+- **同一 feature 内**（例: `features/todo/actions/` から `features/todo/types/`）や**同一ディレクトリ内**のインポートでは相対パス（`../types/todo` など）を使用して構いません。
+- **別の feature・app・components・lib・types・hooks を参照する場合**は、必ず `#/` から始まるパスエイリアスで記述してください。例: `import { Button } from "#/components/ui/button"`。
 
 ## コーディングガイドライン
 
-## `any`の禁止
+### `any`の禁止
 
 - いかなる理由があっても`any`を使用してはなりません。
+- `unknown`や`never`の使用も避けてください。
+- 実データと一致する型を定義してください。
 
 ### 型アサーションの禁止
 
