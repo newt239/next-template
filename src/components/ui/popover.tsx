@@ -6,7 +6,9 @@ import {
   OverlayArrow,
   Popover as PopoverPrimitive,
 } from "react-aria-components";
+
 import { cx } from "#/lib/primitive";
+
 import {
   DialogBody,
   DialogClose,
@@ -17,9 +19,7 @@ import {
   DialogTrigger,
 } from "./dialog";
 
-const Popover = (props: DialogTriggerProps) => {
-  return <DialogTriggerPrimitive {...props} />;
-};
+const Popover = (props: DialogTriggerProps) => <DialogTriggerPrimitive {...props} />;
 
 const PopoverTitle = DialogTitle;
 const PopoverHeader = DialogHeader;

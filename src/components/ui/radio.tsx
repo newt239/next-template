@@ -2,12 +2,14 @@
 
 import type { RadioGroupProps, RadioProps } from "react-aria-components";
 import {
-  composeRenderProps,
   RadioGroup as RadioGroupPrimitive,
   Radio as RadioPrimitive,
+  composeRenderProps,
 } from "react-aria-components";
-import { twMerge } from "tailwind-merge";
+
 import { cx } from "#/lib/primitive";
+import { twMerge } from "tailwind-merge";
+
 import { Label } from "./field";
 
 export function RadioGroup({ className, ...props }: RadioGroupProps) {

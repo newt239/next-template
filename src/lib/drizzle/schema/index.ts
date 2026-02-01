@@ -4,18 +4,18 @@ import { nanoid } from "nanoid";
 
 // ユーザーテーブル
 export const user = sqliteTable("user", {
-  id: text("id")
-    .primaryKey()
-    .$defaultFn(() => nanoid()),
-  name: text("name").notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" })
+    .default(sql`(unixepoch())`)
+    .notNull(),
   email: text("email").notNull().unique(),
   emailVerified: integer("email_verified", { mode: "boolean" })
     .$defaultFn(() => false)
     .notNull(),
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => nanoid()),
   image: text("image"),
-  createdAt: integer("created_at", { mode: "timestamp" })
-    .default(sql`(unixepoch())`)
-    .notNull(),
+  name: text("name").notNull(),
   updatedAt: integer("updated_at", { mode: "timestamp" })
     .default(sql`(unixepoch())`)
     .notNull(),
@@ -23,12 +23,12 @@ export const user = sqliteTable("user", {
 
 // セッションテーブル
 export const session = sqliteTable("session", {
-  id: text("id").primaryKey(),
-  expiresAt: integer("expires_at", { mode: "timestamp" }).notNull(),
-  token: text("token").notNull().unique(),
   createdAt: integer("created_at", { mode: "timestamp" }).default(sql`(unixepoch())`),
-  updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`(unixepoch())`),
+  expiresAt: integer("expires_at", { mode: "timestamp" }).notNull(),
+  id: text("id").primaryKey(),
   ipAddress: text("ip_address"),
+  token: text("token").notNull().unique(),
+  updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`(unixepoch())`),
   userAgent: text("user_agent"),
   userId: text("user_id")
     .notNull()
@@ -39,25 +39,25 @@ export const sessionExpiresAtIdx = index("idx_session_expires_at").on(session.ex
 
 // アカウントテーブル（OAuth用）
 export const account = sqliteTable("account", {
-  id: text("id").primaryKey(),
-  accountId: text("account_id").notNull(),
-  providerId: text("provider_id").notNull(),
-  userId: text("user_id")
-    .notNull()
-    .references(() => user.id),
   accessToken: text("access_token"),
-  refreshToken: text("refresh_token"),
-  idToken: text("id_token"),
   accessTokenExpiresAt: integer("access_token_expires_at", {
     mode: "timestamp",
   }),
+  accountId: text("account_id").notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" }).default(sql`(unixepoch())`),
+  id: text("id").primaryKey(),
+  idToken: text("id_token"),
+  password: text("password"),
+  providerId: text("provider_id").notNull(),
+  refreshToken: text("refresh_token"),
   refreshTokenExpiresAt: integer("refresh_token_expires_at", {
     mode: "timestamp",
   }),
   scope: text("scope"),
-  password: text("password"),
-  createdAt: integer("created_at", { mode: "timestamp" }).default(sql`(unixepoch())`),
   updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`(unixepoch())`),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id),
 });
 
 export const accountUniqueIdx = unique("idx_account_unique").on(
@@ -67,19 +67,19 @@ export const accountUniqueIdx = unique("idx_account_unique").on(
 
 // 認証用検証テーブル
 export const verification = sqliteTable("verification", {
+  createdAt: integer("created_at", { mode: "timestamp" }).default(sql`(unixepoch())`),
+  expiresAt: integer("expires_at", { mode: "timestamp" }).notNull(),
   id: text("id").primaryKey(),
   identifier: text("identifier").notNull(),
-  value: text("value").notNull(),
-  expiresAt: integer("expires_at", { mode: "timestamp" }).notNull(),
-  createdAt: integer("created_at", { mode: "timestamp" }).default(sql`(unixepoch())`),
   updatedAt: integer("updated_at", { mode: "timestamp" }).default(sql`(unixepoch())`),
+  value: text("value").notNull(),
 });
 
 export const todoItems = sqliteTable("todo_items", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
-  title: text("title").notNull(),
-  isCompleted: integer("is_completed", { mode: "boolean" }).notNull().default(false),
   createdAt: integer("created_at", { mode: "timestamp" })
     .notNull()
     .default(sql`(strftime('%s','now'))`),
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  isCompleted: integer("is_completed", { mode: "boolean" }).notNull().default(false),
+  title: text("title").notNull(),
 });

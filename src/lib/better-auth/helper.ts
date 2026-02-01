@@ -10,17 +10,17 @@ export async function getSession() {
     return session;
   } catch (error) {
     console.error("Failed to get session:", error);
-    return null;
+    return;
   }
 }
 
 export async function getUser() {
   try {
     const session = await getSession();
-    return session?.user || null;
+    return session?.user || undefined;
   } catch (error) {
     console.error("Failed to get user:", error);
-    return null;
+    return;
   }
 }
 

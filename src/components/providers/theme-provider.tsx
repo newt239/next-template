@@ -1,21 +1,22 @@
 "use client";
 
-import { createContext, useContext, type ReactNode, type ReactElement } from "react";
+import { createContext, useContext } from "react";
+import type { ReactElement, ReactNode } from "react";
 
 type Theme = "light" | "dark" | "system";
 
-type ThemeContextValue = {
+interface ThemeContextValue {
   theme: Theme;
-};
+}
 
-const ThemeContext = createContext<ThemeContextValue | null>(null);
+const ThemeContext = createContext<ThemeContextValue | null>(undefined);
 
 const defaultTheme: Theme = "system";
 
-type ThemeProviderProps = {
+interface ThemeProviderProps {
   children: ReactNode;
   defaultTheme?: Theme;
-};
+}
 
 export function ThemeProvider({
   children,

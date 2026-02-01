@@ -1,16 +1,15 @@
 "use server";
 
-import { eq } from "drizzle-orm";
-
-import { UpdateTodoRequestSchema, TodoResponseSchema } from "../schemas/todo";
-
 import { DBClient } from "#/lib/drizzle/client";
 import { todoItems } from "#/lib/drizzle/schema";
+import { eq } from "drizzle-orm";
+
+import { TodoResponseSchema, UpdateTodoRequestSchema } from "../schemas/todo";
 
 export const updateTodo = async (id: number, data: { title?: string; isCompleted?: boolean }) => {
   try {
     if (Number.isNaN(id)) {
-      return { success: false, error: "無効なIDです" } as const;
+      return { error: "無効なIDです", success: false } as const;
     }
 
     const body = UpdateTodoRequestSchema.parse(data);
@@ -29,13 +28,13 @@ export const updateTodo = async (id: number, data: { title?: string; isCompleted
       .returning();
 
     if (!todo) {
-      return { success: false, error: "TODOが見つかりません" } as const;
+      return { error: "TODOが見つかりません", success: false } as const;
     }
 
     const response = TodoResponseSchema.parse(todo);
     return { success: true, todo: response } as const;
   } catch (error) {
     console.error("TODO更新エラー:", error);
-    return { success: false, error: "TODOの更新に失敗しました" } as const;
+    return { error: "TODOの更新に失敗しました", success: false } as const;
   }
 };

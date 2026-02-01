@@ -1,14 +1,27 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "ignorePatterns": ["node_modules/", ".next/", "public/", "playwright-report/"],
-  "env": {
-    "es2022": true,
-    "node": true
+  "ignorePatterns": ["node_modules/", ".next/", "out/", "build/"],
+  "categories": {
+    "nursery": "warn",
+    "pedantic": "warn",
+    "perf": "warn",
+    "restriction": "warn",
+    "style": "warn",
+    "suspicious": "warn"
   },
-  "settings": {
-    "react": {
-      "version": "19.2.3"
-    }
-  },
-  "plugins": ["eslint", "oxc", "nextjs", "react", "import", "jsx-a11y", "unicorn"]
+  "plugins": [
+    "eslint",
+    "typescript",
+    "unicorn",
+    "react",
+    "react-perf",
+    "nextjs",
+    "oxc",
+    "import",
+    "jsx-a11y"
+  ],
+  "rules": {
+    "sort-keys": "warn",
+    "no-console": ["warn", { "allow": ["warn", "error"] }]
+  }
 }

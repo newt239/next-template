@@ -1,4 +1,3 @@
-import type { z } from "zod";
 import type {
   CreateTodoRequestSchema,
   GetTodosQuerySchema,
@@ -6,13 +5,14 @@ import type {
   TodoResponseSchema,
   UpdateTodoRequestSchema,
 } from "#/features/todo/schemas/todo";
+import type { z } from "zod";
 
-export type Todo = {
+export interface Todo {
   id: number;
   title: string;
   isCompleted: boolean;
   createdAt: Date;
-};
+}
 
 export type CreateTodoRequestType = z.infer<typeof CreateTodoRequestSchema>;
 export type UpdateTodoRequestType = z.infer<typeof UpdateTodoRequestSchema>;

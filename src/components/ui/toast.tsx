@@ -1,8 +1,10 @@
 "use client";
 
-import { Toaster as ToasterPrimitive, type ToasterProps } from "sonner";
-import { twJoin } from "tailwind-merge";
 import { useTheme } from "#/components/providers/theme-provider";
+import { Toaster as ToasterPrimitive } from "sonner";
+import { twJoin } from "tailwind-merge";
+
+import type { ToasterProps } from "sonner";
 
 export function Toast(props: ToasterProps) {
   const { theme = "system" } = useTheme();
@@ -19,25 +21,25 @@ export function Toast(props: ToasterProps) {
       }}
       style={
         {
+          "--error-bg": "var(--color-danger-subtle)",
+          "--error-border": "color-mix(in oklab, var(--danger-subtle-fg) 20%, transparent)",
+          "--error-text": "var(--color-danger-subtle-fg)",
+
+          "--info-bg": "var(--color-info-subtle)",
+          "--info-border": "color-mix(in oklab, var(--info-subtle-fg) 20%, transparent)",
+          "--info-text": "var(--color-info-subtle-fg)",
+
           "--normal-bg": "var(--color-overlay)",
-          "--normal-text": "var(--color-overlay-fg)",
           "--normal-border": "var(--color-border)",
+          "--normal-text": "var(--color-overlay-fg)",
 
           "--success-bg": "var(--color-success-subtle)",
           "--success-border": "color-mix(in oklab, var(--success-subtle-fg) 20%, transparent)",
           "--success-text": "var(--color-success-subtle-fg)",
 
-          "--error-bg": "var(--color-danger-subtle)",
-          "--error-border": "color-mix(in oklab, var(--danger-subtle-fg) 20%, transparent)",
-          "--error-text": "var(--color-danger-subtle-fg)",
-
           "--warning-bg": "var(--color-warning-subtle)",
           "--warning-border": "color-mix(in oklab, var(--warning-subtle-fg) 20%, transparent)",
           "--warning-text": "var(--color-warning-subtle-fg)",
-
-          "--info-bg": "var(--color-info-subtle)",
-          "--info-border": "color-mix(in oklab, var(--info-subtle-fg) 20%, transparent)",
-          "--info-text": "var(--color-info-subtle-fg)",
         } as React.CSSProperties
       }
       {...props}

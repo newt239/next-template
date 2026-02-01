@@ -6,9 +6,10 @@ import {
   Label as LabelPrimitive,
   Text,
 } from "react-aria-components";
+
+import { cx } from "#/lib/primitive";
 import { twMerge } from "tailwind-merge";
 import { tv } from "tailwind-variants";
-import { cx } from "#/lib/primitive";
 
 export const labelStyles = tv({
   base: "select-none text-base/6 text-fg in-disabled:opacity-50 group-disabled:opacity-50 sm:text-sm/6",

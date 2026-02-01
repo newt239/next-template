@@ -1,7 +1,6 @@
-import process from "node:process";
-
 import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
+import process from "node:process";
 
 import * as schema from "./schema/index";
 
@@ -17,8 +16,8 @@ if (!tursoToken) {
 }
 
 const sqlClient = createClient({
-  url: tursoUrl,
   authToken: tursoToken,
+  url: tursoUrl,
 });
 
 export const DBClient = drizzle(sqlClient, { schema });

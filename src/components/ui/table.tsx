@@ -1,6 +1,5 @@
 "use client";
 
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { createContext, use } from "react";
 import type {
   CellProps,
@@ -17,17 +16,20 @@ import {
   Collection,
   Column,
   ColumnResizer as ColumnResizerPrimitive,
-  composeRenderProps,
   ResizableTableContainer,
   Row,
   TableBody as TableBodyPrimitive,
   TableHeader as TableHeaderPrimitive,
   Table as TablePrimitive,
+  composeRenderProps,
   useTableOptions,
 } from "react-aria-components";
-import { twJoin, twMerge } from "tailwind-merge";
+
 import { Text } from "#/components/ui/text";
 import { cx } from "#/lib/primitive";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { twJoin, twMerge } from "tailwind-merge";
+
 import { Checkbox } from "./checkbox";
 
 interface TableProps extends Omit<TablePrimitiveProps, "className"> {
@@ -45,14 +47,12 @@ const TableContext = createContext<TableProps>({
 
 const useTableContext = () => use(TableContext);
 
-const Root = (props: TableProps) => {
-  return (
-    <TablePrimitive
-      className="w-full min-w-full caption-bottom text-sm/6 outline-hidden [--table-selected-bg:var(--color-secondary)]/50"
-      {...props}
-    />
-  );
-};
+const Root = (props: TableProps) => (
+  <TablePrimitive
+    className="w-full min-w-full caption-bottom text-sm/6 outline-hidden [--table-selected-bg:var(--color-secondary)]/50"
+    {...props}
+  />
+);
 
 const Table = ({
   allowResize,
@@ -62,32 +62,30 @@ const Table = ({
   striped = false,
   ref,
   ...props
-}: TableProps) => {
-  return (
-    <TableContext.Provider value={{ allowResize, bleed, grid, striped }}>
-      <div className="flow-root">
+}: TableProps) => (
+  <TableContext.Provider value={{ allowResize, bleed, grid, striped }}>
+    <div className="flow-root">
+      <div
+        className={twMerge(
+          "relative -mx-(--gutter) overflow-x-auto whitespace-nowrap [--gutter-y:--spacing(2)] has-data-[slot=table-resizable-container]:overflow-auto",
+          className,
+        )}
+      >
         <div
-          className={twMerge(
-            "relative -mx-(--gutter) overflow-x-auto whitespace-nowrap [--gutter-y:--spacing(2)] has-data-[slot=table-resizable-container]:overflow-auto",
-            className,
-          )}
+          className={twJoin("inline-block min-w-full align-middle", !bleed && "sm:px-(--gutter)")}
         >
-          <div
-            className={twJoin("inline-block min-w-full align-middle", !bleed && "sm:px-(--gutter)")}
-          >
-            {allowResize ? (
-              <ResizableTableContainer data-slot="table-resizable-container">
-                <Root ref={ref} {...props} />
-              </ResizableTableContainer>
-            ) : (
-              <Root {...props} ref={ref} />
-            )}
-          </div>
+          {allowResize ? (
+            <ResizableTableContainer data-slot="table-resizable-container">
+              <Root ref={ref} {...props} />
+            </ResizableTableContainer>
+          ) : (
+            <Root {...props} ref={ref} />
+          )}
         </div>
       </div>
-    </TableContext.Provider>
-  );
-};
+    </div>
+  </TableContext.Provider>
+);
 
 const ColumnResizer = ({ className, ...props }: ColumnResizerProps) => (
   <ColumnResizerPrimitive

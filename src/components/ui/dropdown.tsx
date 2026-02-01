@@ -1,6 +1,5 @@
 "use client";
 
-import { CheckIcon } from "@heroicons/react/16/solid";
 import type {
   ListBoxItemProps,
   ListBoxSectionProps,
@@ -9,22 +8,25 @@ import type {
 } from "react-aria-components";
 import {
   Collection,
-  composeRenderProps,
   Header,
   ListBoxItem as ListBoxItemPrimitive,
   ListBoxSection,
   Separator,
   Text,
+  composeRenderProps,
 } from "react-aria-components";
+
+import { CheckIcon } from "@heroicons/react/16/solid";
 import { twJoin, twMerge } from "tailwind-merge";
 import { tv } from "tailwind-variants";
+
 import { Keyboard } from "./keyboard";
 
 const dropdownSectionStyles = tv({
   slots: {
-    section: "col-span-full grid grid-cols-[auto_1fr]",
     header:
       "col-span-full px-3 py-2 font-medium text-muted-fg text-sm/6 sm:px-2.5 sm:py-1.5 sm:text-xs/3",
+    section: "col-span-full grid grid-cols-[auto_1fr]",
   },
 });
 
@@ -38,14 +40,12 @@ const DropdownSection = <T extends object>({
   className,
   children,
   ...props
-}: DropdownSectionProps<T>) => {
-  return (
-    <ListBoxSection className={section({ className })}>
-      {"title" in props && <Header className={header()}>{props.title}</Header>}
-      <Collection items={props.items}>{children}</Collection>
-    </ListBoxSection>
-  );
-};
+}: DropdownSectionProps<T>) => (
+  <ListBoxSection className={section({ className })}>
+    {"title" in props && <Header className={header()}>{props.title}</Header>}
+    <Collection items={props.items}>{children}</Collection>
+  </ListBoxSection>
+);
 
 const dropdownItemStyles = tv({
   base: [
@@ -53,11 +53,11 @@ const dropdownItemStyles = tv({
     "col-span-full grid grid-cols-[auto_1fr_1.5rem_0.5rem_auto] px-3 py-2 supports-[grid-template-columns:subgrid]:grid-cols-subgrid sm:px-2.5 sm:py-1.5",
     "not-has-[[slot=description]]:items-center",
     "group relative cursor-default select-none rounded-[calc(var(--radius-xl)-(--spacing(1)))] outline-0",
-    // text
+    // Text
     "text-base/6 text-fg sm:text-sm/6 forced-colors:text-[CanvasText]",
-    // avatar
+    // Avatar
     "*:data-[slot=avatar]:*:me-(--me-icon) *:data-[slot=avatar]:me-(--me-icon) has-[[slot=description]]:*:data-[slot=avatar]:row-span-2 *:data-[slot=avatar]:[--avatar-size:--spacing(5)] sm:*:data-[slot=avatar]:[--avatar-size:--spacing(4)]",
-    // icon
+    // Icon
     "*:data-[slot=icon]:col-start-1 *:data-[slot=icon]:row-start-1 *:data-[slot=icon]:-ms-0.5 *:data-[slot=icon]:me-(--me-icon) *:data-[slot=icon]:shrink-0 [&_[data-slot='icon']:not([class*='text-'])]:text-muted-fg",
     "not-has-[[slot=description]]:*:data-[slot=icon]:size-5 sm:not-has-[[slot=description]]:*:data-[slot=icon]:size-4",
     "has-[[slot=description]]:*:data-[slot=icon]:h-lh has-[[slot=description]]:[&_[data-slot='icon']:not([class*='w-'])]:w-5 sm:has-[[slot=description]]:[&_[data-slot='icon']:not([class*='w-'])]:w-4",
@@ -65,9 +65,9 @@ const dropdownItemStyles = tv({
     "selected:[&>[data-slot=icon]:has(+[data-slot=icon])]:absolute selected:[&>[data-slot=icon]:has(+[data-slot=icon])]:end-0 selected:[&>[data-slot=icon]:has(+[data-slot=icon])]:top-1",
     "selected:[&>[data-slot=icon]:has(+[data-slot=avatar])]:absolute selected:[&>[data-slot=icon]:has(+[data-slot=avatar])]:end-0 selected:[&>[data-slot=icon]:has(+[data-slot=avatar])]:top-1",
     "selected:[&>[data-slot=avatar]+[data-slot=icon]+[slot=label]]:me-6 selected:[&>[data-slot=avatar]+[slot=label]]:me-6 selected:[&>[data-slot=icon]+[data-slot=avatar]+[slot=label]]:me-6 selected:[&>[data-slot=icon]+[slot=label]]:me-6",
-    // keyboard
+    // Keyboard
     "*:data-[slot=keyboard]:end-3",
-    // force color adjust
+    // Force color adjust
     "forced-color-adjust-none forced-colors:focus:bg-[Highlight] forced-colors:focus:text-[HighlightText] forced-colors:focus:*:data-[slot=icon]:text-[HighlightText]",
   ],
   variants: {
@@ -88,9 +88,6 @@ const dropdownItemStyles = tv({
     isDisabled: {
       true: "opacity-50 forced-colors:text-[GrayText]",
     },
-    isSelected: {
-      true: "[&_[data-slot='icon']:not([class*='text-'])]:text-accent-fg",
-    },
     isFocused: {
       true: [
         "*:data-[slot=keyboard]:text-accent-fg [&_[data-slot='icon']:not([class*='text-'])]:text-accent-fg",
@@ -104,6 +101,9 @@ const dropdownItemStyles = tv({
         "bg-accent text-accent-fg forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]",
         "[&_.text-muted-fg]:text-accent-fg/80 *:[[slot=description]]:text-accent-fg *:[[slot=label]]:text-accent-fg",
       ],
+    },
+    isSelected: {
+      true: "[&_[data-slot='icon']:not([class*='text-'])]:text-accent-fg",
     },
   },
 });
@@ -165,17 +165,15 @@ const DropdownSeparator = ({ className, ...props }: Omit<SeparatorProps, "orient
   />
 );
 
-const DropdownKeyboard = ({ className, ...props }: React.ComponentProps<typeof Keyboard>) => {
-  return (
-    <Keyboard
-      className={twMerge(
-        "absolute end-2 ps-2 group-hover:text-primary-fg group-focus:text-primary-fg",
-        className,
-      )}
-      {...props}
-    />
-  );
-};
+const DropdownKeyboard = ({ className, ...props }: React.ComponentProps<typeof Keyboard>) => (
+  <Keyboard
+    className={twMerge(
+      "absolute end-2 ps-2 group-hover:text-primary-fg group-focus:text-primary-fg",
+      className,
+    )}
+    {...props}
+  />
+);
 
 /**
  * Note: This is not exposed component, but it's used in other components to render dropdowns.

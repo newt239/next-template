@@ -1,6 +1,5 @@
-import process from "node:process";
-
 import { defineConfig } from "drizzle-kit";
+import process from "node:process";
 
 const databaseUrl = process.env.TURSO_CONNECTION_URL;
 if (typeof databaseUrl !== "string" || databaseUrl.length === 0) {
@@ -13,8 +12,8 @@ if (typeof authToken !== "string" || authToken.length === 0) {
 }
 
 export default defineConfig({
-  schema: "./src/lib/drizzle/schema/index.ts",
-  out: "./drizzle",
+  dbCredentials: { authToken, url: databaseUrl },
   dialect: "turso",
-  dbCredentials: { url: databaseUrl, authToken },
+  out: "./drizzle",
+  schema: "./src/lib/drizzle/schema/index.ts",
 });

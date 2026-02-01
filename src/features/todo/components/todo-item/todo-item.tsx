@@ -7,11 +7,12 @@ import { Card, CardContent, CardTitle } from "#/components/ui/card";
 import { Text } from "#/components/ui/text";
 import { deleteTodo } from "#/features/todo/actions/delete-todo";
 import { updateTodo } from "#/features/todo/actions/update-todo";
+
 import type { Todo } from "#/features/todo/types/todo";
 
-type TodoItemProps = {
+interface TodoItemProps {
   todo: Todo;
-};
+}
 
 export const TodoItem = ({ todo }: TodoItemProps) => {
   const [isPending, startTransition] = useTransition();
@@ -33,7 +34,9 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
   };
 
   const handleDelete = async () => {
-    if (!confirm("このタスクを削除しますか？")) return;
+    if (!confirm("このタスクを削除しますか？")) {
+      return;
+    }
 
     startTransition(async () => {
       try {

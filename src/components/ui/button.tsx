@@ -1,11 +1,12 @@
 "use client";
 
-import {
-  Button as ButtonPrimitive,
-  type ButtonProps as ButtonPrimitiveProps,
-} from "react-aria-components";
-import { tv, type VariantProps } from "tailwind-variants";
+import { Button as ButtonPrimitive } from "react-aria-components";
+import type { ButtonProps as ButtonPrimitiveProps } from "react-aria-components";
+
 import { cx } from "#/lib/primitive";
+import { tv } from "tailwind-variants";
+
+import type { VariantProps } from "tailwind-variants";
 
 export const buttonStyles = tv({
   base: [
@@ -18,6 +19,11 @@ export const buttonStyles = tv({
     "pending:opacity-50 disabled:opacity-50 disabled:forced-colors:text-[GrayText]",
     "*:data-[slot=color-swatch]:-mx-0.5 *:data-[slot=color-swatch]:shrink-0 *:data-[slot=color-swatch]:self-center *:data-[slot=color-swatch]:[--color-swatch-size:--spacing(5)]",
   ],
+  defaultVariants: {
+    intent: "primary",
+    isCircle: false,
+    size: "md",
+  },
   variants: {
     intent: {
       primary:
@@ -33,6 +39,11 @@ export const buttonStyles = tv({
       plain:
         "border-transparent [--btn-bg:transparent] [--btn-icon:var(--color-muted-fg)] [--btn-outline:var(--color-ring)] [--btn-overlay:var(--color-secondary)] [--btn-ring:var(--color-ring)]/20",
     },
+    isCircle: {
+      true: "rounded-full",
+      false: "rounded-lg",
+    },
+
     size: {
       xs: [
         "min-h-8 gap-x-1.5 px-[calc(--spacing(3)-1px)] py-[calc(--spacing(1.5)-1px)] text-sm sm:min-h-7 sm:px-2 sm:py-[calc(--spacing(1.5)-1px)] sm:text-xs/4",
@@ -75,16 +86,6 @@ export const buttonStyles = tv({
         "*:data-[slot=loader]:size-6 sm:*:data-[slot=loader]:size-5",
       ],
     },
-
-    isCircle: {
-      true: "rounded-full",
-      false: "rounded-lg",
-    },
-  },
-  defaultVariants: {
-    intent: "primary",
-    size: "md",
-    isCircle: false,
   },
 });
 
@@ -100,8 +101,8 @@ export function Button({ className, intent, size, isCircle, ref, ...props }: But
       className={cx(
         buttonStyles({
           intent,
-          size,
           isCircle,
+          size,
         }),
         className,
       )}

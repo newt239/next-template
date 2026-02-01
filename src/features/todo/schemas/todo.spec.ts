@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { CreateTodoRequestSchema } from "./todo";
 
 describe("CreateTodoRequestSchema", () => {

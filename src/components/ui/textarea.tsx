@@ -1,8 +1,10 @@
 "use client";
 
-import { TextArea, type TextAreaProps } from "react-aria-components";
-import { twJoin } from "tailwind-merge";
+import { TextArea } from "react-aria-components";
+import type { TextAreaProps } from "react-aria-components";
+
 import { cx } from "#/lib/primitive";
+import { twJoin } from "tailwind-merge";
 
 export function Textarea({ className, ...props }: TextAreaProps) {
   return (

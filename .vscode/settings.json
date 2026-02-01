@@ -1,11 +1,12 @@
 {
   "editor.tabSize": 2,
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
+  "oxc.fmt.configPath": ".oxfmtrc.json",
+  "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.codeActionsOnSave": {
     "source.fixAll.oxc": "explicit",
     "source.organizeImports": "never"
   },
-  "css.validate": false,
   "files.insertFinalNewline": true,
   "workbench.editor.customLabels.patterns": {
     "**/app/**/{page,layout,index}.{ts,tsx}": "(${dirname})/${filename}.${extname}",

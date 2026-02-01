@@ -1,8 +1,5 @@
 "use client";
 
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-import { type CalendarDate, getLocalTimeZone, today } from "@internationalized/date";
-import { useDateFormatter } from "@react-aria/i18n";
 import { use } from "react";
 import {
   CalendarCell,
@@ -11,17 +8,23 @@ import {
   CalendarGridHeader as CalendarGridHeaderPrimitive,
   CalendarHeaderCell,
   Calendar as CalendarPrimitive,
-  type CalendarProps as CalendarPrimitiveProps,
   CalendarStateContext,
-  composeRenderProps,
-  type DateValue,
   Heading,
   RangeCalendarStateContext,
+  composeRenderProps,
   useLocale,
 } from "react-aria-components";
+import type { CalendarProps as CalendarPrimitiveProps, DateValue } from "react-aria-components";
+
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import { getLocalTimeZone, today } from "@internationalized/date";
+import { useDateFormatter } from "@react-aria/i18n";
 import { twMerge } from "tailwind-merge";
+
 import { Button } from "./button";
 import { Select, SelectContent, SelectItem, SelectLabel, SelectTrigger } from "./select";
+
+import type { CalendarDate } from "@internationalized/date";
 
 interface CalendarProps<T extends DateValue> extends Omit<
   CalendarPrimitiveProps<T>,
@@ -121,9 +124,9 @@ const SelectMonth = () => {
   for (let i = 1; i <= numMonths; i++) {
     const date = state.focusedDate.set({ month: i });
     months.push({
-      id: i,
       date,
       formatted: formatter.format(date.toDate(state.timeZone)),
+      id: i,
     });
   }
 
@@ -156,17 +159,17 @@ const SelectYear = () => {
   const rangeCalendarState = use(RangeCalendarStateContext);
   const state = calendarState || rangeCalendarState!;
   const formatter = useDateFormatter({
-    year: "numeric",
     timeZone: state.timeZone,
+    year: "numeric",
   });
 
   const years: CalendarDropdown[] = [];
   for (let i = -20; i <= 20; i++) {
     const date = state.focusedDate.add({ years: i });
     years.push({
-      id: years.length,
       date,
       formatted: formatter.format(date.toDate(state.timeZone)),
+      id: years.length,
     });
   }
   return (
@@ -192,17 +195,15 @@ const SelectYear = () => {
   );
 };
 
-const CalendarGridHeader = () => {
-  return (
-    <CalendarGridHeaderPrimitive>
-      {(day) => (
-        <CalendarHeaderCell className="pb-2 text-center font-semibold text-muted-fg text-sm/6 sm:px-0 sm:py-0.5 lg:text-xs">
-          {day}
-        </CalendarHeaderCell>
-      )}
-    </CalendarGridHeaderPrimitive>
-  );
-};
+const CalendarGridHeader = () => (
+  <CalendarGridHeaderPrimitive>
+    {(day) => (
+      <CalendarHeaderCell className="pb-2 text-center font-semibold text-muted-fg text-sm/6 sm:px-0 sm:py-0.5 lg:text-xs">
+        {day}
+      </CalendarHeaderCell>
+    )}
+  </CalendarGridHeaderPrimitive>
+);
 
 export type { CalendarProps };
 export { Calendar, SelectMonth, SelectYear, CalendarHeader, CalendarGridHeader };

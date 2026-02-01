@@ -8,8 +8,9 @@ import {
   SliderTrack as PrimitiveSliderTrack,
   SliderStateContext,
 } from "react-aria-components";
-import { twMerge } from "tailwind-merge";
+
 import { cx } from "#/lib/primitive";
+import { twMerge } from "tailwind-merge";
 
 export function SliderGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (

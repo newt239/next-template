@@ -1,9 +1,9 @@
 "use server";
 
-import { CreateTodoRequestSchema, TodoResponseSchema } from "../schemas/todo";
-
 import { DBClient } from "#/lib/drizzle/client";
 import { todoItems } from "#/lib/drizzle/schema";
+
+import { CreateTodoRequestSchema, TodoResponseSchema } from "../schemas/todo";
 
 export const createTodo = async (data: { title: string }) => {
   try {
@@ -11,8 +11,8 @@ export const createTodo = async (data: { title: string }) => {
 
     const [todo] = await DBClient.insert(todoItems)
       .values({
-        title: body.title,
         isCompleted: false,
+        title: body.title,
       })
       .returning();
 
@@ -20,6 +20,6 @@ export const createTodo = async (data: { title: string }) => {
     return { success: true, todo: response } as const;
   } catch (error) {
     console.error("TODO作成エラー:", error);
-    return { success: false, error: "TODOの作成に失敗しました" } as const;
+    return { error: "TODOの作成に失敗しました", success: false } as const;
   }
 };
