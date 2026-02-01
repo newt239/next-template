@@ -172,10 +172,11 @@ const SelectYear = () => {
   return (
     <Select
       aria-label="Year"
-      value={20}
-      onChange={(key) => {
-        if (typeof key === "number") {
-          state.setFocusedDate(years[key].date);
+      selectedKey={years[20].id}
+      onSelectionChange={(key) => {
+        const selected = years.find((year) => year.id == key);
+        if (selected) {
+          state.setFocusedDate(selected.date);
         }
       }}
     >
