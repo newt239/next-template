@@ -8,6 +8,9 @@ concurrency:
   cancel-in-progress: false
 jobs:
   test:
+    env:
+      TURSO_CONNECTION_URL: ${{ secrets.TURSO_CONNECTION_URL }}
+      TURSO_AUTH_TOKEN: ${{ secrets.TURSO_AUTH_TOKEN }}
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
