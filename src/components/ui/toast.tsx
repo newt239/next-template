@@ -1,14 +1,41 @@
 "use client";
 
+import type { CSSProperties } from "react";
+
 import { useTheme } from "#/components/providers/theme-provider";
 import { type ToasterProps, Toaster as ToasterPrimitive } from "sonner";
 import { twJoin } from "tailwind-merge";
 
-export function Toast(props: ToasterProps) {
+type ToastStyle = CSSProperties & Record<`--${string}`, string>;
+
+const toastStyle: ToastStyle = {
+  "--error-bg": "var(--color-danger-subtle)",
+  "--error-border": "color-mix(in oklab, var(--danger-subtle-fg) 20%, transparent)",
+  "--error-text": "var(--color-danger-subtle-fg)",
+
+  "--info-bg": "var(--color-info-subtle)",
+  "--info-border": "color-mix(in oklab, var(--info-subtle-fg) 20%, transparent)",
+  "--info-text": "var(--color-info-subtle-fg)",
+
+  "--normal-bg": "var(--color-overlay)",
+  "--normal-border": "var(--color-border)",
+  "--normal-text": "var(--color-overlay-fg)",
+
+  "--success-bg": "var(--color-success-subtle)",
+  "--success-border": "color-mix(in oklab, var(--success-subtle-fg) 20%, transparent)",
+  "--success-text": "var(--color-success-subtle-fg)",
+
+  "--warning-bg": "var(--color-warning-subtle)",
+  "--warning-border": "color-mix(in oklab, var(--warning-subtle-fg) 20%, transparent)",
+  "--warning-text": "var(--color-warning-subtle-fg)",
+};
+
+export const Toast = (props: ToasterProps) => {
   const { theme = "system" } = useTheme();
+  const toasterTheme: ToasterProps["theme"] = theme;
   return (
     <ToasterPrimitive
-      theme={theme as ToasterProps["theme"]}
+      theme={toasterTheme}
       className="toaster group"
       richColors
       toastOptions={{
@@ -17,30 +44,8 @@ export function Toast(props: ToasterProps) {
           "**:data-action:[--normal-bg:var(--color-primary-fg)] **:data-action:[--normal-text:var(--color-primary)]",
         ),
       }}
-      style={
-        {
-          "--error-bg": "var(--color-danger-subtle)",
-          "--error-border": "color-mix(in oklab, var(--danger-subtle-fg) 20%, transparent)",
-          "--error-text": "var(--color-danger-subtle-fg)",
-
-          "--info-bg": "var(--color-info-subtle)",
-          "--info-border": "color-mix(in oklab, var(--info-subtle-fg) 20%, transparent)",
-          "--info-text": "var(--color-info-subtle-fg)",
-
-          "--normal-bg": "var(--color-overlay)",
-          "--normal-border": "var(--color-border)",
-          "--normal-text": "var(--color-overlay-fg)",
-
-          "--success-bg": "var(--color-success-subtle)",
-          "--success-border": "color-mix(in oklab, var(--success-subtle-fg) 20%, transparent)",
-          "--success-text": "var(--color-success-subtle-fg)",
-
-          "--warning-bg": "var(--color-warning-subtle)",
-          "--warning-border": "color-mix(in oklab, var(--warning-subtle-fg) 20%, transparent)",
-          "--warning-text": "var(--color-warning-subtle-fg)",
-        } as React.CSSProperties
-      }
+      style={toastStyle}
       {...props}
     />
   );
-}
+};

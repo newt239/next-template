@@ -21,9 +21,9 @@ import {
 import { cx } from "#/lib/primitive";
 import { twMerge } from "tailwind-merge";
 
-interface TabsProps extends TabsPrimitiveProps {
+type TabsProps = TabsPrimitiveProps & {
   ref?: React.RefObject<HTMLDivElement>;
-}
+};
 const Tabs = ({ className, ref, orientation = "horizontal", ...props }: TabsProps) => (
   <TabsContext value={{ orientation }}>
     <TabsPrimitive
@@ -43,17 +43,18 @@ interface TabListContextValue {
 }
 const TabListContext = createContext<TabListContextValue | undefined>(undefined);
 
-export function useTabListContext() {
+export const useTabListContext = () => {
   const context = use(TabListContext);
   if (!context) {
     throw new Error("useTabsContext must be used within TabsContext.Provider");
   }
   return context;
-}
+};
 
-interface TabListProps<T extends object> extends TabListPrimitiveProps<T>, TabListContextValue {
-  ref?: React.RefObject<HTMLDivElement>;
-}
+type TabListProps<T extends object> = TabListPrimitiveProps<T> &
+  TabListContextValue & {
+    ref?: React.RefObject<HTMLDivElement>;
+  };
 const TabList = <T extends object>({
   className,
   selectionIndicator = true,
@@ -80,23 +81,21 @@ const TabList = <T extends object>({
   </TabListContext>
 );
 
-export function TabScrollArea({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div className="relative">
-      <div className={twMerge("scrollbar-hidden overflow-x-auto sm:overflow-x-visible", className)}>
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-px w-full bg-border"
-          aria-hidden
-        />
-        {props.children}
-      </div>
+export const TabScrollArea = ({ className, ...props }: React.ComponentProps<"div">) => (
+  <div className="relative">
+    <div className={twMerge("scrollbar-hidden overflow-x-auto sm:overflow-x-visible", className)}>
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-px w-full bg-border"
+        aria-hidden
+      />
+      {props.children}
     </div>
-  );
-}
+  </div>
+);
 
-interface TabProps extends TabPrimitiveProps {
+type TabProps = TabPrimitiveProps & {
   ref?: React.RefObject<HTMLDivElement>;
-}
+};
 const Tab = ({ className, ref, ...props }: TabProps) => {
   const { orientation } = useSlottedContext(TabsContext)!;
   const { selectionIndicator } = useTabListContext();
@@ -139,9 +138,9 @@ const Tab = ({ className, ref, ...props }: TabProps) => {
   );
 };
 
-interface TabPanelProps extends TabPanelPrimitiveProps {
+type TabPanelProps = TabPanelPrimitiveProps & {
   ref?: React.RefObject<HTMLDivElement>;
-}
+};
 
 const TabPanels = <T extends object>(props: TabPanelsProps<T>) => <PrimitiveTabPanels {...props} />;
 

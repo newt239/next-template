@@ -18,27 +18,25 @@ const NumberField = ({ className, ...props }: NumberFieldProps) => (
   <NumberFieldPrimitive {...props} data-slot="control" className={cx(fieldStyles(), className)} />
 );
 
-function NumberInput({ className, ...props }: InputProps) {
-  return (
-    <InputGroup className="[--input-gutter-end:--spacing(20)]">
-      <Input className={cx("tabular-nums", className)} {...props} />
-      <div
-        data-slot="text"
-        className="in-disabled:pointer-events-none pointer-events-auto end-0 p-px in-disabled:opacity-50"
-      >
-        <div className="flex h-full items-center divide-x overflow-hidden rounded-e-[calc(var(--radius-lg)-1px)] border-s">
-          <StepperButton slot="decrement" />
-          <StepperButton slot="increment" />
-        </div>
+const NumberInput = ({ className, ...props }: InputProps) => (
+  <InputGroup className="[--input-gutter-end:--spacing(20)]">
+    <Input className={cx("tabular-nums", className)} {...props} />
+    <div
+      data-slot="text"
+      className="in-disabled:pointer-events-none pointer-events-auto end-0 p-px in-disabled:opacity-50"
+    >
+      <div className="flex h-full items-center divide-x overflow-hidden rounded-e-[calc(var(--radius-lg)-1px)] border-s">
+        <StepperButton slot="decrement" />
+        <StepperButton slot="increment" />
       </div>
-    </InputGroup>
-  );
-}
+    </div>
+  </InputGroup>
+);
 
-interface StepperButtonProps extends ButtonProps {
+type StepperButtonProps = ButtonProps & {
   slot: "increment" | "decrement";
   className?: string;
-}
+};
 
 const StepperButton = ({ slot, className, ...props }: StepperButtonProps) => (
   <Button

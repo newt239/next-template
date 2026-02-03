@@ -89,23 +89,22 @@ export const buttonStyles = tv({
   },
 });
 
-export interface ButtonProps extends ButtonPrimitiveProps, VariantProps<typeof buttonStyles> {
-  ref?: React.Ref<HTMLButtonElement>;
-}
+export type ButtonProps = ButtonPrimitiveProps &
+  VariantProps<typeof buttonStyles> & {
+    ref?: React.Ref<HTMLButtonElement>;
+  };
 
-export function Button({ className, intent, size, isCircle, ref, ...props }: ButtonProps) {
-  return (
-    <ButtonPrimitive
-      ref={ref}
-      {...props}
-      className={cx(
-        buttonStyles({
-          intent,
-          isCircle,
-          size,
-        }),
-        className,
-      )}
-    />
-  );
-}
+export const Button = ({ className, intent, size, isCircle, ref, ...props }: ButtonProps) => (
+  <ButtonPrimitive
+    ref={ref}
+    {...props}
+    className={cx(
+      buttonStyles({
+        intent,
+        isCircle,
+        size,
+      }),
+      className,
+    )}
+  />
+);

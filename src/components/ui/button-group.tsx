@@ -16,30 +16,26 @@ const buttonGroupStyles = tv({
   },
 });
 
-export function ButtonGroup({
+export const ButtonGroup = ({
   className,
   orientation,
   ...props
-}: React.ComponentProps<"div"> & VariantProps<typeof buttonGroupStyles>) {
-  return (
-    <div
-      role="group"
-      data-slot="button-group"
-      data-orientation={orientation}
-      className={buttonGroupStyles({ className, orientation })}
-      {...props}
-    />
-  );
-}
+}: React.ComponentProps<"div"> & VariantProps<typeof buttonGroupStyles>) => (
+  <div
+    role="group"
+    data-slot="button-group"
+    data-orientation={orientation}
+    className={buttonGroupStyles({ className, orientation })}
+    {...props}
+  />
+);
 
-export function ButtonGroupText({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      className={twMerge(
-        "flex items-center gap-2 rounded-md border bg-muted px-4 font-medium text-sm shadow-xs *:data-[slot=icon]:pointer-events-none [&_[data-slot=icon]:not([class*='size-'])]:size-5 sm:[&_[data-slot=icon]:not([class*='size-'])]:size-4",
-        className,
-      )}
-      {...props}
-    />
-  );
-}
+export const ButtonGroupText = ({ className, ...props }: React.ComponentProps<"div">) => (
+  <div
+    className={twMerge(
+      "flex items-center gap-2 rounded-md border bg-muted px-4 font-medium text-sm shadow-xs *:data-[slot=icon]:pointer-events-none [&_[data-slot=icon]:not([class*='size-'])]:size-5 sm:[&_[data-slot=icon]:not([class*='size-'])]:size-4",
+      className,
+    )}
+    {...props}
+  />
+);

@@ -17,17 +17,17 @@ interface ThemeProviderProps {
   defaultTheme?: Theme;
 }
 
-export function ThemeProvider({
+export const ThemeProvider = ({
   children,
   defaultTheme: initialTheme = defaultTheme,
-}: ThemeProviderProps): ReactElement {
-  return <ThemeContext.Provider value={{ theme: initialTheme }}>{children}</ThemeContext.Provider>;
-}
+}: ThemeProviderProps): ReactElement => (
+  <ThemeContext.Provider value={{ theme: initialTheme }}>{children}</ThemeContext.Provider>
+);
 
-export function useTheme(): ThemeContextValue {
+export const useTheme = (): ThemeContextValue => {
   const context = useContext(ThemeContext);
   if (context === null) {
     return { theme: defaultTheme };
   }
   return context;
-}
+};
