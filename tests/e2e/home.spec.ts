@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 test.describe("ホームページ", () => {
   test("Todo App の見出しが表示される", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByRole("heading", { name: "Todo App", level: 1 })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: "Todo App" })).toBeVisible();
   });
 
   test("新しいタスクの入力欄が表示される", async ({ page }) => {

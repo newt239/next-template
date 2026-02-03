@@ -1,14 +1,13 @@
 import "server-only";
-
-import { GetTodosQuerySchema, GetTodosResponseSchema } from "../schemas/todo";
-
 import { DBClient } from "#/lib/drizzle/client";
 import { todoItems } from "#/lib/drizzle/schema";
 
-type GetTodosOptions = {
+import { GetTodosQuerySchema, GetTodosResponseSchema } from "../schemas/todo";
+
+interface GetTodosOptions {
   limit?: number;
   offset?: number;
-};
+}
 
 export const getTodos = async (options?: GetTodosOptions) => {
   try {
@@ -27,6 +26,6 @@ export const getTodos = async (options?: GetTodosOptions) => {
     return response;
   } catch (error) {
     console.error("TODO一覧取得エラー:", error);
-    throw new Error("サーバーエラーが発生しました");
+    throw new Error("サーバーエラーが発生しました", { cause: error });
   }
 };

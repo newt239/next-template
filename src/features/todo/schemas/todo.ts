@@ -19,13 +19,13 @@ export const CreateTodoRequestSchema = z.object({
 });
 
 export const UpdateTodoRequestSchema = z.object({
+  isCompleted: z.boolean().optional(),
   title: z
     .string()
     .min(1, "タイトルは必須です")
     .max(100, "タイトルは100文字以内で入力してください")
     .trim()
     .optional(),
-  isCompleted: z.boolean().optional(),
 });
 
 export const GetTodosQuerySchema = z.object({
@@ -34,17 +34,17 @@ export const GetTodosQuerySchema = z.object({
 });
 
 export const TodoResponseSchema = z.object({
-  id: z.number(),
-  title: z.string(),
-  isCompleted: z.boolean(),
   createdAt: epochSecondsToDate,
+  id: z.number(),
+  isCompleted: z.boolean(),
+  title: z.string(),
 });
 
 export const TodoResponseFromJsonSchema = z.object({
-  id: z.number(),
-  title: z.string(),
-  isCompleted: z.boolean(),
   createdAt: jsonEpochSecondsToDate,
+  id: z.number(),
+  isCompleted: z.boolean(),
+  title: z.string(),
 });
 
 export const GetTodosResponseSchema = z.object({
