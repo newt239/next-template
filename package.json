@@ -25,7 +25,7 @@
     "@heroicons/react": "2.2.0",
     "@internationalized/date": "3.11.0",
     "@libsql/client": "0.17.0",
-    "@react-aria/i18n": "3.12.14",
+    "@react-aria/i18n": "3.12.15",
     "better-auth": "1.4.17",
     "drizzle-orm": "0.45.1",
     "motion": "12.29.2",
