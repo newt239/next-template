@@ -52,7 +52,7 @@
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "5.1.2",
     "drizzle-kit": "0.31.8",
-    "jsdom": "27.4.0",
+    "jsdom": "28.0.0",
     "lefthook": "2.0.16",
     "oxfmt": "0.28.0",
     "oxlint": "1.39.0",
