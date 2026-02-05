@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@heroicons/react": "2.2.0",
-    "@internationalized/date": "3.10.1",
+    "@internationalized/date": "3.11.0",
     "@libsql/client": "0.17.0",
     "@react-aria/i18n": "3.12.14",
     "better-auth": "1.4.17",
