@@ -30,9 +30,9 @@ const dropdownSectionStyles = tv({
 
 const { section, header } = dropdownSectionStyles();
 
-interface DropdownSectionProps<T> extends ListBoxSectionProps<T> {
+type DropdownSectionProps<T> = {
   title?: string;
-}
+} & ListBoxSectionProps<T>;
 
 const DropdownSection = <T extends object>({
   className,
@@ -106,9 +106,9 @@ const dropdownItemStyles = tv({
   },
 });
 
-interface DropdownItemProps extends ListBoxItemProps {
+type DropdownItemProps = {
   intent?: "danger" | "warning";
-}
+} & ListBoxItemProps;
 
 const DropdownItem = ({ className, children, intent, ...props }: DropdownItemProps) => {
   const textValue = typeof children === "string" ? children : undefined;

@@ -30,14 +30,14 @@ import { twJoin, twMerge } from "tailwind-merge";
 
 import { Checkbox } from "./checkbox";
 
-interface TableProps extends Omit<TablePrimitiveProps, "className"> {
+type TableProps = {
   allowResize?: boolean;
   className?: string;
   bleed?: boolean;
   grid?: boolean;
   striped?: boolean;
   ref?: React.Ref<HTMLTableElement>;
-}
+} & Omit<TablePrimitiveProps, "className">;
 
 const TableContext = createContext<TableProps>({
   allowResize: false,
@@ -115,9 +115,9 @@ const TableBody = <T extends object>({ renderEmptyState, ...props }: TableBodyPr
   />
 );
 
-interface TableColumnProps extends ColumnProps {
+type TableColumnProps = {
   isResizable?: boolean;
-}
+} & ColumnProps;
 
 const TableColumn = ({ isResizable = false, className, ...props }: TableColumnProps) => {
   const { bleed, grid } = useTableContext();
@@ -160,9 +160,9 @@ const TableColumn = ({ isResizable = false, className, ...props }: TableColumnPr
   );
 };
 
-interface TableHeaderProps<T extends object> extends HeaderProps<T> {
+type TableHeaderProps<T extends object> = {
   ref?: React.Ref<HTMLTableSectionElement>;
-}
+} & HeaderProps<T>;
 
 const TableHeader = <T extends object>({
   children,
@@ -205,9 +205,9 @@ const TableHeader = <T extends object>({
   );
 };
 
-interface TableRowProps<T extends object> extends RowProps<T> {
+type TableRowProps<T extends object> = {
   ref?: React.Ref<HTMLTableRowElement>;
-}
+} & RowProps<T>;
 
 const TableRow = <T extends object>({
   children,
@@ -295,9 +295,9 @@ const TableRow = <T extends object>({
   );
 };
 
-interface TableCellProps extends CellProps {
+type TableCellProps = {
   ref?: React.Ref<HTMLTableCellElement>;
-}
+} & CellProps;
 const TableCell = ({ className, ref, ...props }: TableCellProps) => {
   const { allowResize, bleed, grid, striped } = useTableContext();
   return (

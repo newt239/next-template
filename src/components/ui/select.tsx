@@ -22,12 +22,9 @@ import {
 import { fieldStyles } from "./field";
 import { PopoverContent } from "./popover";
 
-interface SelectProps<
-  T extends object,
-  M extends "single" | "multiple" = "single",
-> extends SelectPrimitiveProps<T, M> {
+type SelectProps<T extends object, M extends "single" | "multiple" = "single"> = {
   items?: Iterable<T, M>;
-}
+} & SelectPrimitiveProps<T, M>;
 
 const Select = <T extends object, M extends "single" | "multiple" = "single">({
   className,
@@ -40,13 +37,10 @@ const Select = <T extends object, M extends "single" | "multiple" = "single">({
   />
 );
 
-interface SelectListProps<T extends object> extends Omit<
-  ListBoxProps<T>,
-  "layout" | "orientation"
-> {
+type SelectListProps<T extends object> = {
   items?: Iterable<T>;
   popover?: Omit<PopoverProps, "children">;
-}
+} & Omit<ListBoxProps<T>, "layout" | "orientation">;
 
 const SelectContent = <T extends object>({
   items,
@@ -75,10 +69,10 @@ const SelectContent = <T extends object>({
   </PopoverContent>
 );
 
-interface SelectTriggerProps extends React.ComponentProps<typeof Button> {
+type SelectTriggerProps = {
   prefix?: React.ReactNode;
   className?: string;
-}
+} & React.ComponentProps<typeof Button>;
 
 const SelectTrigger = ({ children, className, ...props }: SelectTriggerProps) => (
   <span data-slot="control" className="relative block w-full">

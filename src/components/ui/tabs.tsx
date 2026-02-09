@@ -38,9 +38,9 @@ const Tabs = ({ className, ref, orientation = "horizontal", ...props }: TabsProp
     />
   </TabsContext>
 );
-interface TabListContextValue {
+type TabListContextValue = {
   selectionIndicator?: boolean;
-}
+};
 const TabListContext = createContext<TabListContextValue | undefined>(undefined);
 
 export const useTabListContext = () => {

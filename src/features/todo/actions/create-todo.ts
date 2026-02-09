@@ -1,5 +1,7 @@
 "use server";
 
+import { updateTag } from "next/cache";
+
 import { DBClient } from "#/lib/drizzle/client";
 import { todoItems } from "#/lib/drizzle/schema";
 
@@ -17,6 +19,10 @@ export const createTodo = async (data: { title: string }) => {
       .returning();
 
     const response = TodoResponseSchema.parse(todo);
+
+    updateTag("todos");
+    updateTag(`todo-${response.id}`);
+
     return { success: true, todo: response } as const;
   } catch (error) {
     console.error("TODO作成エラー:", error);

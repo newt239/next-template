@@ -11,10 +11,10 @@ const Card = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => 
   />
 );
 
-interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+type HeaderProps = {
   title?: string;
   description?: string;
-}
+} & React.HTMLAttributes<HTMLDivElement>;
 
 const CardHeader = ({ className, title, description, children, ...props }: HeaderProps) => (
   <div

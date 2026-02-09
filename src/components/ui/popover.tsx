@@ -27,10 +27,10 @@ const PopoverHeader = DialogHeader;
 const PopoverBody = DialogBody;
 const PopoverFooter = DialogFooter;
 
-interface PopoverContentProps extends PopoverProps {
+type PopoverContentProps = {
   arrow?: boolean;
   ref?: React.Ref<HTMLDivElement>;
-}
+} & PopoverProps;
 
 const PopoverContent = ({
   children,

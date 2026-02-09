@@ -1,15 +1,27 @@
 import "server-only";
+import { cacheLife, cacheTag } from "next/cache";
+
 import { DBClient } from "#/lib/drizzle/client";
 import { todoItems } from "#/lib/drizzle/schema";
 
 import { GetTodosQuerySchema, GetTodosResponseSchema } from "../schemas/todo";
 
-interface GetTodosOptions {
+type GetTodosOptions = {
   limit?: number;
   offset?: number;
-}
+};
 
 export const getTodos = async (options?: GetTodosOptions) => {
+  "use cache";
+
+  cacheLife({
+    expire: 3600,
+    revalidate: 300,
+    stale: 60,
+  });
+
+  cacheTag("todos");
+
   try {
     const query = GetTodosQuerySchema.parse({
       limit: options?.limit,

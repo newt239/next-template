@@ -27,16 +27,14 @@ const DrawerOverlay = motion.create(ModalOverlay);
 
 const Drawer = (props: DialogTriggerProps) => <DialogTrigger {...props} />;
 
-interface DrawerContentProps
-  extends
-    Omit<ModalOverlayProps, "className" | "children" | "isDismissable">,
-    Pick<DialogProps, "aria-label" | "aria-labelledby" | "role" | "children" | "className"> {
+type DrawerContentProps = {
   isFloat?: boolean;
   isBlurred?: boolean;
   className?: string;
   side?: "top" | "bottom" | "left" | "right";
   notch?: boolean;
-}
+} & Omit<ModalOverlayProps, "className" | "children" | "isDismissable"> &
+  Pick<DialogProps, "aria-label" | "aria-labelledby" | "role" | "children" | "className">;
 
 const DrawerContent = ({
   side = "bottom",

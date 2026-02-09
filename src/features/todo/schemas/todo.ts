@@ -54,3 +54,11 @@ export const GetTodosResponseSchema = z.object({
 export const GetTodosResponseFromJsonSchema = z.object({
   todos: z.array(TodoResponseFromJsonSchema),
 });
+
+export const GetTodoByIdSchema = z.object({
+  id: z.number().int().positive(),
+});
+
+export const TodoIdParamsSchema = z.object({
+  id: z.string().regex(/^\d+$/, "不正なIDです"),
+});

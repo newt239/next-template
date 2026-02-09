@@ -34,12 +34,12 @@ const PaginationList = ({ className, ref, ...props }: React.ComponentProps<"ul">
   />
 );
 
-interface PaginationItemProps
-  extends Omit<LinkProps, "children">, Pick<ButtonProps, "isCircle" | "size" | "intent"> {
+type PaginationItemProps = {
   className?: string;
   isCurrent?: boolean;
   children?: string | number;
-}
+} & Omit<LinkProps, "children"> &
+  Pick<ButtonProps, "isCircle" | "size" | "intent">;
 
 const PaginationItem = ({
   className,
@@ -64,10 +64,10 @@ const PaginationItem = ({
   </li>
 );
 
-interface PaginationAttributesProps
-  extends Omit<LinkProps, "className">, Pick<ButtonProps, "size" | "isCircle" | "intent"> {
+type PaginationAttributesProps = {
   className?: string;
-}
+} & Omit<LinkProps, "className"> &
+  Pick<ButtonProps, "size" | "isCircle" | "intent">;
 
 const PaginationFirst = ({
   className,

@@ -7,12 +7,12 @@ import type {
 } from "#/features/todo/schemas/todo";
 import type { z } from "zod";
 
-export interface Todo {
+export type Todo = {
   id: number;
   title: string;
   isCompleted: boolean;
   createdAt: Date;
-}
+};
 
 export type CreateTodoRequestType = z.infer<typeof CreateTodoRequestSchema>;
 export type UpdateTodoRequestType = z.infer<typeof UpdateTodoRequestSchema>;

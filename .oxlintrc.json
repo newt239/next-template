@@ -30,6 +30,7 @@
     "func-style": ["error", "expression"],
     "max-lines": ["warn", { "max": 500, "skipBlankLines": true, "skipComments": true }],
     "sort-imports": "off",
+    "typescript/consistent-type-definitions": ["error", "type"],
     "import/no-named-export": "off",
     "import/prefer-default-export": "off",
     "import/no-default-export": "off",

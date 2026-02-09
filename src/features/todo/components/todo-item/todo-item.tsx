@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useTransition } from "react";
 
 import { Button } from "#/components/ui/button";
@@ -10,9 +11,9 @@ import { updateTodo } from "#/features/todo/actions/update-todo";
 
 import type { Todo } from "#/features/todo/types/todo";
 
-interface TodoItemProps {
+type TodoItemProps = {
   todo: Todo;
-}
+};
 
 export const TodoItem = ({ todo }: TodoItemProps) => {
   const [isPending, startTransition] = useTransition();
@@ -71,7 +72,9 @@ export const TodoItem = ({ todo }: TodoItemProps) => {
           <CardTitle
             className={todo.isCompleted ? "font-normal text-muted-fg line-through" : undefined}
           >
-            {todo.title}
+            <Link href={`/todos/${todo.id}`} className="hover:underline">
+              {todo.title}
+            </Link>
           </CardTitle>
           <Text className="mt-1 text-sm">{todo.createdAt.toLocaleString("ja-JP")}</Text>
         </div>

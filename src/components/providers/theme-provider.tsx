@@ -4,18 +4,18 @@ import { type ReactElement, type ReactNode, createContext, useContext } from "re
 
 type Theme = "light" | "dark" | "system";
 
-interface ThemeContextValue {
+type ThemeContextValue = {
   theme: Theme;
-}
+};
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 const defaultTheme: Theme = "system";
 
-interface ThemeProviderProps {
+type ThemeProviderProps = {
   children: ReactNode;
   defaultTheme?: Theme;
-}
+};
 
 export const ThemeProvider = ({
   children,

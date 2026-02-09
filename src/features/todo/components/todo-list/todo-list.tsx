@@ -5,9 +5,9 @@ import { TodoItem } from "../todo-item";
 
 import type { Todo } from "#/features/todo/types/todo";
 
-interface TodoListProps {
+type TodoListProps = {
   todos: Todo[];
-}
+};
 
 export const TodoList = ({ todos }: TodoListProps) => (
   <div className="flex flex-col gap-4">

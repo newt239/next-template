@@ -34,10 +34,10 @@ const DialogTrigger = ({ className, ...props }: ButtonProps) => (
   <PrimitiveButton className={cx("cursor-pointer", className)} {...props} />
 );
 
-interface DialogHeaderProps extends Omit<React.ComponentProps<"div">, "title"> {
+type DialogHeaderProps = {
   title?: string;
   description?: string;
-}
+} & Omit<React.ComponentProps<"div">, "title">;
 
 const DialogHeader = ({ className, ...props }: DialogHeaderProps) => (
   <div
@@ -57,9 +57,9 @@ const DialogHeader = ({ className, ...props }: DialogHeaderProps) => (
   </div>
 );
 
-interface DialogTitleProps extends HeadingProps {
+type DialogTitleProps = {
   ref?: React.Ref<HTMLHeadingElement>;
-}
+} & HeadingProps;
 const DialogTitle = ({ className, ref, ...props }: DialogTitleProps) => (
   <Heading
     slot="title"
@@ -69,9 +69,9 @@ const DialogTitle = ({ className, ref, ...props }: DialogTitleProps) => (
   />
 );
 
-interface DialogDescriptionProps extends TextProps {
+type DialogDescriptionProps = {
   ref?: React.Ref<HTMLDivElement>;
-}
+} & TextProps;
 const DialogDescription = ({ className, ref, ...props }: DialogDescriptionProps) => (
   <p
     data-slot="description"
@@ -84,7 +84,7 @@ const DialogDescription = ({ className, ref, ...props }: DialogDescriptionProps)
   />
 );
 
-interface DialogBodyProps extends React.ComponentProps<"div"> {}
+type DialogBodyProps = React.ComponentProps<"div">;
 const DialogBody = ({ className, ...props }: DialogBodyProps) => (
   <div
     data-slot="dialog-body"
@@ -97,7 +97,7 @@ const DialogBody = ({ className, ...props }: DialogBodyProps) => (
   />
 );
 
-interface DialogFooterProps extends React.ComponentProps<"div"> {}
+type DialogFooterProps = React.ComponentProps<"div">;
 const DialogFooter = ({ className, ...props }: DialogFooterProps) => (
   <div
     data-slot="dialog-footer"
@@ -113,10 +113,10 @@ const DialogClose = ({ intent = "plain", ref, ...props }: ButtonProps) => (
   <Button slot="close" ref={ref} intent={intent} {...props} />
 );
 
-interface CloseButtonIndicatorProps extends Omit<ButtonProps, "children"> {
+type CloseButtonIndicatorProps = {
   className?: string;
   isDismissable?: boolean | undefined;
-}
+} & Omit<ButtonProps, "children">;
 
 const DialogCloseIcon = ({ className, ...props }: CloseButtonIndicatorProps) =>
   props.isDismissable ? (

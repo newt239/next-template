@@ -25,12 +25,9 @@ import { twMerge } from "tailwind-merge";
 import { Button } from "./button";
 import { Select, SelectContent, SelectItem, SelectLabel, SelectTrigger } from "./select";
 
-interface CalendarProps<T extends DateValue> extends Omit<
-  CalendarPrimitiveProps<T>,
-  "visibleDuration"
-> {
+type CalendarProps<T extends DateValue> = {
   className?: string;
-}
+} & Omit<CalendarPrimitiveProps<T>, "visibleDuration" | "className">;
 
 const Calendar = <T extends DateValue>({ className, ...props }: CalendarProps<T>) => {
   const now = today(getLocalTimeZone());
@@ -103,11 +100,11 @@ const CalendarHeader = ({ className, ...props }: React.ComponentProps<"header">)
   );
 };
 
-interface CalendarDropdown {
+type CalendarDropdown = {
   id: number;
   date: CalendarDate;
   formatted: string;
-}
+};
 
 const SelectMonth = () => {
   const calendarState = use(CalendarStateContext);

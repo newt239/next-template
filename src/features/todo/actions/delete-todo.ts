@@ -1,5 +1,7 @@
 "use server";
 
+import { updateTag } from "next/cache";
+
 import { DBClient } from "#/lib/drizzle/client";
 import { todoItems } from "#/lib/drizzle/schema";
 import { eq } from "drizzle-orm";
@@ -19,6 +21,10 @@ export const deleteTodo = async (id: number) => {
     }
 
     const response = TodoResponseSchema.parse(todo);
+
+    updateTag("todos");
+    updateTag(`todo-${response.id}`);
+
     return { success: true, todo: response } as const;
   } catch (error) {
     console.error("TODO削除エラー:", error);
