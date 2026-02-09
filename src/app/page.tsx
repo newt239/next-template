@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader } from "#/components/ui/card";
 import { Heading } from "#/components/ui/heading";
-import { TodoForm } from "#/features/todo/components/todo-form";
-import { TodoListFetcher } from "#/features/todo/components/todo-list/todo-list-fetcher";
+import { TaskForm } from "#/features/task/components/task-form";
+import { TaskListFetcher } from "#/features/task/components/task-list/task-list-fetcher";
 
 const HomePage = () => (
   <main className="min-h-screen bg-muted/30 py-12 px-4 sm:py-16 sm:px-6">
@@ -9,12 +9,12 @@ const HomePage = () => (
       <Card className="shadow-md">
         <CardHeader className="pb-2">
           <Heading level={1} className="text-center">
-            Todo App
+            Task App
           </Heading>
         </CardHeader>
         <CardContent className="flex flex-col gap-8 pt-2">
-          <TodoForm />
-          <TodoListFetcher />
+          <TaskForm />
+          <TaskListFetcher />
         </CardContent>
       </Card>
     </div>

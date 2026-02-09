@@ -75,7 +75,7 @@ export const verification = sqliteTable("verification", {
   value: text("value").notNull(),
 });
 
-export const todoItems = sqliteTable("todo_items", {
+export const taskItems = sqliteTable("task_items", {
   createdAt: integer("created_at", { mode: "timestamp" })
     .notNull()
     .default(sql`(strftime('%s','now'))`),
