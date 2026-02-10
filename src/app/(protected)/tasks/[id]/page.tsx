@@ -1,5 +1,12 @@
 import { TaskDetail } from "#/features/task/components/task-detail";
 
-const TaskDetailPage = ({ params }: { params: { id: string } }) => <TaskDetail params={params} />;
+type TaskDetailPageProps = {
+  params: Promise<{ id: string }>;
+};
+
+const TaskDetailPage = async ({ params }: TaskDetailPageProps) => {
+  const { id } = await params;
+  return <TaskDetail params={{ id }} />;
+};
 
 export default TaskDetailPage;
