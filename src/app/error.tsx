@@ -8,15 +8,15 @@ import { Heading } from "#/components/ui/heading";
 import { Text } from "#/components/ui/text";
 
 const ErrorPage = () => (
-  <main className="min-h-screen bg-muted/30 py-12 px-4 sm:py-16 sm:px-6">
+  <main className="min-h-screen bg-bg py-12 px-4 sm:py-16 sm:px-6">
     <div className="mx-auto max-w-2xl">
-      <Card className="shadow-md">
-        <CardHeader className="pb-2">
-          <Heading level={1} className="text-center">
+      <Card className="border-line-strong">
+        <CardHeader className="border-b border-line-subtle pb-4">
+          <Heading level={1} className="text-center tracking-tight">
             エラーが発生しました
           </Heading>
         </CardHeader>
-        <CardContent className="flex flex-col items-center gap-4 pt-2">
+        <CardContent className="flex flex-col items-center gap-4 pt-6">
           <Text className="text-sm text-muted-fg">
             一時的な問題の可能性があります。ページを再読み込みするか、時間をおいて再度お試しください。
           </Text>

@@ -12,7 +12,7 @@ type TaskListProps = {
 export const TaskList = ({ tasks }: TaskListProps) => (
   <div className="flex flex-col gap-4">
     {tasks.length === 0 ? (
-      <Card className="bg-muted/30">
+      <Card className="border-line-subtle bg-surface-subtle">
         <CardContent className="py-8 text-center">
           <Text>タスクがありません。新しいタスクを追加してください。</Text>
         </CardContent>
