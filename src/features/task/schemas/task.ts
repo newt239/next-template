@@ -1,13 +1,15 @@
 import { z } from "zod";
 
-const epochSecondsToDate = z.codec(z.number().int().min(0), z.date(), {
+const jsonEpochSecondsToDate = z.codec(z.number().int().min(0), z.date(), {
   decode: (seconds) => new Date(seconds * 1000),
   encode: (date) => Math.floor(date.getTime() / 1000),
 });
 
-const jsonEpochSecondsToDate = z.codec(z.number().int().min(0), z.date(), {
-  decode: (seconds) => new Date(seconds * 1000),
-  encode: (date) => Math.floor(date.getTime() / 1000),
+const createdAtSchema = z.union([z.date(), z.number().int().min(0)]).transform((value) => {
+  if (value instanceof Date) {
+    return value;
+  }
+  return new Date(value * 1000);
 });
 
 export const CreateTaskRequestSchema = z.object({
@@ -34,7 +36,7 @@ export const GetTasksQuerySchema = z.object({
 });
 
 export const TaskResponseSchema = z.object({
-  createdAt: epochSecondsToDate,
+  createdAt: createdAtSchema,
   id: z.number(),
   isCompleted: z.boolean(),
   title: z.string(),
