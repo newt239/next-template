@@ -54,7 +54,7 @@
     "drizzle-kit": "0.31.9",
     "jsdom": "28.1.0",
     "lefthook": "2.1.1",
-    "oxfmt": "0.28.0",
+    "oxfmt": "0.35.0",
     "oxlint": "1.47.0",
     "oxlint-tsgolint": "0.11.4",
     "postcss": "8.5.6",
