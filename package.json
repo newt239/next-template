@@ -55,7 +55,7 @@
     "jsdom": "28.1.0",
     "lefthook": "2.1.2",
     "oxfmt": "0.36.0",
-    "oxlint": "1.47.0",
+    "oxlint": "1.56.0",
     "oxlint-tsgolint": "0.16.0",
     "postcss": "8.5.8",
     "tailwindcss": "4.2.1",
