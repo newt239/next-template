@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, use } from "react";
+
 import {
   type TabListProps as TabListPrimitiveProps,
   type TabPanelProps as TabPanelPrimitiveProps,
@@ -17,9 +18,9 @@ import {
   composeRenderProps,
   useSlottedContext,
 } from "react-aria-components";
+import { twMerge } from "tailwind-merge";
 
 import { cx } from "#/lib/primitive";
-import { twMerge } from "tailwind-merge";
 
 type TabsProps = TabsPrimitiveProps & {
   ref?: React.RefObject<HTMLDivElement>;
@@ -85,7 +86,7 @@ export const TabScrollArea = ({ className, ...props }: React.ComponentProps<"div
   <div className="relative">
     <div className={twMerge("scrollbar-hidden overflow-x-auto sm:overflow-x-visible", className)}>
       <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-px w-full bg-border"
+        className="bg-border pointer-events-none absolute inset-x-0 bottom-0 h-px w-full"
         aria-hidden
       />
       {props.children}

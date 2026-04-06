@@ -1,6 +1,8 @@
 "use client";
 
 import { use } from "react";
+
+import { AnimatePresence, motion } from "motion/react";
 import {
   type DialogProps,
   type DialogTriggerProps,
@@ -16,8 +18,6 @@ import {
   OverlayTriggerStateContext,
   Text,
 } from "react-aria-components";
-
-import { AnimatePresence, motion } from "motion/react";
 import { twJoin, twMerge } from "tailwind-merge";
 
 import { type ButtonProps, Button } from "./button";
@@ -138,11 +138,11 @@ const DrawerContent = ({
                 )}
               >
                 {notch && side === "bottom" && (
-                  <div className="notch sticky top-0 mx-auto mt-2.5 h-1.5 w-10 shrink-0 touch-pan-y rounded-full bg-fg/20" />
+                  <div className="notch bg-fg/20 sticky top-0 mx-auto mt-2.5 h-1.5 w-10 shrink-0 touch-pan-y rounded-full" />
                 )}
                 {children as React.ReactNode}
                 {notch && side === "top" && (
-                  <div className="notch sticky bottom-0 mx-auto mb-2.5 h-1.5 w-10 shrink-0 touch-pan-y rounded-full bg-fg/20" />
+                  <div className="notch bg-fg/20 sticky bottom-0 mx-auto mb-2.5 h-1.5 w-10 shrink-0 touch-pan-y rounded-full" />
                 )}
               </Dialog>
             </DrawerRoot>

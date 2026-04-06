@@ -1,6 +1,10 @@
 "use client";
 
 import { use } from "react";
+
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import { type CalendarDate, getLocalTimeZone, today } from "@internationalized/date";
+import { useDateFormatter } from "@react-aria/i18n";
 import {
   type CalendarProps as CalendarPrimitiveProps,
   type DateValue,
@@ -16,10 +20,6 @@ import {
   composeRenderProps,
   useLocale,
 } from "react-aria-components";
-
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-import { type CalendarDate, getLocalTimeZone, today } from "@internationalized/date";
-import { useDateFormatter } from "@react-aria/i18n";
 import { twMerge } from "tailwind-merge";
 
 import { Button } from "./button";
@@ -79,7 +79,7 @@ const CalendarHeader = ({ className, ...props }: React.ComponentProps<"header">)
       <div className="flex items-center gap-1">
         <Button
           size="sq-sm"
-          className="size-8 **:data-[slot=icon]:text-fg sm:size-7"
+          className="**:data-[slot=icon]:text-fg size-8 sm:size-7"
           isCircle
           intent="plain"
           slot="previous"
@@ -88,7 +88,7 @@ const CalendarHeader = ({ className, ...props }: React.ComponentProps<"header">)
         </Button>
         <Button
           size="sq-sm"
-          className="size-8 **:data-[slot=icon]:text-fg sm:size-7"
+          className="**:data-[slot=icon]:text-fg size-8 sm:size-7"
           isCircle
           intent="plain"
           slot="next"
@@ -194,7 +194,7 @@ const SelectYear = () => {
 const CalendarGridHeader = () => (
   <CalendarGridHeaderPrimitive>
     {(day) => (
-      <CalendarHeaderCell className="pb-2 text-center font-semibold text-muted-fg text-sm/6 sm:px-0 sm:py-0.5 lg:text-xs">
+      <CalendarHeaderCell className="text-muted-fg pb-2 text-center text-sm/6 font-semibold sm:px-0 sm:py-0.5 lg:text-xs">
         {day}
       </CalendarHeaderCell>
     )}

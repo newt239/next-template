@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useTransition } from "react";
+
+import Link from "next/link";
 
 import { Button } from "#/components/ui/button";
 import { Card, CardContent, CardTitle } from "#/components/ui/card";
@@ -64,13 +65,13 @@ export const TaskItem = ({ task }: TaskItemProps) => {
           onPress={handleToggle}
           isDisabled={isPending}
           aria-label={task.isCompleted ? "未完了にマーク" : "完了にマーク"}
-          className="shrink-0 min-w-9 min-h-9"
+          className="min-h-9 min-w-9 shrink-0"
         >
           {task.isCompleted ? "✓" : ""}
         </Button>
         <div className="min-w-0 flex-1">
           <CardTitle
-            className={task.isCompleted ? "font-normal text-muted-fg line-through" : undefined}
+            className={task.isCompleted ? "text-muted-fg font-normal line-through" : undefined}
           >
             <Link href={`/tasks/${task.id}`} className="hover:underline">
               {task.title}

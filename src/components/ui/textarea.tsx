@@ -1,9 +1,9 @@
 "use client";
 
 import { type TextAreaProps, TextArea } from "react-aria-components";
+import { twJoin } from "tailwind-merge";
 
 import { cx } from "#/lib/primitive";
-import { twJoin } from "tailwind-merge";
 
 export const Textarea = ({ className, ...props }: TextAreaProps) => (
   <span data-slot="control" className="relative block w-full">
