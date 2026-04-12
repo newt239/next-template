@@ -14,9 +14,10 @@ import type { Task } from "#/features/task/types/task";
 
 type TaskItemProps = {
   task: Task;
+  formattedCreatedAt: string;
 };
 
-export const TaskItem = ({ task }: TaskItemProps) => {
+export const TaskItem = ({ task, formattedCreatedAt }: TaskItemProps) => {
   const [isPending, startTransition] = useTransition();
 
   const handleToggle = async () => {
@@ -77,7 +78,7 @@ export const TaskItem = ({ task }: TaskItemProps) => {
               {task.title}
             </Link>
           </CardTitle>
-          <Text className="mt-1 text-sm">{task.createdAt.toLocaleString("ja-JP")}</Text>
+          <Text className="mt-1 text-sm">{formattedCreatedAt}</Text>
         </div>
         <Button
           type="button"
