@@ -7,9 +7,9 @@ import {
   Radio as RadioPrimitive,
   composeRenderProps,
 } from "react-aria-components";
+import { twMerge } from "tailwind-merge";
 
 import { cx } from "#/lib/primitive";
-import { twMerge } from "tailwind-merge";
 
 import { Label } from "./field";
 

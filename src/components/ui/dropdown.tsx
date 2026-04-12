@@ -1,5 +1,6 @@
 "use client";
 
+import { CheckIcon } from "@heroicons/react/16/solid";
 import {
   type ListBoxItemProps,
   type ListBoxSectionProps,
@@ -13,8 +14,6 @@ import {
   Text,
   composeRenderProps,
 } from "react-aria-components";
-
-import { CheckIcon } from "@heroicons/react/16/solid";
 import { twJoin, twMerge } from "tailwind-merge";
 import { tv } from "tailwind-variants";
 

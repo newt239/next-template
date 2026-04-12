@@ -1,10 +1,10 @@
 "use server";
 
+import { eq } from "drizzle-orm";
 import { updateTag } from "next/cache";
 
 import { DBClient } from "#/lib/drizzle/client";
 import { taskItems } from "#/lib/drizzle/schema";
-import { eq } from "drizzle-orm";
 
 import { TaskResponseSchema, UpdateTaskRequestSchema } from "../schemas/task";
 

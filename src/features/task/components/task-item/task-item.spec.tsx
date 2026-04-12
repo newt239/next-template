@@ -27,10 +27,12 @@ describe("TaskItem", () => {
   it("タイトルと作成日時が表示される", () => {
     const task = createTask();
 
-    render(<TaskItem task={task} />);
+    const formattedCreatedAt = task.createdAt.toLocaleString("ja-JP");
+
+    render(<TaskItem task={task} formattedCreatedAt={formattedCreatedAt} />);
 
     expect(screen.getByText("テストタスク")).toBeInTheDocument();
-    expect(screen.getByText(task.createdAt.toLocaleString("ja-JP"))).toBeInTheDocument();
+    expect(screen.getByText(formattedCreatedAt)).toBeInTheDocument();
   });
 
   it("完了ボタンを押すと updateTask が呼び出される", async () => {
@@ -39,7 +41,9 @@ describe("TaskItem", () => {
     const updateTaskMock = vi.mocked(updateTask);
     updateTaskMock.mockResolvedValueOnce({ success: true, task });
 
-    const { container } = render(<TaskItem task={task} />);
+    const { container } = render(
+      <TaskItem task={task} formattedCreatedAt={task.createdAt.toLocaleString("ja-JP")} />,
+    );
 
     const button = within(container).getByRole("button", { name: "完了にマーク" });
     fireEvent.click(button);
@@ -55,7 +59,9 @@ describe("TaskItem", () => {
 
     const confirmSpy = vi.spyOn(window, "confirm").mockReturnValue(true);
 
-    const { container } = render(<TaskItem task={task} />);
+    const { container } = render(
+      <TaskItem task={task} formattedCreatedAt={task.createdAt.toLocaleString("ja-JP")} />,
+    );
 
     const button = within(container).getByRole("button", { name: "削除" });
     fireEvent.click(button);

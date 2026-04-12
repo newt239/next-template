@@ -8,13 +8,12 @@
     "utils/fetch/api.d.ts",
     "utils/fetch/bundle.gen.yml"
   ],
-  "experimentalSortImports": {
+  "sortImports": {
     "groups": [
       "react",
       ["value-builtin", "value-external"],
       "value-internal",
       ["value-parent", "value-sibling", "value-index"],
-      "ts-equals-import",
       ["type-parent", "type-sibling", "type-index"],
       "type-internal",
       "type-import",
@@ -26,11 +25,13 @@
         "elementNamePattern": ["react", "react-dom", "next"]
       }
     ],
+    "internalPattern": ["#/"],
     "newlinesBetween": true,
     "order": "asc",
     "ignoreCase": true
   },
-  "experimentalSortPackageJson": {
+  "sortPackageJson": {
     "sortScripts": true
-  }
+  },
+  "sortTailwindcss": true
 }

@@ -27,10 +27,10 @@ export const TaskDetail = async ({ params }: TaskDetailProps) => {
   }
 
   return (
-    <main className="min-h-screen bg-bg py-12 px-4 sm:py-16 sm:px-6">
+    <main className="bg-bg min-h-screen px-4 py-12 sm:px-6 sm:py-16">
       <div className="mx-auto max-w-2xl">
         <Card className="border-line-strong">
-          <CardHeader className="border-b border-line-subtle pb-4">
+          <CardHeader className="border-line-subtle border-b pb-4">
             <Heading level={1} className="text-center tracking-tight">
               タスク詳細
             </Heading>

@@ -1,5 +1,6 @@
 "use client";
 
+import { XMarkIcon } from "@heroicons/react/24/solid";
 import {
   type HeadingProps,
   type TextProps,
@@ -7,10 +8,9 @@ import {
   Button as PrimitiveButton,
   Dialog as PrimitiveDialog,
 } from "react-aria-components";
+import { twMerge } from "tailwind-merge";
 
 import { cx } from "#/lib/primitive";
-import { XMarkIcon } from "@heroicons/react/24/solid";
-import { twMerge } from "tailwind-merge";
 
 import { type ButtonProps, Button } from "./button";
 

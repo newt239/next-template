@@ -2,9 +2,10 @@
 
 import type { CSSProperties } from "react";
 
-import { useTheme } from "#/components/providers/theme-provider";
 import { type ToasterProps, Toaster as ToasterPrimitive } from "sonner";
 import { twJoin } from "tailwind-merge";
+
+import { useTheme } from "#/components/providers/theme-provider";
 
 type ToastStyle = CSSProperties & Record<`--${string}`, string>;
 

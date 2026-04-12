@@ -18,7 +18,13 @@ export const TaskList = ({ tasks }: TaskListProps) => (
         </CardContent>
       </Card>
     ) : (
-      tasks.map((task) => <TaskItem key={task.id} task={task} />)
+      tasks.map((task) => (
+        <TaskItem
+          key={task.id}
+          task={task}
+          formattedCreatedAt={task.createdAt.toLocaleString("ja-JP")}
+        />
+      ))
     )}
   </div>
 );

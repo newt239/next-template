@@ -1,6 +1,7 @@
 "use client";
 
 import { use } from "react";
+
 import {
   Slider as PrimitiveSlider,
   SliderOutput as PrimitiveSliderOutput,
@@ -8,9 +9,9 @@ import {
   SliderTrack as PrimitiveSliderTrack,
   SliderStateContext,
 } from "react-aria-components";
+import { twMerge } from "tailwind-merge";
 
 import { cx } from "#/lib/primitive";
-import { twMerge } from "tailwind-merge";
 
 export const SliderGroup = ({ className, ...props }: React.ComponentProps<"div">) => (
   <div

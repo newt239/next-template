@@ -1,9 +1,9 @@
 import "server-only";
+import { eq } from "drizzle-orm";
 import { cacheLife, cacheTag } from "next/cache";
 
 import { DBClient } from "#/lib/drizzle/client";
 import { taskItems } from "#/lib/drizzle/schema";
-import { eq } from "drizzle-orm";
 
 import { GetTaskByIdSchema, TaskResponseSchema } from "../schemas/task";
 
