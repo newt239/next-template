@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import { TaskDetail } from "#/features/task/components/task-detail";
 
 type TaskDetailPageProps = {
@@ -6,7 +8,11 @@ type TaskDetailPageProps = {
 
 const TaskDetailPage = async ({ params }: TaskDetailPageProps) => {
   const { id } = await params;
-  return <TaskDetail params={{ id }} />;
+  return (
+    <Suspense>
+      <TaskDetail params={{ id }} />
+    </Suspense>
+  );
 };
 
 export default TaskDetailPage;
