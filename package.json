@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "codecheck": "pnpm run typecheck && pnpm run lint && pnpm run format",
+    "codecheck": "pnpm run typecheck && pnpm run lint && pnpm run format && pnpm run knip",
     "db:generate": "drizzle-kit generate",
     "db:studio": "drizzle-kit studio",
     "dev": "next dev --turbopack",
@@ -62,6 +62,7 @@
     "postcss": "8.5.9",
     "tailwindcss": "4.2.2",
     "typescript": "6.0.2",
+    "vite": "8.0.8",
     "vite-tsconfig-paths": "6.1.1",
     "vitest": "4.1.4"
   },
