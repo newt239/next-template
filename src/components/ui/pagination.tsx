@@ -57,8 +57,8 @@ const PaginationItem = ({
       className={buttonStyles({
         className: twMerge("touch-target min-w-9 shrink-0", className),
         intent: isCurrent ? "outline" : "plain",
-        isCircle: isCircle,
-        size: size,
+        isCircle,
+        size,
       })}
       {...props}
     />
