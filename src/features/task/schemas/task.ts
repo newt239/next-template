@@ -1,10 +1,5 @@
 import { z } from "zod";
 
-const jsonEpochSecondsToDate = z.codec(z.number().int().min(0), z.date(), {
-  decode: (seconds) => new Date(seconds * 1000),
-  encode: (date) => Math.floor(date.getTime() / 1000),
-});
-
 const createdAtSchema = z.union([z.date(), z.number().int().min(0)]).transform((value) => {
   if (value instanceof Date) {
     return value;
@@ -42,19 +37,8 @@ export const TaskResponseSchema = z.object({
   title: z.string(),
 });
 
-export const TaskResponseFromJsonSchema = z.object({
-  createdAt: jsonEpochSecondsToDate,
-  id: z.number(),
-  isCompleted: z.boolean(),
-  title: z.string(),
-});
-
 export const GetTasksResponseSchema = z.object({
   tasks: z.array(TaskResponseSchema),
-});
-
-export const GetTasksResponseFromJsonSchema = z.object({
-  tasks: z.array(TaskResponseFromJsonSchema),
 });
 
 export const GetTaskByIdSchema = z.object({
