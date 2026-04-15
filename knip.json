@@ -1,0 +1,15 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [
+    "src/components/ui/**/*.{ts,tsx}!",
+    "src/components/providers/**/*.{ts,tsx}!",
+    "src/lib/better-auth/**/*.{ts,tsx}!",
+    "src/**/*.spec.{ts,tsx}",
+    "tests/unit/vitest.setup.ts"
+  ],
+  "ignore": ["drizzle.config.ts", "vitest.config.ts"],
+  "ignoreBinaries": ["only-allow"],
+  "ignoreDependencies": ["@vitejs/plugin-react", "vite-tsconfig-paths"],
+  "drizzle": false,
+  "vitest": false
+}
