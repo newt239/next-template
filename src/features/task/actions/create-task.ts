@@ -2,10 +2,9 @@
 
 import { updateTag } from "next/cache";
 
+import { CreateTaskRequestSchema, TaskResponseSchema } from "#/features/task/schemas/task";
 import { DBClient } from "#/lib/drizzle/client";
 import { taskItems } from "#/lib/drizzle/schema";
-
-import { CreateTaskRequestSchema, TaskResponseSchema } from "../schemas/task";
 
 export const createTask = async (data: { title: string }) => {
   try {

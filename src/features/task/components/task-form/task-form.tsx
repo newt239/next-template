@@ -12,7 +12,7 @@ export const TaskForm = () => {
   const [title, setTitle] = useState("");
   const [isPending, startTransition] = useTransition();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!title.trim()) {
       return;
@@ -42,7 +42,9 @@ export const TaskForm = () => {
           <Input
             type="text"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
             placeholder="新しいタスクを入力してください"
             disabled={isPending}
           />

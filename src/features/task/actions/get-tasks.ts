@@ -1,10 +1,9 @@
 import "server-only";
 import { cacheLife, cacheTag } from "next/cache";
 
+import { GetTasksQuerySchema, GetTasksResponseSchema } from "#/features/task/schemas/task";
 import { DBClient } from "#/lib/drizzle/client";
 import { taskItems } from "#/lib/drizzle/schema";
-
-import { GetTasksQuerySchema, GetTasksResponseSchema } from "../schemas/task";
 
 type GetTasksOptions = {
   limit?: number;

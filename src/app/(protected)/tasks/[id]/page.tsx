@@ -6,15 +6,10 @@ type TaskDetailPageProps = {
   params: Promise<{ id: string }>;
 };
 
-const TaskDetailPage = async ({ params }: TaskDetailPageProps) => (
+const TaskDetailPage = ({ params }: Readonly<TaskDetailPageProps>) => (
   <Suspense>
-    <TaskDetailContent params={params} />
+    <TaskDetail params={params} />
   </Suspense>
 );
-
-const TaskDetailContent = async ({ params }: { params: Promise<{ id: string }> }) => {
-  const { id } = await params;
-  return <TaskDetail params={{ id }} />;
-};
 
 export default TaskDetailPage;
