@@ -7,13 +7,12 @@ import { getTaskById } from "#/features/task/actions/get-task";
 import { TaskIdParamsSchema } from "#/features/task/schemas/task";
 
 type TaskDetailProps = {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 };
 
-export const TaskDetail = async ({ params }: TaskDetailProps) => {
-  const parsedParams = TaskIdParamsSchema.safeParse(params);
+export const TaskDetail = async ({ params }: Readonly<TaskDetailProps>) => {
+  const resolvedParams = await params;
+  const parsedParams = TaskIdParamsSchema.safeParse(resolvedParams);
 
   if (!parsedParams.success) {
     notFound();
