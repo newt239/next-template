@@ -14,7 +14,6 @@
     "lint": "oxlint --type-aware",
     "lint:fix": "oxlint --fix",
     "preinstall": "npx only-allow pnpm",
-    "setup": "corepack enable pnpm",
     "start": "next start",
     "test": "vitest run",
     "test:e2e": "playwright test",
@@ -66,5 +65,5 @@
     "vite-tsconfig-paths": "6.1.1",
     "vitest": "4.1.4"
   },
-  "packageManager": "pnpm@10.27.0"
+  "packageManager": "pnpm@11.0.1"
 }

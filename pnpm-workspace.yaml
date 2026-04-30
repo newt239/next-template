@@ -1,7 +1,7 @@
 packages:
   - "./"
-onlyBuiltDependencies:
-  - "esbuild"
-  - "lefthook"
-  - "sharp"
-minimumReleaseAge: 1420
+allowBuilds:
+  esbuild: true
+  lefthook: true
+  sharp: true
+saveExact: true
