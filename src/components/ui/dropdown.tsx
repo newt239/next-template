@@ -125,8 +125,8 @@ const DropdownItem = ({ className, children, intent, ...props }: DropdownItemPro
             <CheckIcon
               className={twJoin(
                 "-ms-0.5 me-1.5 h-lh w-4 shrink-0",
-                "group-has-data-[slot=icon]:absolute group-has-data-[slot=icon]:end-0.5 group-has-data-[slot=icon]:top-1/2 group-has-data-[slot=icon]:-translate-y-1/2",
-                "group-has-data-[slot=avatar]:absolute group-has-data-[slot=avatar]:end-0.5 group-has-data-[slot=avatar]:top-1/2 group-has-data-[slot=avatar]:-translate-y-1/2",
+                "group-has-data-[slot=icon]:absolute group-has-data-[slot=icon]:inset-e-0.5 group-has-data-[slot=icon]:top-1/2 group-has-data-[slot=icon]:-translate-y-1/2",
+                "group-has-data-[slot=avatar]:absolute group-has-data-[slot=avatar]:inset-e-0.5 group-has-data-[slot=avatar]:top-1/2 group-has-data-[slot=avatar]:-translate-y-1/2",
               )}
               data-slot="check-indicator"
             />
@@ -174,6 +174,7 @@ const DropdownKeyboard = ({ className, ...props }: React.ComponentProps<typeof K
 
 /**
  * Note: This is not exposed component, but it's used in other components to render dropdowns.
+ *
  * @internal
  */
 export type { DropdownSectionProps, DropdownItemProps };
