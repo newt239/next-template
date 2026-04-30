@@ -1,5 +1,4 @@
 import { createAuthClient } from "better-auth/client";
-import process from "node:process";
 
 export const authClient = createAuthClient({
   basePath: "/api/auth",

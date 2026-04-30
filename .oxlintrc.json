@@ -83,6 +83,26 @@
     "unicorn/numeric-separators-style": "off",
     "unicorn/no-null": "off",
     "unicorn/no-nested-ternary": "off",
-    "react/only-export-components": "off"
-  }
+    "typescript/prefer-readonly-parameter-types": "off"
+  },
+  "overrides": [
+    {
+      "files": ["src/components/ui/**"],
+      "rules": {
+        "typescript/no-unnecessary-condition": "off",
+        "typescript/no-useless-default-assignment": "off",
+        "no-shadow": "off",
+        "no-use-before-define": "off",
+        "react/no-multi-comp": "off",
+        "react/jsx-no-constructed-context-values": "off",
+        "react/only-export-components": "off"
+      }
+    },
+    {
+      "files": ["src/app/**/layout.tsx"],
+      "rules": {
+        "react/only-export-components": "off"
+      }
+    }
+  ]
 }

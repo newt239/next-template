@@ -4,22 +4,18 @@ import { auth } from "./auth";
 
 export const getSession = async () => {
   try {
-    const session = await auth.api.getSession({
+    return await auth.api.getSession({
       headers: await headers(),
     });
-    return session;
   } catch (error) {
     console.error("Failed to get session:", error);
+    throw error;
   }
 };
 
 export const getUser = async () => {
-  try {
-    const session = await getSession();
-    return session?.user || undefined;
-  } catch (error) {
-    console.error("Failed to get user:", error);
-  }
+  const session = await getSession();
+  return session?.user;
 };
 
 export const requireAuth = async () => {

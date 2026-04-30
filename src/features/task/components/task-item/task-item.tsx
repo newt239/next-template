@@ -20,7 +20,7 @@ type TaskItemProps = {
 export const TaskItem = ({ task, formattedCreatedAt }: TaskItemProps) => {
   const [isPending, startTransition] = useTransition();
 
-  const handleToggle = async () => {
+  const handleToggle = () => {
     startTransition(async () => {
       try {
         const result = await updateTask(task.id, { isCompleted: !task.isCompleted });
@@ -36,7 +36,7 @@ export const TaskItem = ({ task, formattedCreatedAt }: TaskItemProps) => {
     });
   };
 
-  const handleDelete = async () => {
+  const handleDelete = () => {
     if (!confirm("このタスクを削除しますか？")) {
       return;
     }

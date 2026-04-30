@@ -12,7 +12,7 @@ export const TaskForm = () => {
   const [title, setTitle] = useState("");
   const [isPending, startTransition] = useTransition();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!title.trim()) {
       return;

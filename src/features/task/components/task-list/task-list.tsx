@@ -1,7 +1,6 @@
 import { Card, CardContent } from "#/components/ui/card";
 import { Text } from "#/components/ui/text";
-
-import { TaskItem } from "../task-item";
+import { TaskItem } from "#/features/task/components/task-item";
 
 import type { Task } from "#/features/task/types/task";
 

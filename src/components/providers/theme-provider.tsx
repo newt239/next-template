@@ -1,16 +1,8 @@
 "use client";
 
-import { type ReactElement, type ReactNode, createContext, useContext } from "react";
+import { type ReactElement, type ReactNode, useMemo } from "react";
 
-type Theme = "light" | "dark" | "system";
-
-type ThemeContextValue = {
-  theme: Theme;
-};
-
-const ThemeContext = createContext<ThemeContextValue | null>(null);
-
-const defaultTheme: Theme = "system";
+import { ThemeContext, type ThemeContextValue, type Theme, defaultTheme } from "./theme-context";
 
 type ThemeProviderProps = {
   children: ReactNode;
@@ -20,14 +12,7 @@ type ThemeProviderProps = {
 export const ThemeProvider = ({
   children,
   defaultTheme: initialTheme = defaultTheme,
-}: ThemeProviderProps): ReactElement => (
-  <ThemeContext.Provider value={{ theme: initialTheme }}>{children}</ThemeContext.Provider>
-);
-
-export const useTheme = (): ThemeContextValue => {
-  const context = useContext(ThemeContext);
-  if (context === null) {
-    return { theme: defaultTheme };
-  }
-  return context;
+}: Readonly<ThemeProviderProps>): ReactElement => {
+  const value = useMemo<ThemeContextValue>(() => ({ theme: initialTheme }), [initialTheme]);
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 };

@@ -1,5 +1,4 @@
 import { defineConfig } from "drizzle-kit";
-import process from "node:process";
 
 const databaseUrl = process.env.TURSO_CONNECTION_URL;
 if (typeof databaseUrl !== "string" || databaseUrl.length === 0) {

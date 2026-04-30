@@ -1,6 +1,5 @@
 import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
-import process from "node:process";
 
 import * as schema from "./schema/index";
 
