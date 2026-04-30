@@ -23,7 +23,7 @@ const NumberInput = ({ className, ...props }: InputProps) => (
     <Input className={cx("tabular-nums", className)} {...props} />
     <div
       data-slot="text"
-      className="pointer-events-auto end-0 p-px in-disabled:pointer-events-none in-disabled:opacity-50"
+      className="pointer-events-auto inset-e-0 p-px in-disabled:pointer-events-none in-disabled:opacity-50"
     >
       <div className="flex h-full items-center divide-x overflow-hidden rounded-e-[calc(var(--radius-lg)-1px)] border-s">
         <StepperButton slot="decrement" />

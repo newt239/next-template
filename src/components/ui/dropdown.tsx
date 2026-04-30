@@ -165,7 +165,7 @@ const DropdownSeparator = ({ className, ...props }: Omit<SeparatorProps, "orient
 const DropdownKeyboard = ({ className, ...props }: React.ComponentProps<typeof Keyboard>) => (
   <Keyboard
     className={twMerge(
-      "absolute end-2 ps-2 group-hover:text-primary-fg group-focus:text-primary-fg",
+      "absolute inset-e-2 ps-2 group-hover:text-primary-fg group-focus:text-primary-fg",
       className,
     )}
     {...props}
