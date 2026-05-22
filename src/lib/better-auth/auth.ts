@@ -1,9 +1,8 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import process from "node:process";
 
-import { DBClient } from "../drizzle/client";
-import { account, session, user, verification } from "../drizzle/schema";
+import { DBClient } from "#/lib/drizzle/client";
+import { account, session, user, verification } from "#/lib/drizzle/schema";
 
 export const auth = betterAuth({
   appName: "Score Watcher",

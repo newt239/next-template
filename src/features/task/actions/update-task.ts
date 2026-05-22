@@ -3,10 +3,9 @@
 import { eq } from "drizzle-orm";
 import { updateTag } from "next/cache";
 
+import { TaskResponseSchema, UpdateTaskRequestSchema } from "#/features/task/schemas/task";
 import { DBClient } from "#/lib/drizzle/client";
 import { taskItems } from "#/lib/drizzle/schema";
-
-import { TaskResponseSchema, UpdateTaskRequestSchema } from "../schemas/task";
 
 export const updateTask = async (id: number, data: { title?: string; isCompleted?: boolean }) => {
   try {
@@ -24,10 +23,11 @@ export const updateTask = async (id: number, data: { title?: string; isCompleted
       updateData.isCompleted = body.isCompleted;
     }
 
-    const [task] = await DBClient.update(taskItems)
+    const updatedTasks = await DBClient.update(taskItems)
       .set(updateData)
       .where(eq(taskItems.id, id))
       .returning();
+    const task = updatedTasks.at(0);
 
     if (!task) {
       return { error: "タスクが見つかりません", success: false } as const;

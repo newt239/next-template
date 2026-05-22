@@ -2,10 +2,9 @@ import "server-only";
 import { eq } from "drizzle-orm";
 import { cacheLife, cacheTag } from "next/cache";
 
+import { GetTaskByIdSchema, TaskResponseSchema } from "#/features/task/schemas/task";
 import { DBClient } from "#/lib/drizzle/client";
 import { taskItems } from "#/lib/drizzle/schema";
-
-import { GetTaskByIdSchema, TaskResponseSchema } from "../schemas/task";
 
 export const getTaskById = async (id: number) => {
   "use cache";
@@ -21,10 +20,8 @@ export const getTaskById = async (id: number) => {
   try {
     const { id: validId } = GetTaskByIdSchema.parse({ id });
 
-    const [task] = await DBClient.select()
-      .from(taskItems)
-      .where(eq(taskItems.id, validId))
-      .limit(1);
+    const tasks = await DBClient.select().from(taskItems).where(eq(taskItems.id, validId)).limit(1);
+    const task = tasks.at(0);
 
     if (!task) {
       return null;
