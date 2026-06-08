@@ -13,6 +13,11 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true, // ファイル名の大文字・小文字の不一致によるバグを防ぐ
+    "noUncheckedIndexedAccess": true, // インデックスアクセスの型安全を強制
     "noEmit": true,
     "esModuleInterop": true,
     "isolatedModules": true,

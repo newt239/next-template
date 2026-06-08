@@ -134,7 +134,10 @@ const SelectMonth = () => {
       value={state.focusedDate.month}
       onChange={(key) => {
         if (typeof key === "number") {
-          state.setFocusedDate(months[key - 1].date);
+          const month = months[key - 1];
+          if (month) {
+            state.setFocusedDate(month.date);
+          }
         }
       }}
     >
@@ -171,7 +174,7 @@ const SelectYear = () => {
   return (
     <Select
       aria-label="Year"
-      selectedKey={years[20].id}
+      selectedKey={years[20]?.id}
       onSelectionChange={(key) => {
         const selected = years.find((year) => year.id == key);
         if (selected) {
