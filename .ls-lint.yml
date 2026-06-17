@@ -1,5 +1,5 @@
 ls:
-  .dir: kebab-case | regex:\..+
+  .dir: kebab-case | regex:^\..+$
   .ts: kebab-case
   .tsx: kebab-case
   .mjs: kebab-case
@@ -13,7 +13,7 @@ ls:
   .md: kebab-case | SCREAMING_SNAKE_CASE
 
   src:
-    .dir: kebab-case | regex:\(.+\) | regex:\[.+\]
+    .dir: kebab-case | regex:^\(.+\)$ | regex:^\[.+\]$
     .ts: kebab-case
     .tsx: kebab-case
     .css: kebab-case
