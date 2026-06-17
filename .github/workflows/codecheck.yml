@@ -25,6 +25,8 @@ jobs:
         run: pnpm run lint
       - name: Oxfmt
         run: pnpm run format
+      - name: ls-lint
+        run: pnpm run ls-lint
       - name: Knip
         run: pnpm run knip
       - name: Test
