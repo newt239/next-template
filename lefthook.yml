@@ -9,3 +9,6 @@ pre-commit:
       run: pnpm run format:fix
       stage_fixed: true
       fail_text: フォーマットエラーがあります
+    ls-lint:
+      run: pnpm run ls-lint
+      fail_text: ファイル名がkebab-case規約に違反しています
