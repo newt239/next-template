@@ -68,8 +68,14 @@ export const TaskItem = ({ task }: TaskItemProps) => {
   };
 
   return (
-    <Card className={task.isCompleted ? "bg-surface-subtle opacity-70" : "bg-surface-subtle"}>
-      <CardContent className="flex items-center gap-3 py-4">
+    <Card
+      className={
+        task.isCompleted
+          ? "bg-surface-subtle opacity-70 [--gutter:--spacing(4)]"
+          : "bg-surface-subtle [--gutter:--spacing(4)]"
+      }
+    >
+      <CardContent className="flex items-start gap-3">
         <Button
           type="button"
           intent="outline"
@@ -77,44 +83,50 @@ export const TaskItem = ({ task }: TaskItemProps) => {
           onPress={handleToggle}
           isDisabled={isPending}
           aria-label={task.isCompleted ? "未完了にマーク" : "完了にマーク"}
-          className="min-h-9 min-w-9 shrink-0"
+          className="shrink-0"
         >
           <CheckIcon data-slot="icon" className={task.isCompleted ? undefined : "opacity-0"} />
         </Button>
-        <div className="min-w-0 flex-1">
+        <div className="min-w-0 flex-1 pt-2 sm:pt-1">
           <CardTitle
-            className={task.isCompleted ? "text-muted-fg font-normal line-through" : undefined}
+            className={
+              task.isCompleted
+                ? "text-muted-fg font-normal break-words line-through"
+                : "break-words"
+            }
           >
             <Link href={`/tasks/${task.id}`} className="hover:underline">
               {task.title}
             </Link>
           </CardTitle>
-          <Text
-            className="mt-1 text-sm"
-            title={task.createdAt.toLocaleString("ja-JP")}
-            suppressHydrationWarning
-          >
-            {formatRelativeTime(task.createdAt)}
-          </Text>
           {error && (
             <Text role="alert" className="text-danger mt-1 text-sm">
               {error}
             </Text>
           )}
+          <div className="mt-2 flex items-center justify-between gap-3">
+            <Text
+              className="text-sm"
+              title={task.createdAt.toLocaleString("ja-JP")}
+              suppressHydrationWarning
+            >
+              {formatRelativeTime(task.createdAt)}
+            </Text>
+            <Button
+              type="button"
+              intent="danger"
+              size="sq-sm"
+              onPress={() => {
+                setIsConfirmOpen(true);
+              }}
+              isDisabled={isPending}
+              aria-label="削除"
+              className="shrink-0"
+            >
+              <TrashIcon data-slot="icon" />
+            </Button>
+          </div>
         </div>
-        <Button
-          type="button"
-          intent="danger"
-          size="sq-sm"
-          onPress={() => {
-            setIsConfirmOpen(true);
-          }}
-          isDisabled={isPending}
-          aria-label="削除"
-          className="shrink-0"
-        >
-          <TrashIcon data-slot="icon" />
-        </Button>
         <span aria-live="polite" className="sr-only">
           {liveMessage}
         </span>
