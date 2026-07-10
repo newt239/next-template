@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 
+import { PlusIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
 
 import { Button } from "#/components/ui/button";
@@ -58,6 +59,7 @@ export const TaskForm = ({ onSuccess }: TaskFormProps) => {
           />
         </TextField>
         <Button type="submit" isDisabled={isPending || !title.trim()} className="shrink-0">
+          <PlusIcon data-slot="icon" />
           {isPending ? "追加中..." : "追加"}
         </Button>
       </div>

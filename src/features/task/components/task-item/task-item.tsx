@@ -2,6 +2,7 @@
 
 import { useTransition } from "react";
 
+import { CheckIcon, TrashIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 
 import { Button } from "#/components/ui/button";
@@ -68,7 +69,7 @@ export const TaskItem = ({ task, formattedCreatedAt }: TaskItemProps) => {
           aria-label={task.isCompleted ? "未完了にマーク" : "完了にマーク"}
           className="min-h-9 min-w-9 shrink-0"
         >
-          {task.isCompleted ? "✓" : ""}
+          <CheckIcon data-slot="icon" className={task.isCompleted ? undefined : "opacity-0"} />
         </Button>
         <div className="min-w-0 flex-1">
           <CardTitle
@@ -89,7 +90,7 @@ export const TaskItem = ({ task, formattedCreatedAt }: TaskItemProps) => {
           aria-label="削除"
           className="shrink-0"
         >
-          ×
+          <TrashIcon data-slot="icon" />
         </Button>
       </CardContent>
     </Card>
