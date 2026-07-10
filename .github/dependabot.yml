@@ -9,6 +9,9 @@ updates:
     target-branch: "main"
     cooldown:
       default-days: 1
+    ignore:
+      - dependency-name: "typescript"
+        versions: [">=7.0.0 <7.1.0"]
     groups:
       all-dependencies:
         patterns:
