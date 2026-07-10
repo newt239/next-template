@@ -19,6 +19,9 @@
 /playwright/.cache
 /html-report
 
+# Playwright MCP のスナップショット・スクリーンショット
+/.playwright-mcp
+
 # next.js
 /.next/
 /out/

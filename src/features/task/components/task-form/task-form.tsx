@@ -6,7 +6,6 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
 
 import { Button } from "#/components/ui/button";
-import { Label } from "#/components/ui/field";
 import { Input } from "#/components/ui/input";
 import { Text } from "#/components/ui/text";
 import { TextField } from "#/components/ui/text-field";
@@ -48,16 +47,15 @@ export const TaskForm = ({ onSuccess }: TaskFormProps) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
-        <TextField className="min-w-0 flex-1">
-          <Label>新しいタスク</Label>
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+        <TextField aria-label="新しいタスク" className="min-w-0 flex-1">
           <Input
             type="text"
             value={title}
             onChange={(e) => {
               setTitle(e.target.value);
             }}
-            placeholder="新しいタスクを入力してください"
+            placeholder="タスクを入力"
             disabled={isPending}
           />
         </TextField>

@@ -9,10 +9,7 @@ type TaskListProps = {
   emptyMessage?: string;
 };
 
-export const TaskList = ({
-  tasks,
-  emptyMessage = "タスクがありません。新しいタスクを追加してください。",
-}: TaskListProps) => (
+export const TaskList = ({ tasks, emptyMessage = "タスクがありません" }: TaskListProps) => (
   <div className="flex flex-col gap-4">
     {tasks.length === 0 ? (
       <Card className="border-line-subtle bg-surface-subtle">
@@ -21,13 +18,7 @@ export const TaskList = ({
         </CardContent>
       </Card>
     ) : (
-      tasks.map((task) => (
-        <TaskItem
-          key={task.id}
-          task={task}
-          formattedCreatedAt={task.createdAt.toLocaleString("ja-JP")}
-        />
-      ))
+      tasks.map((task) => <TaskItem key={task.id} task={task} />)
     )}
   </div>
 );

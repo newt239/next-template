@@ -38,4 +38,5 @@ ignore:
   - .oxlintrc.json
   - .oxfmtrc.json
   - .mcp.json
+  - .playwright-mcp
   - drizzle/meta

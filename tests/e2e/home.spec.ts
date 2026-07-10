@@ -10,7 +10,7 @@ test.describe("ホームページ", () => {
     await page.goto("/");
     await page.getByRole("button", { name: "新しいタスクを追加" }).click();
     await expect(page.getByRole("dialog")).toBeVisible();
-    await expect(page.getByPlaceholder("新しいタスクを入力してください")).toBeVisible();
+    await expect(page.getByPlaceholder("タスクを入力")).toBeVisible();
   });
 
   test("タスクの追加・確認・完了・削除ができる", async ({ page }) => {
@@ -19,7 +19,7 @@ test.describe("ホームページ", () => {
     await page.goto("/");
 
     await page.getByRole("button", { name: "新しいタスクを追加" }).click();
-    await page.getByPlaceholder("新しいタスクを入力してください").fill(taskTitle);
+    await page.getByPlaceholder("タスクを入力").fill(taskTitle);
     await page.getByRole("button", { exact: true, name: "追加" }).click();
     await expect(page.getByRole("dialog")).toHaveCount(0);
 
@@ -28,7 +28,7 @@ test.describe("ホームページ", () => {
 
     await createdTaskLink.click();
     await expect(page.getByText(taskTitle)).toBeVisible();
-    await expect(page.getByText("ステータス: 未完了")).toBeVisible();
+    await expect(page.getByText("未完了", { exact: true })).toBeVisible();
 
     await page.goto("/");
     const taskLinkOnHome = page.getByRole("link", { name: taskTitle }).first();
@@ -45,7 +45,7 @@ test.describe("ホームページ", () => {
     await expect(completedTaskLink).toBeVisible();
 
     await completedTaskLink.click();
-    await expect(page.getByText("ステータス: 完了")).toBeVisible();
+    await expect(page.getByText("完了", { exact: true })).toBeVisible();
 
     await page.goto("/?status=completed");
     const completedTaskItem = page

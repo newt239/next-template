@@ -3,6 +3,8 @@
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
+import { formatRelativeTime } from "#/lib/format-relative-time";
+
 import { TaskItem } from "./task-item";
 
 import type { Task } from "#/features/task/types/task";
@@ -30,15 +32,13 @@ const createTask = (overrides?: Partial<Task>): Task => ({
 });
 
 describe("TaskItem", () => {
-  it("タイトルと作成日時が表示される", () => {
+  it("タイトルと相対時刻が表示される", () => {
     const task = createTask();
 
-    const formattedCreatedAt = task.createdAt.toLocaleString("ja-JP");
-
-    render(<TaskItem task={task} formattedCreatedAt={formattedCreatedAt} />);
+    render(<TaskItem task={task} />);
 
     expect(screen.getByText("テストタスク")).toBeInTheDocument();
-    expect(screen.getByText(formattedCreatedAt)).toBeInTheDocument();
+    expect(screen.getByText(formatRelativeTime(task.createdAt))).toBeInTheDocument();
   });
 
   it("完了ボタンを押すと updateTask が呼び出される", async () => {
@@ -47,9 +47,7 @@ describe("TaskItem", () => {
     const updateTaskMock = vi.mocked(updateTask);
     updateTaskMock.mockResolvedValueOnce({ success: true, task });
 
-    const { container } = render(
-      <TaskItem task={task} formattedCreatedAt={task.createdAt.toLocaleString("ja-JP")} />,
-    );
+    const { container } = render(<TaskItem task={task} />);
 
     const button = within(container).getByRole("button", { name: "完了にマーク" });
     fireEvent.click(button);
@@ -63,9 +61,7 @@ describe("TaskItem", () => {
     const deleteTaskMock = vi.mocked(deleteTask);
     deleteTaskMock.mockResolvedValueOnce({ success: true, task });
 
-    const { container } = render(
-      <TaskItem task={task} formattedCreatedAt={task.createdAt.toLocaleString("ja-JP")} />,
-    );
+    const { container } = render(<TaskItem task={task} />);
 
     const button = within(container).getByRole("button", { name: "削除" });
     fireEvent.click(button);

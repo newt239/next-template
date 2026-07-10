@@ -16,9 +16,7 @@ export const TaskListFetcher = async ({ status }: TaskListFetcherProps) => {
     <TaskList
       tasks={response.tasks}
       emptyMessage={
-        status === "completed"
-          ? "完了済みのタスクはありません。"
-          : "未着手のタスクはありません。新しいタスクを追加してください。"
+        status === "completed" ? "完了済みのタスクはありません" : "未着手のタスクはありません"
       }
     />
   );

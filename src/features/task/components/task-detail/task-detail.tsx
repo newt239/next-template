@@ -6,6 +6,7 @@ import { Heading } from "#/components/ui/heading";
 import { Text } from "#/components/ui/text";
 import { getTaskById } from "#/features/task/actions/get-task";
 import { TaskIdParamsSchema } from "#/features/task/schemas/task";
+import { formatRelativeTime } from "#/lib/format-relative-time";
 
 type TaskDetailProps = {
   params: Promise<{ id: string }>;
@@ -38,8 +39,10 @@ export const TaskDetail = async ({ params }: Readonly<TaskDetailProps>) => {
       <Heading level={2} className={task.isCompleted ? "text-muted-fg line-through" : undefined}>
         {task.title}
       </Heading>
-      <Text className="text-sm">作成日時: {task.createdAt.toLocaleString("ja-JP")}</Text>
-      <Text className="text-sm">ステータス: {task.isCompleted ? "完了" : "未完了"}</Text>
+      <Text className="text-sm">{task.isCompleted ? "完了" : "未完了"}</Text>
+      <Text className="text-sm" title={task.createdAt.toLocaleString("ja-JP")}>
+        {formatRelativeTime(task.createdAt)}
+      </Text>
     </div>
   );
 };

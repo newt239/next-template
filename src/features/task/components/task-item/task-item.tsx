@@ -13,15 +13,15 @@ import { ModalContent } from "#/components/ui/modal";
 import { Text } from "#/components/ui/text";
 import { deleteTask } from "#/features/task/actions/delete-task";
 import { updateTask } from "#/features/task/actions/update-task";
+import { formatRelativeTime } from "#/lib/format-relative-time";
 
 import type { Task } from "#/features/task/types/task";
 
 type TaskItemProps = {
   task: Task;
-  formattedCreatedAt: string;
 };
 
-export const TaskItem = ({ task, formattedCreatedAt }: TaskItemProps) => {
+export const TaskItem = ({ task }: TaskItemProps) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
@@ -89,7 +89,13 @@ export const TaskItem = ({ task, formattedCreatedAt }: TaskItemProps) => {
               {task.title}
             </Link>
           </CardTitle>
-          <Text className="mt-1 text-sm">{formattedCreatedAt}</Text>
+          <Text
+            className="mt-1 text-sm"
+            title={task.createdAt.toLocaleString("ja-JP")}
+            suppressHydrationWarning
+          >
+            {formatRelativeTime(task.createdAt)}
+          </Text>
           {error && (
             <Text role="alert" className="text-danger mt-1 text-sm">
               {error}
