@@ -2,6 +2,7 @@ import { Suspense } from "react";
 
 import { Heading } from "#/components/ui/heading";
 import { TaskDetail } from "#/features/task/components/task-detail";
+import { TaskDetailSkeleton } from "#/features/task/components/task-detail/task-detail-skeleton";
 
 type TaskDetailPageProps = {
   params: Promise<{ id: string }>;
@@ -15,7 +16,7 @@ const TaskDetailPage = ({ params }: Readonly<TaskDetailPageProps>) => (
           タスク詳細
         </Heading>
       </header>
-      <Suspense>
+      <Suspense fallback={<TaskDetailSkeleton />}>
         <TaskDetail params={params} />
       </Suspense>
     </div>

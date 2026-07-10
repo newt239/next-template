@@ -1,6 +1,9 @@
+import { Suspense } from "react";
+
 import { Heading } from "#/components/ui/heading";
 import { TaskFormDialog } from "#/features/task/components/task-form";
 import { TaskListFetcher } from "#/features/task/components/task-list/task-list-fetcher";
+import { TaskListSkeleton } from "#/features/task/components/task-list/task-list-skeleton";
 
 const HomePage = () => (
   <main className="bg-bg min-h-screen px-4 py-12 sm:px-6 sm:py-16">
@@ -10,7 +13,9 @@ const HomePage = () => (
           Task App
         </Heading>
       </header>
-      <TaskListFetcher />
+      <Suspense fallback={<TaskListSkeleton />}>
+        <TaskListFetcher />
+      </Suspense>
       <TaskFormDialog />
     </div>
   </main>
