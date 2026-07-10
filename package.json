@@ -62,10 +62,10 @@
     "oxlint-tsgolint": "0.24.0",
     "postcss": "8.5.16",
     "tailwindcss": "4.3.2",
-    "typescript": "7.0.2",
+    "typescript": "6.0.3",
     "vite": "8.1.4",
     "vite-tsconfig-paths": "6.1.1",
     "vitest": "4.1.10"
   },
-  "packageManager": "pnpm@11.9.0"
+  "packageManager": "pnpm@11.11.0"
 }

@@ -5,3 +5,4 @@ allowBuilds:
   lefthook: true
   sharp: true
 saveExact: true
+minimumReleaseAge: 1440
