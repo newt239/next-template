@@ -1,9 +1,9 @@
 import { Suspense } from "react";
 
 import { Heading } from "#/components/ui/heading";
-import { TaskFormDialog } from "#/features/task/components/task-form";
-import { TaskListSkeleton } from "#/features/task/components/task-list/task-list-skeleton";
-import { TaskTabsFetcher } from "#/features/task/components/task-list/task-tabs-fetcher";
+import { TaskFormDialog } from "#/features/task/components/task-form-dialog";
+import { TaskListSkeleton } from "#/features/task/components/task-list-skeleton";
+import { TaskTabsFetcher } from "#/features/task/components/task-tabs-fetcher";
 
 type HomePageProps = {
   searchParams: Promise<{ status?: string | string[] }>;

@@ -3,9 +3,9 @@ import { Suspense } from "react";
 
 import { TaskStatusSchema } from "#/features/task/schemas/task";
 
-import { TaskListFetcher } from "./task-list-fetcher";
-import { TaskListSkeleton } from "./task-list-skeleton";
-import { TaskTabs } from "./task-tabs";
+import { TaskListFetcher } from "../task-list-fetcher";
+import { TaskListSkeleton } from "../task-list-skeleton";
+import { TaskTabs } from "../task-tabs";
 
 type TaskTabsFetcherProps = {
   searchParams: Promise<{ status?: string | string[] }>;

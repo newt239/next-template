@@ -8,7 +8,7 @@ import { Button } from "#/components/ui/button";
 import { DialogBody, DialogHeader } from "#/components/ui/dialog";
 import { Modal, ModalContent } from "#/components/ui/modal";
 
-import { TaskForm } from "./task-form";
+import { TaskForm } from "../task-form";
 
 export const TaskFormDialog = () => {
   const [isOpen, setIsOpen] = useState(false);

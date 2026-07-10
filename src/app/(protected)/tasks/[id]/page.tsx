@@ -2,7 +2,7 @@ import { Suspense } from "react";
 
 import { Heading } from "#/components/ui/heading";
 import { TaskDetail } from "#/features/task/components/task-detail";
-import { TaskDetailSkeleton } from "#/features/task/components/task-detail/task-detail-skeleton";
+import { TaskDetailSkeleton } from "#/features/task/components/task-detail-skeleton";
 
 type TaskDetailPageProps = {
   params: Promise<{ id: string }>;
