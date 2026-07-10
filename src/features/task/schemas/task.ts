@@ -26,9 +26,12 @@ export const UpdateTaskRequestSchema = z.object({
 });
 
 export const GetTasksQuerySchema = z.object({
+  isCompleted: z.boolean().optional(),
   limit: z.number().int().positive().optional(),
   offset: z.number().int().nonnegative().optional(),
 });
+
+export const TaskStatusSchema = z.enum(["incomplete", "completed"]).catch("incomplete");
 
 export const TaskResponseSchema = z.object({
   createdAt: createdAtSchema,

@@ -4,3 +4,5 @@ export type Task = {
   isCompleted: boolean;
   createdAt: Date;
 };
+
+export type TaskStatus = "incomplete" | "completed";

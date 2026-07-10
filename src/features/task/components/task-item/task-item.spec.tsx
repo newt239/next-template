@@ -7,6 +7,12 @@ import { TaskItem } from "./task-item";
 
 import type { Task } from "#/features/task/types/task";
 
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({
+    refresh: vi.fn(),
+  }),
+}));
+
 vi.mock("#/features/task/actions/update-task", () => ({
   updateTask: vi.fn(),
 }));

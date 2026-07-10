@@ -3,8 +3,23 @@ import { getTasks } from "#/features/task/actions/get-tasks";
 
 import { TaskList } from ".";
 
-export const TaskListFetcher = async () => {
-  const response = await getTasks();
+import type { TaskStatus } from "#/features/task/types/task";
 
-  return <TaskList tasks={response.tasks} />;
+type TaskListFetcherProps = {
+  status: TaskStatus;
+};
+
+export const TaskListFetcher = async ({ status }: TaskListFetcherProps) => {
+  const response = await getTasks({ isCompleted: status === "completed" });
+
+  return (
+    <TaskList
+      tasks={response.tasks}
+      emptyMessage={
+        status === "completed"
+          ? "完了済みのタスクはありません。"
+          : "未着手のタスクはありません。新しいタスクを追加してください。"
+      }
+    />
+  );
 };

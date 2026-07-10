@@ -37,17 +37,26 @@ test.describe("ホームページ", () => {
     const taskItem = taskLinkOnHome.locator("xpath=ancestor::*[@data-slot='card'][1]");
     await taskItem.getByRole("button", { name: "完了にマーク" }).click();
 
-    await expect(taskItem.getByRole("button", { name: "未完了にマーク" })).toBeVisible();
+    await expect(page.getByRole("link", { name: taskTitle })).toHaveCount(0);
 
-    await taskLinkOnHome.click();
+    await page.getByRole("tab", { name: "完了済み" }).click();
+    await expect(page).toHaveURL(/status=completed/);
+    const completedTaskLink = page.getByRole("link", { name: taskTitle }).first();
+    await expect(completedTaskLink).toBeVisible();
+
+    await completedTaskLink.click();
     await expect(page.getByText("ステータス: 完了")).toBeVisible();
 
-    await page.goto("/");
+    await page.goto("/?status=completed");
+    const completedTaskItem = page
+      .getByRole("link", { name: taskTitle })
+      .first()
+      .locator("xpath=ancestor::*[@data-slot='card'][1]");
 
     page.once("dialog", async (dialog) => {
       await dialog.accept();
     });
-    await taskItem.getByRole("button", { name: "削除" }).click();
+    await completedTaskItem.getByRole("button", { name: "削除" }).click();
 
     await expect(page.getByRole("link", { name: taskTitle })).toHaveCount(0);
   });

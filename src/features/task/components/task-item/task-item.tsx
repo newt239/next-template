@@ -4,6 +4,7 @@ import { useTransition } from "react";
 
 import { CheckIcon, TrashIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { Button } from "#/components/ui/button";
 import { Card, CardContent, CardTitle } from "#/components/ui/card";
@@ -19,6 +20,7 @@ type TaskItemProps = {
 };
 
 export const TaskItem = ({ task, formattedCreatedAt }: TaskItemProps) => {
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
   const handleToggle = () => {
@@ -27,7 +29,7 @@ export const TaskItem = ({ task, formattedCreatedAt }: TaskItemProps) => {
         const result = await updateTask(task.id, { isCompleted: !task.isCompleted });
 
         if (result.success) {
-          window.location.reload();
+          router.refresh();
         } else {
           console.error("タスクの更新に失敗しました:", result.error);
         }
@@ -47,7 +49,7 @@ export const TaskItem = ({ task, formattedCreatedAt }: TaskItemProps) => {
         const result = await deleteTask(task.id);
 
         if (result.success) {
-          window.location.reload();
+          router.refresh();
         } else {
           console.error("タスクの削除に失敗しました:", result.error);
         }
