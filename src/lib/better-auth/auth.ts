@@ -3,12 +3,13 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 
 import { DBClient } from "#/lib/drizzle/client";
 import { account, session, user, verification } from "#/lib/drizzle/schema";
+import { env } from "#/lib/env";
 
 export const auth = betterAuth({
-  appName: "Score Watcher",
+  appName: "next-template",
   basePath: "/api/auth",
-  baseURL: process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL
-    ? `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`
+  baseURL: env.NEXT_PUBLIC_VERCEL_BRANCH_URL
+    ? `https://${env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`
     : "http://localhost:3000",
   database: drizzleAdapter(DBClient, {
     provider: "sqlite",
@@ -21,22 +22,16 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     // テスト環境のみ有効化
-    enabled: process.env.NODE_ENV !== "production",
+    enabled: env.NODE_ENV !== "production",
     requireEmailVerification: false, // テスト用のため検証不要
   },
   session: {
     expiresIn: 60 * 60 * 24 * 7, // 7 days
     updateAge: 60 * 60 * 24, // 1 day
   },
-  socialProviders: {
-    google: {
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    },
-  },
   trustedOrigins: [
-    process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL
-      ? `https://${process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`
+    env.NEXT_PUBLIC_VERCEL_BRANCH_URL
+      ? `https://${env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`
       : "http://localhost:3000",
   ],
 });
