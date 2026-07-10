@@ -1,22 +1,26 @@
-import { Card, CardContent, CardHeader } from "#/components/ui/card";
-import { Heading } from "#/components/ui/heading";
-import { TaskForm } from "#/features/task/components/task-form";
-import { TaskListFetcher } from "#/features/task/components/task-list/task-list-fetcher";
+import { Suspense } from "react";
 
-const HomePage = () => (
-  <main className="bg-bg min-h-screen px-4 py-12 sm:px-6 sm:py-16">
-    <div className="mx-auto max-w-2xl">
-      <Card className="border-line-strong">
-        <CardHeader className="border-line-subtle border-b pb-4">
-          <Heading level={1} className="text-center tracking-tight">
-            Task App
-          </Heading>
-        </CardHeader>
-        <CardContent className="flex flex-col gap-8 pt-6">
-          <TaskForm />
-          <TaskListFetcher />
-        </CardContent>
-      </Card>
+import { Heading } from "#/components/ui/heading";
+import { TaskFormDialog } from "#/features/task/components/task-form-dialog";
+import { TaskListSkeleton } from "#/features/task/components/task-list-skeleton";
+import { TaskTabsFetcher } from "#/features/task/components/task-tabs-fetcher";
+
+type HomePageProps = {
+  searchParams: Promise<{ status?: string | string[] }>;
+};
+
+const HomePage = ({ searchParams }: Readonly<HomePageProps>) => (
+  <main className="bg-bg min-h-screen">
+    <div className="lg:border-line-subtle lg:bg-surface lg:text-surface-fg mx-auto flex min-h-screen max-w-2xl flex-col gap-8 px-4 py-12 sm:px-6 sm:py-16 lg:border-x lg:px-8">
+      <header className="border-line-subtle border-b pb-4">
+        <Heading level={1} className="text-center tracking-tight">
+          Task App
+        </Heading>
+      </header>
+      <Suspense fallback={<TaskListSkeleton />}>
+        <TaskTabsFetcher searchParams={searchParams} />
+      </Suspense>
+      <TaskFormDialog />
     </div>
   </main>
 );

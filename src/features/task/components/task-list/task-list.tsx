@@ -6,24 +6,19 @@ import type { Task } from "#/features/task/types/task";
 
 type TaskListProps = {
   tasks: Task[];
+  emptyMessage?: string;
 };
 
-export const TaskList = ({ tasks }: TaskListProps) => (
+export const TaskList = ({ tasks, emptyMessage = "タスクがありません" }: TaskListProps) => (
   <div className="flex flex-col gap-4">
     {tasks.length === 0 ? (
       <Card className="border-line-subtle bg-surface-subtle">
         <CardContent className="py-8 text-center">
-          <Text>タスクがありません。新しいタスクを追加してください。</Text>
+          <Text>{emptyMessage}</Text>
         </CardContent>
       </Card>
     ) : (
-      tasks.map((task) => (
-        <TaskItem
-          key={task.id}
-          task={task}
-          formattedCreatedAt={task.createdAt.toLocaleString("ja-JP")}
-        />
-      ))
+      tasks.map((task) => <TaskItem key={task.id} task={task} />)
     )}
   </div>
 );

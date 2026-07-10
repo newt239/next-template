@@ -1,10 +1,12 @@
+import { ArrowLeftIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { Card, CardContent, CardHeader, CardTitle } from "#/components/ui/card";
 import { Heading } from "#/components/ui/heading";
 import { Text } from "#/components/ui/text";
 import { getTaskById } from "#/features/task/actions/get-task";
 import { TaskIdParamsSchema } from "#/features/task/schemas/task";
+import { formatRelativeTime } from "#/lib/format-relative-time";
 
 type TaskDetailProps = {
   params: Promise<{ id: string }>;
@@ -26,23 +28,21 @@ export const TaskDetail = async ({ params }: Readonly<TaskDetailProps>) => {
   }
 
   return (
-    <main className="bg-bg min-h-screen px-4 py-12 sm:px-6 sm:py-16">
-      <div className="mx-auto max-w-2xl">
-        <Card className="border-line-strong">
-          <CardHeader className="border-line-subtle border-b pb-4">
-            <Heading level={1} className="text-center tracking-tight">
-              タスク詳細
-            </Heading>
-          </CardHeader>
-          <CardContent className="space-y-4 pt-6">
-            <CardTitle className={task.isCompleted ? "text-muted-fg line-through" : undefined}>
-              {task.title}
-            </CardTitle>
-            <Text className="text-sm">作成日時: {task.createdAt.toLocaleString("ja-JP")}</Text>
-            <Text className="text-sm">ステータス: {task.isCompleted ? "完了" : "未完了"}</Text>
-          </CardContent>
-        </Card>
-      </div>
-    </main>
+    <div className="space-y-4">
+      <Link
+        href="/"
+        className="text-muted-fg hover:text-fg focus-visible:outline-ring inline-flex items-center gap-1.5 text-sm hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
+      >
+        <ArrowLeftIcon className="size-4" />
+        トップへ戻る
+      </Link>
+      <Heading level={2} className={task.isCompleted ? "text-muted-fg line-through" : undefined}>
+        {task.title}
+      </Heading>
+      <Text className="text-sm">{task.isCompleted ? "完了" : "未完了"}</Text>
+      <Text className="text-sm" title={task.createdAt.toLocaleString("ja-JP")}>
+        {formatRelativeTime(task.createdAt)}
+      </Text>
+    </div>
   );
 };
