@@ -55,7 +55,29 @@ describe("TaskItem", () => {
     expect(updateTaskMock).toHaveBeenCalledWith(task.id, { isCompleted: true });
   });
 
-  it("削除ボタンを押すと確認ダイアログが表示され、削除実行で deleteTask が呼ばれる", async () => {
+  it("右スワイプで updateTask が呼び出される", async () => {
+    const task = createTask({ isCompleted: false });
+    const { updateTask } = await import("#/features/task/actions/update-task");
+    const updateTaskMock = vi.mocked(updateTask);
+    updateTaskMock.mockResolvedValueOnce({ success: true, task });
+
+    const { container } = render(<TaskItem task={task} />);
+
+    const swipeArea = container.firstElementChild;
+    if (!swipeArea) {
+      throw new Error("スワイプ領域が見つかりません");
+    }
+
+    fireEvent.pointerDown(swipeArea, { clientX: 100, clientY: 10, pointerId: 1 });
+    fireEvent.pointerMove(swipeArea, { clientX: 180, clientY: 10, pointerId: 1 });
+    fireEvent.pointerUp(swipeArea, { clientX: 200, clientY: 10, pointerId: 1 });
+
+    await waitFor(() => {
+      expect(updateTaskMock).toHaveBeenCalledWith(task.id, { isCompleted: true });
+    });
+  });
+
+  it("左スワイプで確認ダイアログが表示され、削除実行で deleteTask が呼ばれる", async () => {
     const task = createTask();
     const { deleteTask } = await import("#/features/task/actions/delete-task");
     const deleteTaskMock = vi.mocked(deleteTask);
@@ -63,8 +85,14 @@ describe("TaskItem", () => {
 
     const { container } = render(<TaskItem task={task} />);
 
-    const button = within(container).getByRole("button", { name: "削除" });
-    fireEvent.click(button);
+    const swipeArea = container.firstElementChild;
+    if (!swipeArea) {
+      throw new Error("スワイプ領域が見つかりません");
+    }
+
+    fireEvent.pointerDown(swipeArea, { clientX: 200, clientY: 10, pointerId: 1 });
+    fireEvent.pointerMove(swipeArea, { clientX: 120, clientY: 10, pointerId: 1 });
+    fireEvent.pointerUp(swipeArea, { clientX: 100, clientY: 10, pointerId: 1 });
 
     const dialog = await screen.findByRole("alertdialog");
     fireEvent.click(within(dialog).getByRole("button", { name: "削除する" }));

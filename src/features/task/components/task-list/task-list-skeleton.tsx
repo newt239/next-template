@@ -9,10 +9,7 @@ export const TaskListSkeleton = () => (
           <Skeleton className="size-10 shrink-0 sm:size-8" />
           <div className="min-w-0 flex-1 pt-2 sm:pt-1">
             <Skeleton className="h-5 w-2/3" />
-            <div className="mt-2 flex items-center justify-between gap-3">
-              <Skeleton className="h-4 w-24" />
-              <Skeleton className="size-10 shrink-0 sm:size-8" />
-            </div>
+            <Skeleton className="mt-2 h-4 w-24" />
           </div>
         </CardContent>
       </Card>

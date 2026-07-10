@@ -53,7 +53,14 @@ test.describe("ホームページ", () => {
       .first()
       .locator("xpath=ancestor::*[@data-slot='card'][1]");
 
-    await completedTaskItem.getByRole("button", { name: "削除" }).click();
+    const box = await completedTaskItem.boundingBox();
+    if (!box) {
+      throw new Error("タスクカードが見つかりません");
+    }
+    await page.mouse.move(box.x + box.width - 24, box.y + box.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(box.x + box.width - 174, box.y + box.height / 2, { steps: 12 });
+    await page.mouse.up();
 
     const alertDialog = page.getByRole("alertdialog");
     await expect(alertDialog).toBeVisible();
