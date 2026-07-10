@@ -1,5 +1,5 @@
 import { Heading } from "#/components/ui/heading";
-import { TaskForm } from "#/features/task/components/task-form";
+import { TaskFormDialog } from "#/features/task/components/task-form";
 import { TaskListFetcher } from "#/features/task/components/task-list/task-list-fetcher";
 
 const HomePage = () => (
@@ -10,8 +10,8 @@ const HomePage = () => (
           Task App
         </Heading>
       </header>
-      <TaskForm />
       <TaskListFetcher />
+      <TaskFormDialog />
     </div>
   </main>
 );

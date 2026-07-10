@@ -6,8 +6,10 @@ test.describe("ホームページ", () => {
     await expect(page.getByRole("heading", { level: 1, name: "Task App" })).toBeVisible();
   });
 
-  test("新しいタスクの入力欄が表示される", async ({ page }) => {
+  test("FABからタスク入力ダイアログを開ける", async ({ page }) => {
     await page.goto("/");
+    await page.getByRole("button", { name: "新しいタスクを追加" }).click();
+    await expect(page.getByRole("dialog")).toBeVisible();
     await expect(page.getByPlaceholder("新しいタスクを入力してください")).toBeVisible();
   });
 
@@ -16,8 +18,10 @@ test.describe("ホームページ", () => {
 
     await page.goto("/");
 
+    await page.getByRole("button", { name: "新しいタスクを追加" }).click();
     await page.getByPlaceholder("新しいタスクを入力してください").fill(taskTitle);
-    await page.getByRole("button", { name: "追加" }).click();
+    await page.getByRole("button", { exact: true, name: "追加" }).click();
+    await expect(page.getByRole("dialog")).toHaveCount(0);
 
     const createdTaskLink = page.getByRole("link", { name: taskTitle });
     await expect(createdTaskLink).toBeVisible();

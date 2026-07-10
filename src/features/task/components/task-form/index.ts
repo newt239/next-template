@@ -1,1 +1,1 @@
-export { TaskForm } from "./task-form";
+export { TaskFormDialog } from "./task-form-dialog";

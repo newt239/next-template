@@ -2,13 +2,20 @@
 
 import { useState, useTransition } from "react";
 
+import { useRouter } from "next/navigation";
+
 import { Button } from "#/components/ui/button";
 import { Label } from "#/components/ui/field";
 import { Input } from "#/components/ui/input";
 import { TextField } from "#/components/ui/text-field";
 import { createTask } from "#/features/task/actions/create-task";
 
-export const TaskForm = () => {
+type TaskFormProps = {
+  onSuccess?: () => void;
+};
+
+export const TaskForm = ({ onSuccess }: TaskFormProps) => {
+  const router = useRouter();
   const [title, setTitle] = useState("");
   const [isPending, startTransition] = useTransition();
 
@@ -24,7 +31,8 @@ export const TaskForm = () => {
 
         if (result.success) {
           setTitle("");
-          window.location.reload();
+          router.refresh();
+          onSuccess?.();
         } else {
           console.error("タスクの作成に失敗しました:", result.error);
         }
