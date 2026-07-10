@@ -57,7 +57,7 @@ export const TaskItem = ({ task, formattedCreatedAt }: TaskItemProps) => {
   };
 
   return (
-    <Card className={task.isCompleted ? "opacity-70" : undefined}>
+    <Card className={task.isCompleted ? "bg-surface-subtle opacity-70" : "bg-surface-subtle"}>
       <CardContent className="flex items-center gap-3 py-4">
         <Button
           type="button"
