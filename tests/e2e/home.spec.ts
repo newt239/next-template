@@ -53,10 +53,11 @@ test.describe("ホームページ", () => {
       .first()
       .locator("xpath=ancestor::*[@data-slot='card'][1]");
 
-    page.once("dialog", async (dialog) => {
-      await dialog.accept();
-    });
     await completedTaskItem.getByRole("button", { name: "削除" }).click();
+
+    const alertDialog = page.getByRole("alertdialog");
+    await expect(alertDialog).toBeVisible();
+    await alertDialog.getByRole("button", { name: "削除する" }).click();
 
     await expect(page.getByRole("link", { name: taskTitle })).toHaveCount(0);
   });

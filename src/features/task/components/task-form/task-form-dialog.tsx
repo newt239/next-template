@@ -12,6 +12,7 @@ import { TaskForm } from "./task-form";
 
 export const TaskFormDialog = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [liveMessage, setLiveMessage] = useState("");
 
   return (
     <Modal isOpen={isOpen} onOpenChange={setIsOpen}>
@@ -29,11 +30,15 @@ export const TaskFormDialog = () => {
         <DialogBody className="pb-(--gutter)">
           <TaskForm
             onSuccess={() => {
+              setLiveMessage("タスクを追加しました");
               setIsOpen(false);
             }}
           />
         </DialogBody>
       </ModalContent>
+      <span aria-live="polite" className="sr-only">
+        {liveMessage}
+      </span>
     </Modal>
   );
 };

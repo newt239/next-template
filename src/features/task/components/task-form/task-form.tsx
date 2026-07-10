@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "#/components/ui/button";
 import { Label } from "#/components/ui/field";
 import { Input } from "#/components/ui/input";
+import { Text } from "#/components/ui/text";
 import { TextField } from "#/components/ui/text-field";
 import { createTask } from "#/features/task/actions/create-task";
 
@@ -18,6 +19,7 @@ type TaskFormProps = {
 export const TaskForm = ({ onSuccess }: TaskFormProps) => {
   const router = useRouter();
   const [title, setTitle] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
@@ -26,6 +28,7 @@ export const TaskForm = ({ onSuccess }: TaskFormProps) => {
       return;
     }
 
+    setError(null);
     startTransition(async () => {
       try {
         const result = await createTask({ title: title.trim() });
@@ -35,10 +38,10 @@ export const TaskForm = ({ onSuccess }: TaskFormProps) => {
           router.refresh();
           onSuccess?.();
         } else {
-          console.error("タスクの作成に失敗しました:", result.error);
+          setError(result.error);
         }
-      } catch (error) {
-        console.error("タスクの作成に失敗しました:", error);
+      } catch {
+        setError("タスクの作成に失敗しました");
       }
     });
   };
@@ -63,6 +66,11 @@ export const TaskForm = ({ onSuccess }: TaskFormProps) => {
           {isPending ? "追加中..." : "追加"}
         </Button>
       </div>
+      {error && (
+        <Text role="alert" className="text-danger mt-2 text-sm">
+          {error}
+        </Text>
+      )}
     </form>
   );
 };

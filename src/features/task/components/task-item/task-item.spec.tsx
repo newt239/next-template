@@ -1,6 +1,6 @@
 /// <reference types="@testing-library/jest-dom" />
 
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
 import { TaskItem } from "./task-item";
@@ -57,13 +57,11 @@ describe("TaskItem", () => {
     expect(updateTaskMock).toHaveBeenCalledWith(task.id, { isCompleted: true });
   });
 
-  it("削除ボタンを押すと confirm が表示され、承認時に deleteTask が呼ばれる", async () => {
+  it("削除ボタンを押すと確認ダイアログが表示され、削除実行で deleteTask が呼ばれる", async () => {
     const task = createTask();
     const { deleteTask } = await import("#/features/task/actions/delete-task");
     const deleteTaskMock = vi.mocked(deleteTask);
     deleteTaskMock.mockResolvedValueOnce({ success: true, task });
-
-    const confirmSpy = vi.spyOn(window, "confirm").mockReturnValue(true);
 
     const { container } = render(
       <TaskItem task={task} formattedCreatedAt={task.createdAt.toLocaleString("ja-JP")} />,
@@ -72,7 +70,11 @@ describe("TaskItem", () => {
     const button = within(container).getByRole("button", { name: "削除" });
     fireEvent.click(button);
 
-    expect(confirmSpy).toHaveBeenCalled();
-    expect(deleteTaskMock).toHaveBeenCalledWith(task.id);
+    const dialog = await screen.findByRole("alertdialog");
+    fireEvent.click(within(dialog).getByRole("button", { name: "削除する" }));
+
+    await waitFor(() => {
+      expect(deleteTaskMock).toHaveBeenCalledWith(task.id);
+    });
   });
 });
