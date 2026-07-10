@@ -25,7 +25,7 @@ jobs:
       - name: Playwrightのバージョンを取得し、ブラウザのキャッシュキーを生成
         id: version-checker
         run: |
-          echo "playwright-version=$(npx playwright --version | sed 's/ //g')" >> $GITHUB_OUTPUT
+          echo "playwright-version=$(npx playwright --version | sed 's/ //g')" >> "$GITHUB_OUTPUT"
         shell: bash
       - name: ブラウザのキャッシュを復元
         id: restore-chromium
