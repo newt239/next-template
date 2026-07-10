@@ -7,6 +7,8 @@ updates:
       timezone: "Asia/Tokyo"
       time: "08:00"
     target-branch: "main"
+    cooldown:
+      default-days: 1
     groups:
       all-dependencies:
         patterns:
