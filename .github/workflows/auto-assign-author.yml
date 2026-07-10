@@ -5,11 +5,12 @@ on:
     types: [opened, reopened]
 
 permissions:
-  issues: write
+  pull-requests: write
 
 jobs:
   assign:
     runs-on: ubuntu-latest
+    if: ${{ !endsWith(github.event.pull_request.user.login, '[bot]') }}
     steps:
       - name: Assign author
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
@@ -23,5 +24,5 @@ jobs:
                 assignees: [context.payload.pull_request.user.login],
               });
             } catch (error) {
-              core.warning(`PR作成者のアサインに失敗しました: ${error.message}`);
+              core.setFailed(`PR作成者のアサインに失敗しました: ${error.message}`);
             }
