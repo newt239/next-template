@@ -1,7 +1,7 @@
 /// <reference types="@testing-library/jest-dom" />
 
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { beforeAll, describe, expect, it, vi } from "vitest";
 
 import { formatRelativeTime } from "#/lib/format-relative-time";
 
@@ -32,6 +32,10 @@ const createTask = (overrides?: Partial<Task>): Task => ({
 });
 
 describe("TaskItem", () => {
+  beforeAll(() => {
+    Element.prototype.setPointerCapture = () => {};
+  });
+
   it("タイトルと相対時刻が表示される", () => {
     const task = createTask();
 

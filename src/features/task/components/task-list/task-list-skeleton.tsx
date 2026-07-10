@@ -7,7 +7,7 @@ export const TaskListSkeleton = () => (
       <Card key={index} className="bg-surface-subtle [--gutter:--spacing(4)]" aria-hidden="true">
         <CardContent className="flex items-start gap-3">
           <Skeleton className="size-10 shrink-0 sm:size-8" />
-          <div className="min-w-0 flex-1 pt-2 sm:pt-1">
+          <div className="min-w-0 flex-1">
             <Skeleton className="h-5 w-2/3" />
             <Skeleton className="mt-2 h-4 w-24" />
           </div>

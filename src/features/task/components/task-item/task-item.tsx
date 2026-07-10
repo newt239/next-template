@@ -105,12 +105,15 @@ export const TaskItem = ({ task }: TaskItemProps) => {
         }
         return;
       }
+      try {
+        event.currentTarget.setPointerCapture(event.pointerId);
+      } catch {
+        gestureRef.current = null;
+        return;
+      }
       gesture.isHorizontal = true;
       shouldSuppressClickRef.current = true;
       setIsDragging(true);
-      try {
-        event.currentTarget.setPointerCapture(event.pointerId);
-      } catch {}
     }
     setDragX(Math.max(-140, Math.min(140, dx)));
   };
@@ -193,7 +196,7 @@ export const TaskItem = ({ task }: TaskItemProps) => {
           >
             <CheckIcon data-slot="icon" className={task.isCompleted ? undefined : "opacity-0"} />
           </Button>
-          <div className="min-w-0 flex-1 pt-2 sm:pt-1">
+          <div className="min-w-0 flex-1">
             <CardTitle
               className={
                 task.isCompleted
