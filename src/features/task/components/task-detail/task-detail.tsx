@@ -1,3 +1,5 @@
+import { ArrowLeftIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { Heading } from "#/components/ui/heading";
@@ -26,6 +28,13 @@ export const TaskDetail = async ({ params }: Readonly<TaskDetailProps>) => {
 
   return (
     <div className="space-y-4">
+      <Link
+        href="/"
+        className="text-muted-fg hover:text-fg focus-visible:outline-ring inline-flex items-center gap-1.5 text-sm hover:underline focus-visible:outline-2 focus-visible:outline-offset-2"
+      >
+        <ArrowLeftIcon className="size-4" />
+        トップへ戻る
+      </Link>
       <Heading level={2} className={task.isCompleted ? "text-muted-fg line-through" : undefined}>
         {task.title}
       </Heading>
