@@ -1,22 +1,13 @@
 import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
 
+import { env } from "#/lib/env";
+
 import * as schema from "./schema/index";
 
-const tursoUrl = process.env.TURSO_CONNECTION_URL!;
-const tursoToken = process.env.TURSO_AUTH_TOKEN!;
-
-if (!tursoUrl) {
-  throw new Error("TURSO_CONNECTION_URL environment variable is required");
-}
-
-if (!tursoToken) {
-  throw new Error("TURSO_AUTH_TOKEN environment variable is required");
-}
-
 const sqlClient = createClient({
-  authToken: tursoToken,
-  url: tursoUrl,
+  authToken: env.TURSO_AUTH_TOKEN,
+  url: env.TURSO_CONNECTION_URL,
 });
 
 export const DBClient = drizzle(sqlClient, { schema });

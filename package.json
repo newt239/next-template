@@ -27,6 +27,7 @@
     "@internationalized/date": "3.12.2",
     "@libsql/client": "0.17.4",
     "@react-aria/i18n": "3.13.1",
+    "@t3-oss/env-nextjs": "0.13.11",
     "better-auth": "1.6.23",
     "drizzle-orm": "0.45.2",
     "motion": "12.42.2",
