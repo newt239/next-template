@@ -7,14 +7,14 @@
       "Bash(grep:*)",
       "Bash(gh pr create:*)"
     ],
-    "deny": [
+    "deny": ["Bash(git reset:*)", "Bash(git merge:*)", "Bash(git rebase:*)", "Bash(git reset:*)"],
+    "ask": [
       "Bash(rm:*)",
-      "Bash(git reset:*)",
-      "Bash(git merge:*)",
-      "Bash(git rebase:*)",
-      "Bash(git reset:*)"
-    ],
-    "ask": ["Bash(git checkout:*)", "Bash(git add:*)", "Bash(git commit:*)", "Bash(git push:*)"]
+      "Bash(git checkout:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
+    ]
   },
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": ["deepwiki", "playwright", "context7"],

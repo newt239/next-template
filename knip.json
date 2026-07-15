@@ -8,7 +8,6 @@
     "tests/unit/vitest.setup.ts"
   ],
   "ignore": ["drizzle.config.ts", "vitest.config.ts"],
-  "ignoreBinaries": ["only-allow"],
   "ignoreDependencies": ["@vitejs/plugin-react", "vite-tsconfig-paths"],
   "drizzle": false,
   "vitest": false
