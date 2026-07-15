@@ -1,7 +1,6 @@
 import "server-only";
 import { getTasks } from "#/features/task/actions/get-tasks";
-
-import { TaskList } from "../task-list";
+import { TaskList } from "#/features/task/components/task-list";
 
 import type { TaskStatus } from "#/features/task/types/task";
 

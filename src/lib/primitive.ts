@@ -8,10 +8,7 @@ type Render<T> = string | ((v: T) => string) | undefined;
 type CxArgs<T> = [...ClassNameValue[], Render<T>] | [[...ClassNameValue[], Render<T>]];
 
 export const cx = <T = unknown>(...args: CxArgs<T>): string | ((v: T) => string) => {
-  let resolvedArgs = args;
-  if (args.length === 1 && Array.isArray(args[0])) {
-    resolvedArgs = args[0] as [...ClassNameValue[], Render<T>];
-  }
+  const resolvedArgs = args.length === 1 && Array.isArray(args[0]) ? args[0] : args;
 
   const className = resolvedArgs.pop() as Render<T>;
   const tailwinds = resolvedArgs as ClassNameValue[];
