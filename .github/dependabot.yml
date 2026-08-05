@@ -8,7 +8,7 @@ updates:
       time: "08:00"
     target-branch: "main"
     cooldown:
-      default-days: 1
+      default-days: 7
     ignore:
       - dependency-name: "typescript"
         versions: [">=7.0.0 <7.1.0"]
