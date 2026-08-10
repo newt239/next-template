@@ -15,6 +15,7 @@
     "lint:fix": "oxlint --fix",
     "ls-lint": "ls-lint",
     "preinstall": "npx only-allow pnpm",
+    "setup:repo": "bash scripts/setup-repo.sh",
     "start": "next start",
     "test": "vitest run",
     "test:e2e": "playwright test",
