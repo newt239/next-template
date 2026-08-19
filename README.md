@@ -84,9 +84,9 @@ pnpm run test:e2e
 - `BETTER_AUTH_URL`: アプリの URL。`src/lib/better-auth/auth.ts` の `baseURL` オプションに渡しています。未設定でもリクエストのオリジンから解決されますが、ビルド時に警告が出るためローカルでは `http://localhost:3000` を設定してください。**`/api/auth/*` の origin チェックはこの値を基準にするため、Host ヘッダを信用できないホスティングでは本番でも必ず設定してください。**
 - `NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL`: `metadataBase` に使用します。Vercel では自動で設定されるため不要です。**他のホスティングでは設定しないと `metadataBase` が `http://localhost:3000` のままになります。**
 
-CI など DB 認証情報のない環境で型チェックやビルドのみを行う場合は、`SKIP_ENV_VALIDATION=1` を指定すると `src/lib/env.ts` の検証をスキップできます。
+GitHub Actions では Turso ではなくローカル SQLite (`TURSO_CONNECTION_URL=file:ci.db`) を使うため、リポジトリのシークレット登録は不要です。ジョブごとに空の DB を作ってマイグレーションを流すため、本番データに触れず並列実行もぶつかりません。
 
-E2E テストを GitHub Actions で実行する場合は、リポジトリのシークレットに `TURSO_CONNECTION_URL`・`TURSO_AUTH_TOKEN`・`BETTER_AUTH_SECRET` を登録してください。
+DB 認証情報を用意できない環境で型チェックやビルドのみを行う場合は、`SKIP_ENV_VALIDATION=1` を指定すると `src/lib/env.ts` の検証をスキップできます。ただし検証を飛ばしても `src/lib/drizzle/client.ts` の接続先は必要なので、ビルドまで通すなら値を与えるほうが確実です。
 
 ## 認証と認可
 

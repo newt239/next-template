@@ -15,6 +15,11 @@ concurrency:
 
 jobs:
   codecheck:
+    env:
+      TURSO_CONNECTION_URL: file:ci.db
+      TURSO_AUTH_TOKEN: ci
+      BETTER_AUTH_SECRET: ci-dummy-secret-not-used-in-production
+      NEXT_TELEMETRY_DISABLED: 1
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -30,8 +35,6 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Typecheck
         run: pnpm run typecheck
-        env:
-          SKIP_ENV_VALIDATION: 1
       - name: Oxlint
         run: pnpm run lint
       - name: Oxfmt
@@ -42,6 +45,3 @@ jobs:
         run: pnpm run knip
       - name: Build
         run: pnpm run build
-        env:
-          SKIP_ENV_VALIDATION: 1
-          NEXT_TELEMETRY_DISABLED: 1
