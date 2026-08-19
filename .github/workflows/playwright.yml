@@ -9,8 +9,8 @@ concurrency:
 jobs:
   test:
     env:
-      TURSO_CONNECTION_URL: ${{ secrets.TURSO_CONNECTION_URL }}
-      TURSO_AUTH_TOKEN: ${{ secrets.TURSO_AUTH_TOKEN }}
+      TURSO_CONNECTION_URL: file:ci.db
+      TURSO_AUTH_TOKEN: ci
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
@@ -44,6 +44,8 @@ jobs:
         with:
           path: ~/.cache/ms-playwright
           key: playwright-chromium-${{ steps.version-checker.outputs.playwright-version }}
+      - name: テスト用データベースを準備
+        run: pnpm exec drizzle-kit migrate
       - name: ビルドキャッシュを復元
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
