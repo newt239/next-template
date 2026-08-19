@@ -4,18 +4,13 @@
 
 @custom-variant dark (&:is(.dark *));
 
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 @theme inline {
   --font-sans:
-    "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    var(--font-inter), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol", "Noto Color Emoji";
   --font-mono:
-    "Geist Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas",
-    '"Liberation Mono"', '"Courier New"', "monospace";
+    var(--font-geist-mono), ui-monospace, "SFMono-Regular", "Menlo", "Monaco", "Consolas",
+    "Liberation Mono", "Courier New", monospace;
   --font-sans--font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   --font-mono--font-feature-settings: "ss02", "zero";
   --color-border: var(--border);
@@ -80,25 +75,26 @@ body {
 }
 
 :root {
-  --bg: oklch(0.14 0 0);
-  --fg: oklch(0.94 0 0);
-  --surface: oklch(0.18 0 0);
-  --surface-fg: oklch(0.93 0 0);
-  --surface-subtle: oklch(0.21 0 0);
-  --line-strong: oklch(0.32 0 0);
-  --line-subtle: oklch(0.26 0 0);
-  --primary: oklch(0.9 0 0);
-  --primary-fg: oklch(0.16 0 0);
-  --primary-subtle: oklch(0.88 0 0 / 0.12);
-  --primary-subtle-fg: oklch(0.9 0 0);
-  --secondary: oklch(0.23 0 0);
-  --secondary-fg: oklch(0.93 0 0);
-  --overlay: oklch(0.17 0 0);
-  --overlay-fg: oklch(0.94 0 0);
-  --accent: oklch(0.23 0 0);
-  --accent-fg: oklch(0.93 0 0);
-  --muted: oklch(0.19 0 0);
-  --muted-fg: oklch(0.72 0 0);
+  color-scheme: light;
+  --bg: oklch(0.98 0 0);
+  --fg: oklch(0.18 0 0);
+  --surface: oklch(1 0 0);
+  --surface-fg: oklch(0.18 0 0);
+  --surface-subtle: oklch(0.97 0 0);
+  --line-strong: oklch(0.85 0 0);
+  --line-subtle: oklch(0.91 0 0);
+  --primary: oklch(0.22 0 0);
+  --primary-fg: oklch(0.98 0 0);
+  --primary-subtle: oklch(0.22 0 0 / 0.08);
+  --primary-subtle-fg: oklch(0.28 0 0);
+  --secondary: oklch(0.95 0 0);
+  --secondary-fg: oklch(0.22 0 0);
+  --overlay: oklch(1 0 0);
+  --overlay-fg: oklch(0.18 0 0);
+  --accent: oklch(0.95 0 0);
+  --accent-fg: oklch(0.22 0 0);
+  --muted: oklch(0.96 0 0);
+  --muted-fg: oklch(0.48 0 0);
   --success: oklch(0.596 0.145 163.225);
   --success-fg: oklch(1 0 0);
   --success-subtle: oklch(0.696 0.17 162.48 / 0.15);
@@ -114,8 +110,8 @@ body {
   --danger-subtle: oklch(0.637 0.237 25.331 / 0.15);
   --danger-subtle-fg: oklch(0.505 0.213 27.518);
   --border: var(--line-subtle);
-  --input: oklch(0.24 0 0);
-  --ring: oklch(0.88 0 0);
+  --input: oklch(0.88 0 0);
+  --ring: oklch(0.45 0 0);
   --navbar: var(--surface);
   --navbar-fg: var(--surface-fg);
   --sidebar: var(--surface);
@@ -126,11 +122,11 @@ body {
   --sidebar-accent-fg: var(--accent-fg);
   --sidebar-border: var(--line-subtle);
   --sidebar-ring: var(--ring);
-  --chart-1: oklch(0.83 0 0);
-  --chart-2: oklch(0.74 0 0);
-  --chart-3: oklch(0.64 0 0);
-  --chart-4: oklch(0.54 0 0);
-  --chart-5: oklch(0.44 0 0);
+  --chart-1: oklch(0.3 0 0);
+  --chart-2: oklch(0.42 0 0);
+  --chart-3: oklch(0.54 0 0);
+  --chart-4: oklch(0.66 0 0);
+  --chart-5: oklch(0.78 0 0);
   --radius-lg: 0.5rem;
   --radius-xs: calc(var(--radius-lg) * 0.25);
   --radius-sm: calc(var(--radius-lg) * 0.5);
@@ -142,6 +138,7 @@ body {
 }
 
 .dark {
+  color-scheme: dark;
   --bg: oklch(0.14 0 0);
   --fg: oklch(0.94 0 0);
   --surface: oklch(0.18 0 0);
@@ -215,7 +212,7 @@ body {
   body {
     background-color: var(--bg);
     color: var(--fg);
-    min-height: 100vh;
+    min-height: 100dvh;
   }
   ::-webkit-scrollbar {
     width: 4px;
