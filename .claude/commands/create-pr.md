@@ -108,7 +108,7 @@ cp .github/PULL_REQUEST_TEMPLATE.md pr_body.md
 
 ```bash
 # 利用可能ラベルの取得 (非インタラクティブ)
-「.github/labels.yml または GitHub リポジトリから利用可能なラベルを取得して、変更内容に基づいて適切なラベルを自動選択してください」
+「gh label list で利用可能なラベルを取得して、変更内容に基づいて適切なラベルを自動選択してください」
 
 # パターンマッチングによる自動選択 (最大 3 個)
 # - ドキュメント: *.md, docs/ → documentation|docs
@@ -150,9 +150,9 @@ mcp_github_create_pull_request({
 ### ファイルパターンベース判定
 
 - **ドキュメント**: `*.md`, `README`, `docs/` → `documentation|docs|doc`
-- **テスト**: `test`, `spec` → `test|testing`
-- **CI/CD**: `.github/`, `*.yml`, `Dockerfile` → `ci|build|infra|ops`
-- **依存関係**: `package.json`, `pubspec.yaml` → `dependencies|deps`
+- **テスト**: `tests/`, `*.spec.ts` → `test|testing`
+- **CI/CD**: `.github/`, `*.yml` → `ci|build|infra|ops`
+- **依存関係**: `package.json`, `pnpm-lock.yaml` → `dependencies|deps`
 
 ### 変更内容ベース判定
 
@@ -245,7 +245,7 @@ git push
 
 ### 自動化の制約
 
-- **新規ラベル禁止**: `.github/labels.yml` 定義外のラベル作成不可
+- **新規ラベル禁止**: リポジトリに存在しないラベルの作成不可
 - **最大 3 ラベル**: 自動選択の上限
 - **既存内容優先**: 手動で記述された内容は一切変更しない
 
