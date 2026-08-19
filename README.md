@@ -26,6 +26,10 @@ pnpm run setup:repo
 
 <!-- setup-repo:end -->
 
+### Node のバージョン
+
+pnpm が `package.json` の `devEngines.runtime` を参照し、`pnpm run` 経由のコマンドを指定バージョンの Node で実行します。未取得の場合は自動でダウンロードされるため、別途バージョンマネージャーを用意する必要はありません。CI も同じフィールドを参照します。
+
 ### 1. 依存関係のインストール
 
 ```bash
