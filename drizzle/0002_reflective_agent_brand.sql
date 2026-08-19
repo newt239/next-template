@@ -1,0 +1,1 @@
+ALTER TABLE `task_items` ADD `updated_at` integer;

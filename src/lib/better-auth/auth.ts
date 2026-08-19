@@ -1,45 +1,47 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { nextCookies } from "better-auth/next-js";
 
 import { DBClient } from "#/lib/drizzle/client";
-import { account, session, user, verification } from "#/lib/drizzle/schema";
+import { account, rateLimit, session, user, verification } from "#/lib/drizzle/schema";
 import { env } from "#/lib/env";
 
 export const auth = betterAuth({
   appName: "next-template",
   basePath: "/api/auth",
-  baseURL: env.NEXT_PUBLIC_VERCEL_BRANCH_URL
-    ? `https://${env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`
-    : "http://localhost:3000",
+  baseURL: env.BETTER_AUTH_URL,
   database: drizzleAdapter(DBClient, {
     provider: "sqlite",
     schema: {
       account,
+      rateLimit,
       session,
       user,
       verification,
     },
   }),
   emailAndPassword: {
-    // テスト環境のみ有効化
-    enabled: env.NODE_ENV !== "production",
-    requireEmailVerification: false, // テスト用のため検証不要
+    autoSignIn: true,
+    enabled: true,
+    maxPasswordLength: 128,
+    minPasswordLength: 8,
+    requireEmailVerification: false,
   },
+  plugins: [nextCookies()],
+  rateLimit: {
+    customRules: {
+      "/sign-in/email": { max: 20, window: 300 },
+      "/sign-up/email": { max: 30, window: 300 },
+    },
+    storage: "database",
+  },
+  secret: env.BETTER_AUTH_SECRET,
   session: {
-    expiresIn: 60 * 60 * 24 * 7, // 7 days
-    updateAge: 60 * 60 * 24, // 1 day
+    cookieCache: {
+      enabled: true,
+      maxAge: 300,
+    },
+    expiresIn: 60 * 60 * 24 * 7,
+    updateAge: 60 * 60 * 24,
   },
-  trustedOrigins: [
-    env.NEXT_PUBLIC_VERCEL_BRANCH_URL
-      ? `https://${env.NEXT_PUBLIC_VERCEL_BRANCH_URL}`
-      : "http://localhost:3000",
-  ],
 });
-
-export type Session = typeof auth.$Infer.Session;
-export type User = typeof auth.$Infer.Session.user;
-
-export type AuthType = {
-  user: User | null;
-  session: Session | null;
-};

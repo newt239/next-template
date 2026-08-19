@@ -2,10 +2,24 @@ name: Codecheck
 
 on:
   pull_request:
+  push:
+    branches: ["main"]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  setup:
+  codecheck:
+    env:
+      TURSO_CONNECTION_URL: file:ci.db
+      TURSO_AUTH_TOKEN: ci
+      BETTER_AUTH_SECRET: ci-dummy-secret-not-used-in-production
+      NEXT_TELEMETRY_DISABLED: 1
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -29,5 +43,5 @@ jobs:
         run: pnpm run ls-lint
       - name: Knip
         run: pnpm run knip
-      - name: Test
-        run: pnpm run test
+      - name: Build
+        run: pnpm run build

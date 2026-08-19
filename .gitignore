@@ -52,3 +52,6 @@ next-env.d.ts
 
 # CSS Modules Kit
 generated
+
+# テスト用のローカル SQLite
+ci.db

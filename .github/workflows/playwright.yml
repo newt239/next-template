@@ -3,14 +3,18 @@ on:
   pull_request:
     branches: ["main", "develop"]
   workflow_dispatch:
+permissions:
+  contents: read
 concurrency:
-  group: ${{ github.workflow }}
-  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   test:
     env:
-      TURSO_CONNECTION_URL: ${{ secrets.TURSO_CONNECTION_URL }}
-      TURSO_AUTH_TOKEN: ${{ secrets.TURSO_AUTH_TOKEN }}
+      TURSO_CONNECTION_URL: file:ci.db
+      TURSO_AUTH_TOKEN: ci
+      BETTER_AUTH_SECRET: ci-dummy-secret-not-used-in-production
+      E2E_RUN_ID: ${{ github.run_id }}-${{ github.run_attempt }}
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
@@ -21,11 +25,11 @@ jobs:
           node-version-file: "package.json"
           cache: "pnpm"
       - name: 依存関係をインストール
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
       - name: Playwrightのバージョンを取得し、ブラウザのキャッシュキーを生成
         id: version-checker
         run: |
-          echo "playwright-version=$(npx playwright --version | sed 's/ //g')" >> "$GITHUB_OUTPUT"
+          echo "playwright-version=$(pnpm exec playwright --version | sed 's/ //g')" >> "$GITHUB_OUTPUT"
         shell: bash
       - name: ブラウザのキャッシュを復元
         id: restore-chromium
@@ -51,6 +55,8 @@ jobs:
           key: ${{ runner.os }}-nextjs-${{ hashFiles('pnpm-lock.yaml') }}-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('pnpm-lock.yaml') }}-
+      - name: DBマイグレーションを適用
+        run: pnpm run db:migrate
       - name: ビルド
         run: pnpm run build
         env:
@@ -61,5 +67,5 @@ jobs:
         if: always()
         with:
           name: playwright-report
-          path: playwright-report/
+          path: html-report/
           retention-days: 30

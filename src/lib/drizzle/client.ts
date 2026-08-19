@@ -3,7 +3,7 @@ import { drizzle } from "drizzle-orm/libsql";
 
 import { env } from "#/lib/env";
 
-import * as schema from "./schema/index";
+import * as schema from "./schema";
 
 const sqlClient = createClient({
   authToken: env.TURSO_AUTH_TOKEN,
@@ -11,5 +11,3 @@ const sqlClient = createClient({
 });
 
 export const DBClient = drizzle(sqlClient, { schema });
-
-export * from "./schema";

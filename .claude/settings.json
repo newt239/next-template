@@ -7,7 +7,7 @@
       "Bash(grep:*)",
       "Bash(gh pr create:*)"
     ],
-    "deny": ["Bash(git reset:*)", "Bash(git merge:*)", "Bash(git rebase:*)", "Bash(git reset:*)"],
+    "deny": ["Bash(git reset:*)", "Bash(git merge:*)", "Bash(git rebase:*)"],
     "ask": [
       "Bash(rm:*)",
       "Bash(git checkout:*)",

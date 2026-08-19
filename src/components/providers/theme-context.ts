@@ -2,12 +2,11 @@
 
 import { createContext } from "react";
 
-export type Theme = "light" | "dark" | "system";
+import type { Theme } from "./theme";
 
 export type ThemeContextValue = {
   theme: Theme;
+  setTheme: (theme: Theme) => void;
 };
-
-export const defaultTheme: Theme = "system";
 
 export const ThemeContext = createContext<ThemeContextValue | null>(null);

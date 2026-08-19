@@ -18,8 +18,8 @@ description: このテンプレートから新規プロジェクトを始める�
 | 認証           | better-auth (`src/lib/better-auth/`)                                              |
 | DB / ORM       | Turso DB (libsql) + Drizzle (`src/lib/drizzle/`, `drizzle/`, `drizzle.config.ts`) |
 | 環境変数       | t3-env (`src/lib/env.ts`)                                                         |
-| ユニットテスト | Vitest + Testing Library (`tests/unit/`, `src/**/*.spec.{ts,tsx}`)                |
 | E2E テスト     | Playwright (`tests/e2e/`, `playwright.config.ts`)                                 |
+| コード品質     | Oxlint (`.oxlintrc.json`) + Oxfmt (`.oxfmtrc.json`) + ls-lint + knip              |
 | サンプルアプリ | タスク管理 (`src/features/task/`, `src/app/(protected)/`)                         |
 
 ## 手順
@@ -43,7 +43,7 @@ AskUserQuestion ツールを使って以下を質問する。1 回の呼び出�
 
 - **認証**: better-auth を継続 / 不要 / 別の方式
 - **DB / ORM**: Turso + Drizzle を継続 / 不要 / 別の DB・ORM
-- **テスト**: Vitest + Playwright を継続 / ユニットテストのみ / E2E のみ / 不要
+- **テスト**: Playwright (E2E) を継続 / 不要 / 別の方式
 - **サンプルアプリ**: タスク管理アプリを削除する / 参考として残す
 
 **3 回目: 自由記述**
@@ -62,13 +62,14 @@ AskUserQuestion ツールを使って以下を質問する。1 回の呼び出�
 
 - `src/features/task/` 全体
 - `src/app/(protected)/` 以下のタスク関連ページ
-- `src/app/page.tsx` からタスク関連の参照を除去し、最小限のトップページに置き換える
-- `src/lib/drizzle/schema/` のタスク用テーブル定義と `drizzle/` の生成済みマイグレーション
+- `src/app/(protected)/page.tsx` からタスク関連の参照を除去し、最小限のトップページに置き換える
+- `src/lib/drizzle/schema.ts` の `taskItems` テーブル定義と `drizzle/` の生成済みマイグレーション
 - `tests/e2e/` のタスク関連テスト
 
 #### 認証の削除・変更
 
-- `src/lib/better-auth/` と `package.json` の `better-auth`
+- `src/lib/better-auth/` と `src/proxy.ts`、`package.json` の `better-auth`
+- 認証を残す場合、Server Actions の `getSession()` による認可チェックとユーザー単位のデータスコープは必ず維持する (AGENTS.md「認可は必ずデータ層で行う」)
 - Drizzle スキーマ内の認証用テーブルがあれば併せて対応
 - 別方式に変更する場合は `src/lib/{方式名}/` に配置し、`src/app/(public)/`・`(protected)/` のルートグループ構成は維持する
 
@@ -81,24 +82,23 @@ AskUserQuestion ツールを使って以下を質問する。1 回の呼び出�
 
 #### テストの削除・変更
 
-- ユニット: `vitest.config.ts`, `tests/unit/`, `src/**/*.spec.{ts,tsx}`, `package.json` の `vitest`・`@testing-library/*`・`jsdom`・`@vitejs/plugin-react`・`vite`・`vite-tsconfig-paths` と `test`・`test:watch` スクリプト、`knip.json` の関連 entry
-- E2E: `playwright.config.ts`, `tests/e2e/`, `@playwright/test`, `test:e2e*` スクリプト, `.github/workflows/playwright.yml`
+- E2E: `playwright.config.ts`, `tests/e2e/`, `@playwright/test`, `test:e2e*` スクリプト, `.github/workflows/playwright.yml`, `knip.json` の関連 entry
 
 #### UI ライブラリの削除・変更
 
 - `src/components/ui/` の各コンポーネント
 - `package.json` の `react-aria-components`, `@react-aria/i18n`, `@internationalized/date`, `tailwindcss-react-aria-components`, `tailwind-variants`, `tailwind-merge`（新スタックで使うものは残す）
 - `src/lib/primitive.ts` と `components.json`
-- 置き換える場合は新ライブラリの導入手順に従い、`src/components/ui/` の構成ルール（1 コンポーネント 1 ディレクトリ + `index.ts`）を維持する
+- 置き換える場合は新ライブラリの導入手順に従い、AGENTS.md の構成ルール（コンポーネントごとにディレクトリを作らず `{component-name}.tsx` として直接配置、`index.ts` による再エクスポートはしない）を維持する
 
 #### スタイリングの変更
 
 - Tailwind をやめる場合: `@tailwindcss/postcss`, `tailwindcss`, `postcss.config.mjs`, `src/app/globals.css` の Tailwind ディレクティブ。Tailwind 依存の UI コンポーネントが残っていないか先に確認する
-- CSS Modules へ移行する場合は `{component-name}.module.css` を各コンポーネントディレクトリに配置する
+- CSS Modules へ移行する場合は `{component-name}.module.css` をコンポーネントと同階層に配置する
 
 #### デプロイ先の変更
 
-- `src/lib/env.ts` の `NEXT_PUBLIC_VERCEL_BRANCH_URL` などプラットフォーム固有の環境変数
+- `src/lib/env.ts` の `NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL` などプラットフォーム固有の環境変数と、`src/app/layout.tsx` の `metadataBase`
 - Cloudflare の場合は OpenNext (`@opennextjs/cloudflare`) の導入と `wrangler.jsonc` の追加を検討する
 
 #### フレームワークの変更
@@ -119,7 +119,7 @@ Next.js から React Router / TanStack Start への移行は影響が全ファ�
 
 1. `pnpm install` で lockfile を更新する
 2. `pnpm run codecheck` を実行し、エラーがあればすべて修正する（`oxlintrc.json` や `tsconfig.json` の変更による回避は禁止）
-3. テストを残した場合は `pnpm run test` を実行する
+3. テストを残した場合は `pnpm run test:e2e` を実行する
 4. `pnpm run dev` で起動し、トップページが表示されることを確認する
 
 ### 7. 完了報告
