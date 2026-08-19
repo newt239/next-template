@@ -1,12 +1,12 @@
 import "server-only";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { cacheLife, cacheTag } from "next/cache";
 
-import { GetTaskByIdSchema, TaskResponseSchema } from "#/features/task/schemas/task";
+import { TaskIdSchema, TaskResponseSchema } from "#/features/task/lib/schema";
 import { DBClient } from "#/lib/drizzle/client";
 import { taskItems } from "#/lib/drizzle/schema";
 
-export const getTaskById = async (id: number) => {
+export const getTaskById = async (userId: string, id: number) => {
   "use cache";
 
   cacheLife({
@@ -15,12 +15,15 @@ export const getTaskById = async (id: number) => {
     stale: 60,
   });
 
-  cacheTag(`task-${id}`);
+  cacheTag(`task-${userId}-${id}`);
 
   try {
-    const { id: validId } = GetTaskByIdSchema.parse({ id });
+    const validId = TaskIdSchema.parse(id);
 
-    const tasks = await DBClient.select().from(taskItems).where(eq(taskItems.id, validId)).limit(1);
+    const tasks = await DBClient.select()
+      .from(taskItems)
+      .where(and(eq(taskItems.id, validId), eq(taskItems.userId, userId)))
+      .limit(1);
     const task = tasks.at(0);
 
     if (!task) {

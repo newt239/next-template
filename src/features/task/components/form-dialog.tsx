@@ -7,11 +7,10 @@ import { PlusIcon } from "@heroicons/react/24/solid";
 import { Button } from "#/components/ui/button";
 import { DialogBody, DialogHeader } from "#/components/ui/dialog";
 import { Modal, ModalContent } from "#/components/ui/modal";
-import { TaskForm } from "#/features/task/components/task-form";
+import { TaskForm } from "#/features/task/components/form";
 
 export const TaskFormDialog = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [liveMessage, setLiveMessage] = useState("");
 
   return (
     <Modal isOpen={isOpen} onOpenChange={setIsOpen}>
@@ -29,15 +28,11 @@ export const TaskFormDialog = () => {
         <DialogBody className="pb-(--gutter)">
           <TaskForm
             onSuccess={() => {
-              setLiveMessage("タスクを追加しました");
               setIsOpen(false);
             }}
           />
         </DialogBody>
       </ModalContent>
-      <span aria-live="polite" className="sr-only">
-        {liveMessage}
-      </span>
     </Modal>
   );
 };

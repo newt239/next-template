@@ -1,3 +1,11 @@
+const dateTimeFormat = new Intl.DateTimeFormat("ja-JP", {
+  dateStyle: "medium",
+  timeStyle: "short",
+  timeZone: "Asia/Tokyo",
+});
+
+export const formatDateTime = (date: Date) => dateTimeFormat.format(date);
+
 export const formatRelativeTime = (date: Date) => {
   const diffSeconds = Math.round((date.getTime() - Date.now()) / 1000);
   const abs = Math.abs(diffSeconds);

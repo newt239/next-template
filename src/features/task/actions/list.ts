@@ -1,8 +1,8 @@
 import "server-only";
-import { eq } from "drizzle-orm";
+import { and, desc, eq } from "drizzle-orm";
 import { cacheLife, cacheTag } from "next/cache";
 
-import { GetTasksQuerySchema, GetTasksResponseSchema } from "#/features/task/schemas/task";
+import { GetTasksQuerySchema, GetTasksResponseSchema } from "#/features/task/lib/schema";
 import { DBClient } from "#/lib/drizzle/client";
 import { taskItems } from "#/lib/drizzle/schema";
 
@@ -12,7 +12,7 @@ type GetTasksOptions = {
   offset?: number;
 };
 
-export const getTasks = async (options?: GetTasksOptions) => {
+export const getTasks = async (userId: string, options?: GetTasksOptions) => {
   "use cache";
 
   cacheLife({
@@ -21,7 +21,7 @@ export const getTasks = async (options?: GetTasksOptions) => {
     stale: 60,
   });
 
-  cacheTag("tasks");
+  cacheTag(`tasks-${userId}`);
 
   try {
     const query = GetTasksQuerySchema.parse({
@@ -33,9 +33,14 @@ export const getTasks = async (options?: GetTasksOptions) => {
     const tasks = await DBClient.select()
       .from(taskItems)
       .where(
-        query.isCompleted === undefined ? undefined : eq(taskItems.isCompleted, query.isCompleted),
+        and(
+          eq(taskItems.userId, userId),
+          query.isCompleted === undefined
+            ? undefined
+            : eq(taskItems.isCompleted, query.isCompleted),
+        ),
       )
-      .orderBy(taskItems.createdAt)
+      .orderBy(desc(taskItems.createdAt), desc(taskItems.id))
       .limit(query.limit ?? 100)
       .offset(query.offset ?? 0);
 

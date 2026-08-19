@@ -4,9 +4,10 @@ import { notFound } from "next/navigation";
 
 import { Heading } from "#/components/ui/heading";
 import { Text } from "#/components/ui/text";
-import { getTaskById } from "#/features/task/actions/get-task";
-import { TaskIdParamsSchema } from "#/features/task/schemas/task";
-import { formatRelativeTime } from "#/lib/format-relative-time";
+import { getTaskById } from "#/features/task/actions/get";
+import { TaskIdParamsSchema } from "#/features/task/lib/schema";
+import { requireSession } from "#/lib/better-auth/helper";
+import { formatDateTime, formatRelativeTime } from "#/lib/time";
 
 type TaskDetailProps = {
   params: Promise<{ id: string }>;
@@ -20,8 +21,9 @@ export const TaskDetail = async ({ params }: Readonly<TaskDetailProps>) => {
     notFound();
   }
 
+  const session = await requireSession();
   const id = Number(parsedParams.data.id);
-  const task = await getTaskById(id);
+  const task = await getTaskById(session.user.id, id);
 
   if (!task) {
     notFound();
@@ -40,9 +42,14 @@ export const TaskDetail = async ({ params }: Readonly<TaskDetailProps>) => {
         {task.title}
       </Heading>
       <Text className="text-sm">{task.isCompleted ? "完了" : "未完了"}</Text>
-      <Text className="text-sm" title={task.createdAt.toLocaleString("ja-JP")}>
-        {formatRelativeTime(task.createdAt)}
+      <Text className="text-sm" title={formatDateTime(task.createdAt)}>
+        {formatRelativeTime(task.createdAt)}に作成
       </Text>
+      {task.updatedAt && (
+        <Text className="text-sm" title={formatDateTime(task.updatedAt)}>
+          {formatRelativeTime(task.updatedAt)}に更新
+        </Text>
+      )}
     </div>
   );
 };

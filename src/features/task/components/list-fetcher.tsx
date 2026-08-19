@@ -1,15 +1,17 @@
 import "server-only";
-import { getTasks } from "#/features/task/actions/get-tasks";
-import { TaskList } from "#/features/task/components/task-list";
+import { getTasks } from "#/features/task/actions/list";
+import { TaskList } from "#/features/task/components/list";
+import { requireSession } from "#/lib/better-auth/helper";
 
-import type { TaskStatus } from "#/features/task/types/task";
+import type { TaskStatus } from "#/features/task/lib/type";
 
 type TaskListFetcherProps = {
   status: TaskStatus;
 };
 
 export const TaskListFetcher = async ({ status }: TaskListFetcherProps) => {
-  const response = await getTasks({ isCompleted: status === "completed" });
+  const session = await requireSession();
+  const response = await getTasks(session.user.id, { isCompleted: status === "completed" });
 
   return (
     <TaskList

@@ -1,8 +1,8 @@
 import { Card, CardContent } from "#/components/ui/card";
 import { Text } from "#/components/ui/text";
-import { TaskItem } from "#/features/task/components/task-item";
+import { TaskItem } from "#/features/task/components/item";
 
-import type { Task } from "#/features/task/types/task";
+import type { Task } from "#/features/task/lib/type";
 
 type TaskListProps = {
   tasks: Task[];
