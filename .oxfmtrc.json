@@ -1,13 +1,6 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "ignorePatterns": [
-    "node_modules/",
-    ".next/",
-    "out/",
-    "build/",
-    "utils/fetch/api.d.ts",
-    "utils/fetch/bundle.gen.yml"
-  ],
+  "ignorePatterns": ["node_modules/", ".next/", "out/", "build/", "drizzle/meta/"],
   "sortImports": {
     "groups": [
       "react",

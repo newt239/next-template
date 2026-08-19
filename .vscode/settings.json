@@ -1,5 +1,8 @@
 {
   "editor.tabSize": 2,
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
   "editor.formatOnSave": true,
   "oxc.fmt.configPath": ".oxfmtrc.json",
   "editor.defaultFormatter": "oxc.oxc-vscode",

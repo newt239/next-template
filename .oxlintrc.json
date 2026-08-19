@@ -35,11 +35,13 @@
     "no-console": ["warn", { "allow": ["warn", "error"] }],
     "no-empty-function": "off",
     "no-inline-comments": "off",
+    "new-cap": ["warn", { "capIsNewExceptions": ["Geist_Mono", "Inter"] }],
     "no-magic-numbers": "off",
     "no-nested-ternary": "off",
     "no-plusplus": "off",
     "no-ternary": "off",
     "no-undefined": "off",
+    "one-var": "off",
     "require-unicode-regexp": "off",
     "sort-imports": "off",
     "sort-keys": "warn",
@@ -74,8 +76,8 @@
     "typescript/explicit-function-return-type": "off",
     "typescript/explicit-module-boundary-types": "off",
     "typescript/no-empty-interface": "off",
-    "typescript/no-non-null-assertion": "off",
-    "typescript/no-unsafe-type-assertion": "off",
+    "typescript/no-non-null-assertion": "error",
+    "typescript/no-unsafe-type-assertion": "error",
     "typescript/prefer-readonly-parameter-types": "off",
     "typescript/strict-boolean-expressions": "off",
     "unicorn/no-nested-ternary": "off",
@@ -91,6 +93,8 @@
       "rules": {
         "eqeqeq": "off",
         "no-shadow": "off",
+        "typescript/no-non-null-assertion": "off",
+        "typescript/no-unsafe-type-assertion": "off",
         "no-use-before-define": "off",
         "react/jsx-no-constructed-context-values": "off",
         "react/no-multi-comp": "off",
@@ -103,9 +107,15 @@
       }
     },
     {
-      "files": ["src/app/**/layout.tsx"],
+      "files": ["src/app/**/layout.tsx", "src/app/**/page.tsx"],
       "rules": {
         "react/only-export-components": "off"
+      }
+    },
+    {
+      "files": ["tests/**", "*.config.ts"],
+      "rules": {
+        "import/no-nodejs-modules": "off"
       }
     }
   ]
