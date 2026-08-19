@@ -1,14 +1,18 @@
 "use client";
 
-import Link from "next/link";
-
 import { Button } from "#/components/ui/button";
 import { Card, CardContent, CardHeader } from "#/components/ui/card";
 import { Heading } from "#/components/ui/heading";
+import { LinkButton } from "#/components/ui/link-button";
 import { Text } from "#/components/ui/text";
 
-const ErrorPage = () => (
-  <main className="bg-bg min-h-screen px-4 py-12 sm:px-6 sm:py-16">
+type ErrorPageProps = {
+  error: Error & { digest?: string };
+  reset: () => void;
+};
+
+const ErrorPage = ({ error, reset }: Readonly<ErrorPageProps>) => (
+  <main className="bg-bg min-h-dvh px-4 py-12 sm:px-6 sm:py-16">
     <div className="mx-auto max-w-2xl">
       <Card className="border-line-strong">
         <CardHeader className="border-line-subtle border-b pb-4">
@@ -18,12 +22,16 @@ const ErrorPage = () => (
         </CardHeader>
         <CardContent className="flex flex-col items-center gap-4 pt-6">
           <Text className="text-muted-fg text-sm">
-            一時的な問題の可能性があります。ページを再読み込みするか、時間をおいて再度お試しください。
+            一時的な問題の可能性があります。再試行するか、時間をおいて再度お試しください。
           </Text>
+          {error.digest && <Text className="text-muted-fg font-mono text-xs">{error.digest}</Text>}
           <div className="flex gap-3">
-            <Button intent="outline" size="md">
-              <Link href="/">ホームに戻る</Link>
+            <Button intent="primary" size="md" onPress={reset}>
+              再試行
             </Button>
+            <LinkButton href="/" intent="outline" size="md">
+              ホームに戻る
+            </LinkButton>
           </div>
         </CardContent>
       </Card>
