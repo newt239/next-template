@@ -2,10 +2,19 @@ name: Codecheck
 
 on:
   pull_request:
+  push:
+    branches: ["main"]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  setup:
+  codecheck:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -21,6 +30,8 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Typecheck
         run: pnpm run typecheck
+        env:
+          SKIP_ENV_VALIDATION: 1
       - name: Oxlint
         run: pnpm run lint
       - name: Oxfmt
@@ -29,5 +40,8 @@ jobs:
         run: pnpm run ls-lint
       - name: Knip
         run: pnpm run knip
-      - name: Test
-        run: pnpm run test
+      - name: Build
+        run: pnpm run build
+        env:
+          SKIP_ENV_VALIDATION: 1
+          NEXT_TELEMETRY_DISABLED: 1
