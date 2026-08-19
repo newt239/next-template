@@ -1,27 +1,17 @@
+import "server-only";
+import { cache } from "react";
+
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 import { auth } from "./auth";
 
-export const getSession = async () => {
-  try {
-    return await auth.api.getSession({
-      headers: await headers(),
-    });
-  } catch (error) {
-    console.error("Failed to get session:", error);
-    throw error;
-  }
-};
+export const getSession = cache(async () => auth.api.getSession({ headers: await headers() }));
 
-export const getUser = async () => {
+export const requireSession = async () => {
   const session = await getSession();
-  return session?.user;
-};
-
-export const requireAuth = async () => {
-  const session = await getSession();
-  if (!session?.user) {
-    throw new Error("Authentication required");
+  if (!session) {
+    redirect("/login");
   }
   return session;
 };
