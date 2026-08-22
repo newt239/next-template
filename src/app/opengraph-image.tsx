@@ -2,6 +2,12 @@ import { ImageResponse } from "next/og";
 
 import { SITE_NAME } from "#/lib/site";
 
+export const alt = SITE_NAME;
+
+export const size = { height: 630, width: 1200 };
+
+export const contentType = "image/png";
+
 const OpengraphImage = () =>
   new ImageResponse(
     <div
@@ -23,7 +29,7 @@ const OpengraphImage = () =>
         App Router / Tailwind CSS / Drizzle / Better Auth
       </div>
     </div>,
-    { height: 630, width: 1200 },
+    size,
   );
 
 export default OpengraphImage;

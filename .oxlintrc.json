@@ -107,7 +107,7 @@
       }
     },
     {
-      "files": ["src/app/**/layout.tsx", "src/app/**/page.tsx"],
+      "files": ["src/app/**/layout.tsx", "src/app/**/page.tsx", "src/app/**/opengraph-image.tsx"],
       "rules": {
         "react/only-export-components": "off"
       }
