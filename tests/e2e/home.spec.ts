@@ -33,7 +33,9 @@ test.describe("ホームページ", () => {
     await expect(page.getByText("未完了", { exact: true })).toBeVisible();
 
     await page.goto("/");
-    await page.getByRole("button", { name: "完了にマーク" }).click();
+    const toggle = page.getByRole("button", { name: `「${taskTitle}」を完了にする` });
+    await expect(toggle).toHaveAttribute("aria-pressed", "false");
+    await toggle.click();
     await expect(taskLink).toHaveCount(0);
 
     await page.getByRole("tab", { name: "完了済み" }).click();

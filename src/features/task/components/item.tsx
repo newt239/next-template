@@ -4,15 +4,17 @@ import { useState, useTransition } from "react";
 
 import { CheckIcon, TrashIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import { ToggleButton } from "react-aria-components";
 import { toast } from "sonner";
 
-import { Button } from "#/components/ui/button";
+import { Button, buttonStyles } from "#/components/ui/button";
 import { Card, CardContent, CardTitle } from "#/components/ui/card";
 import { DialogClose, DialogFooter, DialogHeader } from "#/components/ui/dialog";
 import { ModalContent } from "#/components/ui/modal";
 import { Text } from "#/components/ui/text";
 import { deleteTask } from "#/features/task/actions/delete";
 import { updateTask } from "#/features/task/actions/update";
+import { cx } from "#/lib/primitive";
 import { formatDateTime, formatRelativeTime } from "#/lib/time";
 
 import type { Task } from "#/features/task/lib/type";
@@ -26,13 +28,13 @@ export const TaskItem = ({ task }: Readonly<TaskItemProps>) => {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleToggle = () => {
+  const handleToggle = (isCompleted: boolean) => {
     setError(null);
     startTransition(async () => {
-      const result = await updateTask(task.id, { isCompleted: !task.isCompleted });
+      const result = await updateTask(task.id, { isCompleted });
 
       if (result.success) {
-        toast.success(task.isCompleted ? "タスクを未完了にしました" : "タスクを完了にしました");
+        toast.success(isCompleted ? "タスクを完了にしました" : "タスクを未完了にしました");
         return;
       }
 
@@ -60,17 +62,15 @@ export const TaskItem = ({ task }: Readonly<TaskItemProps>) => {
       className={`bg-surface-subtle [--gutter:--spacing(4)]${task.isCompleted ? " opacity-70" : ""}`}
     >
       <CardContent className="flex items-start gap-3">
-        <Button
-          type="button"
-          intent="outline"
-          size="sq-sm"
-          onPress={handleToggle}
+        <ToggleButton
+          isSelected={task.isCompleted}
+          onChange={handleToggle}
           isDisabled={isPending}
-          aria-label={task.isCompleted ? "未完了にマーク" : "完了にマーク"}
-          className="shrink-0"
+          aria-label={`「${task.title}」を完了にする`}
+          className={cx(buttonStyles({ intent: "outline", size: "sq-sm" }), "shrink-0")}
         >
           <CheckIcon data-slot="icon" className={task.isCompleted ? undefined : "opacity-0"} />
-        </Button>
+        </ToggleButton>
         <div className="min-w-0 flex-1">
           <CardTitle
             className={
