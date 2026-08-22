@@ -59,6 +59,8 @@ apply_ruleset() {
 
   echo "ブランチ保護ルールセット「${RULESET_NAME}」"
   echo "  デフォルトブランチと release ブランチへの削除・force push を禁止します。"
+  echo "  あわせて Codecheck / Playwright の成功を必須にし、PR 経由でのみ変更できるようにします。"
+  echo "  (これがないと Dependabot の auto-merge が CI の完了を待たずにマージされます)"
   if confirm "  作成しますか?"; then
     gh api -X POST "repos/${REPO}/rulesets" --input - > /dev/null << JSON
 {
@@ -72,7 +74,21 @@ apply_ruleset() {
       "exclude": []
     }
   },
-  "rules": [{ "type": "deletion" }, { "type": "non_fast_forward" }]
+  "rules": [
+    { "type": "deletion" },
+    { "type": "non_fast_forward" },
+    {
+      "type": "required_status_checks",
+      "parameters": {
+        "strict_required_status_checks_policy": false,
+        "do_not_enforce_on_create": true,
+        "required_status_checks": [
+          { "context": "codecheck" },
+          { "context": "test" }
+        ]
+      }
+    }
+  ]
 }
 JSON
     echo "  作成しました。"
