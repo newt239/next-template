@@ -12,6 +12,26 @@
 - Better Auth (メールアドレス + パスワード)
 - Playwright (E2E)
 
+## テンプレートから始める
+
+「Use this template」で複製したあと、テンプレート由来の名前とアイコンを置き換えてください。
+
+| ファイル                                  | 箇所                   | 現在の値                                            |
+| ----------------------------------------- | ---------------------- | --------------------------------------------------- |
+| `package.json`                            | `name`                 | `next-template`                                     |
+| `src/lib/site.ts`                         | `SITE_NAME`            | `Next.js Template`                                  |
+| `src/lib/better-auth/auth.ts`             | `appName`              | `next-template`                                     |
+| `src/app/manifest.ts`                     | `short_name`           | `Template`                                          |
+| `src/app/opengraph-image.tsx`             | サブタイトル           | `App Router / Tailwind CSS / Drizzle / Better Auth` |
+| `src/app/icon.svg`・`src/app/favicon.ico` | アイコン               | Next.js の "N" ロゴ                                 |
+| `README.md`                               | タイトル・技術スタック | このファイル                                        |
+
+`SITE_URL` は環境変数から組み立てるためコードの変更は不要です（[環境変数](#環境変数)を参照）。
+
+日本語圏以外に向ける場合は、`src/app/layout.tsx` の `lang="ja"`、`src/lib/time.ts` の `ja-JP` / `Asia/Tokyo`、`playwright.config.ts` の `locale` / `timezoneId`、および UI とエラーメッセージの日本語文言も置き換えてください。
+
+サンプルとして実装されているタスク管理機能 (`src/features/task/`・`src/app/(protected)/tasks/`・`src/lib/drizzle/task-schema.ts`) は、不要になったら削除してください。Claude Code を使っている場合は `.claude/skills/customize-template/` のスキルが、技術スタックの取捨選択からこれらの削除までを対話形式で支援します。
+
 ## Development
 
 <!-- setup-repo:start -->
@@ -19,6 +39,8 @@
 ### 0. リポジトリ設定の適用
 
 テンプレートから作成したリポジトリには、GitHub 上のリポジトリ設定 (マージ後のブランチ自動削除・auto-merge の許可・ブランチ保護ルールセット) が引き継がれません。以下を実行し、対話形式で適用してください。
+
+ルールセットには Codecheck と Playwright を必須ステータスチェックとして登録します。**これを適用しないと `dependabot-auto-merge.yml` が CI の完了を待たずに main へマージします。**
 
 ```bash
 pnpm run setup:repo
@@ -104,6 +126,11 @@ Better Auth によるメールアドレス + パスワード認証を実装し�
 
 - レートリミットは既定で production のみ有効です
 - カウンタは IP とパスの組で持ちます。ローカルや CI では全リクエストが同一 IP になるため**テスト全体で 1 つのバケットを共有**します。E2E を増やすときは上限に当たらないか確認してください
+- `rate_limit` の行は自動では消えません。`user` に紐づかないため削除の cascade も効かず、放置すると増え続けます。`last_request` はミリ秒の UNIX 時刻なので、定期実行のジョブなどで次のように掃除してください
+
+  ```sql
+  DELETE FROM rate_limit WHERE last_request < (unixepoch() - 86400) * 1000;
+  ```
 
 ### セッションの cookieCache
 
@@ -143,11 +170,11 @@ Better Auth によるメールアドレス + パスワード認証を実装し�
 
 - `src/app/robots.ts`・`src/app/sitemap.ts`・`src/app/manifest.ts`・`src/app/icon.svg`・`src/app/opengraph-image.tsx` を用意しています。URL の基点は `src/lib/site.ts` の `SITE_URL` です
 - これらは `src/proxy.ts` の `matcher` から除外しています。メタデータルートを追加したら matcher も更新してください
-- `src/instrumentation.ts` の `onRequestError` がサーバー側のエラーを受け取ります。現状は `console.error` に出すだけなので、外部の通知先はここに差し込んでください
+- `src/instrumentation.ts` の `onRequestError` がサーバー側のエラーを受け取ります。現状は `console.error` に出すだけなので、外部の通知先はここに差し込んでください。**第 2 引数の `headers` には Cookie がそのまま入るため、ログには `method` と `path` だけを渡しています。** 通知先を追加するときも丸ごと送らないでください
 
 ## Drizzle
 
-- スキーマは `src/lib/drizzle/schema.ts` を編集して管理します。
+- スキーマは認証用の `src/lib/drizzle/auth-schema.ts` とサンプル機能用の `src/lib/drizzle/task-schema.ts` に分かれ、`src/lib/drizzle/schema.ts` が両方を再エクスポートします。サンプルを消すときは `task-schema.ts` と `schema.ts` の該当行を削除してください。
 - スキーマ変更を SQL として生成: `pnpm run db:generate`
 - 生成済みマイグレーションを適用: `pnpm run db:migrate`
 - スキーマを直接データベースへ反映 (開発用): `pnpm run db:push`
