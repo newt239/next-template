@@ -16,6 +16,7 @@ export const SignOutButton = () => {
     startTransition(async () => {
       await authClient.signOut();
       router.replace("/login");
+      router.refresh();
     });
   };
 
