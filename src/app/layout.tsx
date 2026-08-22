@@ -1,5 +1,5 @@
 import "./globals.css";
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 
 import { Geist_Mono, Inter } from "next/font/google";
 
@@ -42,10 +42,6 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
   },
-};
-
-export const viewport: Viewport = {
-  width: "device-width",
 };
 
 const RootLayout = ({
