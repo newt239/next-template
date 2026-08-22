@@ -65,15 +65,13 @@ AskUserQuestion ツールを使って以下を質問する。1 回の呼び出�
 - `src/features/task/` 全体
 - `src/app/(protected)/` 以下のタスク関連ページ
 - `src/app/(protected)/page.tsx` からタスク関連の参照を除去し、最小限のトップページに置き換える
-- `src/lib/drizzle/task-schema.ts` と、`src/lib/drizzle/schema.ts` の `export * from "./task-schema";` の行
-- `drizzle/` の生成済みマイグレーション
+- `src/lib/drizzle/schema.ts` の `taskItems` テーブル定義と `drizzle/` の生成済みマイグレーション
 - `tests/e2e/` のタスク関連テスト
-- README.md の「テンプレートから始める」でサンプルに言及している箇所
 
 #### 認証の削除・変更
 
 - `src/lib/better-auth/` と `src/proxy.ts`、`package.json` の `better-auth`
-- `src/lib/drizzle/auth-schema.ts` と、`src/lib/drizzle/schema.ts` の `export * from "./auth-schema";` の行
+- `src/lib/drizzle/schema.ts` の `user`・`session`・`account`・`verification`・`rateLimit` テーブル定義
 - `src/features/auth/` と `src/app/(public)/`、`src/components/layout/app-bar.tsx` のセッション参照
 - `src/lib/env.ts` の `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL` と `.env.example` の同項目
 - 認証を残す場合、Server Actions の `getSession()` による認可チェックとユーザー単位のデータスコープは必ず維持する (AGENTS.md「認可は必ずデータ層で行う」)
@@ -81,7 +79,7 @@ AskUserQuestion ツールを使って以下を質問する。1 回の呼び出�
 
 #### DB / ORM の削除・変更
 
-- `src/lib/drizzle/` (`schema.ts`・`auth-schema.ts`・`task-schema.ts`・`client.ts`), `drizzle/`, `drizzle.config.ts`
+- `src/lib/drizzle/`, `drizzle/`, `drizzle.config.ts`
 - `package.json` の `@libsql/client`, `drizzle-orm`, `drizzle-kit` と `db:*` スクリプト
 - `src/lib/env.ts` の `TURSO_CONNECTION_URL`, `TURSO_AUTH_TOKEN` と `.env.example` の同項目
 - README.md の DB・マイグレーションに関する節

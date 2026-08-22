@@ -174,7 +174,7 @@ Better Auth によるメールアドレス + パスワード認証を実装し�
 
 ## Drizzle
 
-- スキーマは認証用の `src/lib/drizzle/auth-schema.ts` とサンプル機能用の `src/lib/drizzle/task-schema.ts` に分かれ、`src/lib/drizzle/schema.ts` が両方を再エクスポートします。サンプルを消すときは `task-schema.ts` と `schema.ts` の該当行を削除してください。
+- スキーマは `src/lib/drizzle/schema.ts` を編集して管理します。
 - スキーマ変更を SQL として生成: `pnpm run db:generate`
 - 生成済みマイグレーションを適用: `pnpm run db:migrate`
 - スキーマを直接データベースへ反映 (開発用): `pnpm run db:push`
