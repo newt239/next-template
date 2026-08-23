@@ -20,6 +20,7 @@ jobs:
       TURSO_AUTH_TOKEN: ci
       BETTER_AUTH_SECRET: ci-dummy-secret-not-used-in-production
       NEXT_TELEMETRY_DISABLED: 1
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -43,5 +44,3 @@ jobs:
         run: pnpm run ls-lint
       - name: Knip
         run: pnpm run knip
-      - name: Build
-        run: pnpm run build

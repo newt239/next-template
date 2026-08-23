@@ -17,7 +17,6 @@
     "noImplicitOverride": true,
     "noUncheckedSideEffectImports": true,
     "erasableSyntaxOnly": true,
-    "forceConsistentCasingInFileNames": true, // ファイル名の大文字・小文字の不一致によるバグを防ぐ
     "noEmit": true,
     "esModuleInterop": true,
     "isolatedModules": true,

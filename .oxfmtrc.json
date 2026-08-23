@@ -26,6 +26,5 @@
   "sortPackageJson": {
     "sortScripts": true
   },
-  "sortTailwindcss": true,
-  "jsdoc": true
+  "sortTailwindcss": true
 }
