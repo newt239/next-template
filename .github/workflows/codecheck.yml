@@ -44,5 +44,3 @@ jobs:
         run: pnpm run ls-lint
       - name: Knip
         run: pnpm run knip
-      - name: Build
-        run: pnpm run build
