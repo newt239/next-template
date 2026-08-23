@@ -21,6 +21,7 @@ jobs:
       BETTER_AUTH_SECRET: ci-dummy-secret-not-used-in-production
       BETTER_AUTH_URL: http://localhost:3000
       NEXT_TELEMETRY_DISABLED: 1
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
