@@ -54,7 +54,7 @@
     "oxlint-tsgolint": "7.0.2001",
     "postcss": "8.5.26",
     "tailwindcss": "4.3.3",
-    "typescript": "6.0.3"
+    "typescript": "7.0.2"
   },
   "devEngines": {
     "runtime": {
