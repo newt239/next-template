@@ -60,7 +60,6 @@ apply_ruleset() {
   echo "ブランチ保護ルールセット「${RULESET_NAME}」"
   echo "  デフォルトブランチと release ブランチへの削除・force push を禁止します。"
   echo "  あわせて Codecheck / Playwright の成功を必須にし、PR 経由でのみ変更できるようにします。"
-  echo "  (これがないと Dependabot の auto-merge が CI の完了を待たずにマージされます)"
   if confirm "  作成しますか?"; then
     gh api -X POST "repos/${REPO}/rulesets" --input - > /dev/null << JSON
 {
@@ -132,6 +131,5 @@ cleanup() {
 }
 
 apply_repo_setting "delete_branch_on_merge" "true" "マージ後にヘッドブランチを自動削除する"
-apply_repo_setting "allow_auto_merge" "true" "auto-merge を許可する (Dependabot auto-merge に必要)"
 apply_ruleset
 cleanup
