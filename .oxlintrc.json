@@ -44,7 +44,6 @@
     "one-var": "off",
     "require-unicode-regexp": "off",
     "sort-imports": "off",
-    "sort-keys": "warn",
     "import/consistent-type-specifier-style": "off",
     "import/exports-last": "off",
     "import/group-exports": "off",
