@@ -54,4 +54,4 @@ next-env.d.ts
 generated
 
 # テスト用のローカル SQLite
-ci.db
+ci.db*
