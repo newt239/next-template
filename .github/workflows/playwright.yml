@@ -13,6 +13,7 @@ jobs:
       TURSO_CONNECTION_URL: file:ci.db
       TURSO_AUTH_TOKEN: ci
       BETTER_AUTH_SECRET: ci-dummy-secret-not-used-in-production
+      BETTER_AUTH_URL: http://localhost:3000
       E2E_RUN_ID: ${{ github.run_id }}-${{ github.run_attempt }}
     timeout-minutes: 10
     runs-on: ubuntu-latest
