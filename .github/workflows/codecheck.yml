@@ -19,7 +19,6 @@ jobs:
       TURSO_CONNECTION_URL: file:ci.db
       TURSO_AUTH_TOKEN: ci
       BETTER_AUTH_SECRET: ci-dummy-secret-not-used-in-production
-      BETTER_AUTH_URL: http://localhost:3000
       NEXT_TELEMETRY_DISABLED: 1
     timeout-minutes: 10
     runs-on: ubuntu-latest
