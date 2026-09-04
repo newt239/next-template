@@ -28,7 +28,7 @@
 - `pnpm run build` - 本番アプリケーションをビルド
 - `pnpm run start` - 本番サーバーを開始
 - `pnpm run typecheck` - TypeScript で型チェック
-- `pnpm run codecheck` - 型チェック・Lint・フォーマット・ファイル名規約・未使用コード検出をまとめて実行
+- `pnpm run codecheck` - 型チェック・Lint・フォーマット・未使用コード検出をまとめて実行
 - `pnpm run test:e2e` - Playwright で E2E テストを実行
 - `pnpm run db:generate` - スキーマ変更から SQL マイグレーションを生成
 - `pnpm run db:migrate` - マイグレーションをデータベースへ適用
