@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "codecheck": "pnpm run typecheck && pnpm run lint && pnpm run format && pnpm run ls-lint && pnpm run knip",
+    "codecheck": "pnpm run typecheck && pnpm run lint && pnpm run format && pnpm run knip",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
@@ -15,7 +15,6 @@
     "knip": "knip",
     "lint": "oxlint --type-aware --deny-warnings",
     "lint:fix": "oxlint --fix",
-    "ls-lint": "ls-lint",
     "setup:repo": "bash scripts/setup-repo.sh",
     "start": "next start",
     "test:e2e": "playwright test",
@@ -40,7 +39,6 @@
     "zod": "4.4.3"
   },
   "devDependencies": {
-    "@ls-lint/ls-lint": "2.3.1",
     "@playwright/test": "1.62.1",
     "@tailwindcss/postcss": "4.3.3",
     "@types/node": "26.4.0",
@@ -63,5 +61,5 @@
       "onFail": "download"
     }
   },
-  "packageManager": "pnpm@11.22.0"
+  "packageManager": "pnpm@12.3.1"
 }

@@ -21,7 +21,7 @@ description: このテンプレートから新規プロジェクトを始める�
 | アイコン       | Heroicons (`@heroicons/react`)                                                    |
 | 環境変数       | t3-env (`src/lib/env.ts`)                                                         |
 | E2E テスト     | Playwright (`tests/e2e/`, `playwright.config.ts`)                                 |
-| コード品質     | Oxlint (`.oxlintrc.json`) + Oxfmt (`.oxfmtrc.json`) + ls-lint + knip              |
+| コード品質     | Oxlint (`.oxlintrc.json`) + Oxfmt (`.oxfmtrc.json`) + knip                        |
 | サンプルアプリ | タスク管理 (`src/features/task/`, `src/app/(protected)/`)                         |
 
 ## 手順
