@@ -46,6 +46,7 @@ export const account = sqliteTable(
     createdAt: integer("created_at", { mode: "timestamp" }).default(sql`(unixepoch())`),
     id: text("id").primaryKey(),
     idToken: text("id_token"),
+    issuer: text("issuer").notNull(),
     password: text("password"),
     providerId: text("provider_id").notNull(),
     refreshToken: text("refresh_token"),
@@ -56,7 +57,7 @@ export const account = sqliteTable(
       .notNull()
       .references(() => user.id, { onDelete: "cascade" }),
   },
-  (table) => [unique("idx_account_unique").on(table.providerId, table.accountId)],
+  (table) => [unique("idx_account_unique").on(table.issuer, table.accountId)],
 );
 
 export const verification = sqliteTable(
