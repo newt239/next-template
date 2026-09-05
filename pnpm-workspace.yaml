@@ -7,3 +7,5 @@ allowBuilds:
 saveExact: true
 minimumReleaseAge: 10080
 minimumReleaseAgeExcludePrune: true
+update:
+  githubActions: true
