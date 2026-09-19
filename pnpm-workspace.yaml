@@ -8,7 +8,6 @@ saveExact: true
 minimumReleaseAge: 10080
 minimumReleaseAgeExcludePrune: true
 minimumReleaseAgeExclude:
-  - pnpm
   - "@pnpm/exe.*"
 update:
   githubActions: true
