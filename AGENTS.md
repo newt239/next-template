@@ -270,3 +270,9 @@ Better Authのレートリミットとorigin チェックは**ルーターの`on
 - 作成前に `pnpm run codecheck` と `pnpm run build` が通ることを確認してください。
 - CI では Codecheck と Playwright が必須ステータスチェックです。両方が緑になるまでマージしてはなりません。
 - ファイルの削除を含む場合は、[基本原則](#基本原則)のとおり事前にユーザーの承認を得てください。
+
+### GitHub Actions
+
+- アクションは `uses: actions/checkout@v7.0.1` のようにタグで指定し、実行するコミットは `.github/workflows/actions.lock` で固定します。
+- ワークフローを追加したり `uses` を変更したりしたら `gh actions-lock` を実行して lockfile を更新してください。拡張は `gh extension install github/gh-actions-lock --pin v0.2.0` で導入します。
+- lockfile は手で編集してはなりません。CI の Actions Lock ワークフローが `gh actions-lock --verify` で整合性を検証します。
