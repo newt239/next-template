@@ -18,6 +18,7 @@ const contentSecurityPolicy = [
 ].join("; ");
 
 const nextConfig: NextConfig = {
+  agentRules: false,
   cacheComponents: true,
   headers: () => [
     {
