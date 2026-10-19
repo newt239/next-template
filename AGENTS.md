@@ -268,7 +268,7 @@ Better Authのレートリミットとorigin チェックは**ルーターの`on
 
 - `.github/PULL_REQUEST_TEMPLATE.md` の項目を埋めてください。詳細な説明はコミットメッセージではなく PR 本文に書きます。
 - 作成前に `pnpm run codecheck` と `pnpm run build` が通ることを確認してください。
-- CI では Codecheck と Playwright が必須ステータスチェックです。両方が緑になるまでマージしてはなりません。
+- CI では Codecheck・Playwright・Actions Lock が必須ステータスチェックです。すべてが緑になるまでマージしてはなりません。
 - ファイルの削除を含む場合は、[基本原則](#基本原則)のとおり事前にユーザーの承認を得てください。
 
 ### GitHub Actions
