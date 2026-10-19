@@ -5,6 +5,8 @@ version: 'v0.0.3'
 workflows:
     '.github/workflows/actionlint.yml':
         - 'actions/checkout@v7.0.1'
+    '.github/workflows/actions-lock.yml':
+        - 'actions/checkout@v7.0.1'
     '.github/workflows/auto-assign-author.yml':
         - 'actions/github-script@v9.0.0'
     '.github/workflows/codecheck.yml':
