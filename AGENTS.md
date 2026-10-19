@@ -268,15 +268,11 @@ Better Authのレートリミットとorigin チェックは**ルーターの`on
 
 - `.github/PULL_REQUEST_TEMPLATE.md` の項目を埋めてください。詳細な説明はコミットメッセージではなく PR 本文に書きます。
 - 作成前に `pnpm run codecheck` と `pnpm run build` が通ることを確認してください。
-- CI では Codecheck と Playwright が必須ステータスチェックです。両方が緑になるまでマージしてはなりません。
+- CI では Codecheck・Playwright・Actions Lock が必須ステータスチェックです。すべてが緑になるまでマージしてはなりません。
 - ファイルの削除を含む場合は、[基本原則](#基本原則)のとおり事前にユーザーの承認を得てください。
 
-<!-- BEGIN:nextjs-agent-rules -->
+### GitHub Actions
 
-# This is NOT the Next.js you know
-
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
-
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
-
-<!-- END:nextjs-agent-rules -->
+- アクションは `uses: actions/checkout@v7.0.1` のようにタグで指定し、実行するコミットは `.github/workflows/actions.lock` で固定します。
+- ワークフローを追加したり `uses` を変更したりしたら `gh actions-lock` を実行して lockfile を更新してください。拡張は `gh extension install github/gh-actions-lock --pin v0.2.0` で導入します。
+- lockfile は手で編集してはなりません。CI の Actions Lock ワークフローが `gh actions-lock --verify` で整合性を検証します。
