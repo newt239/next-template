@@ -2,6 +2,9 @@
   "name": "next-template",
   "version": "0.1.0",
   "private": true,
+  "imports": {
+    "#/*": "./src/*"
+  },
   "scripts": {
     "build": "next build",
     "codecheck": "pnpm run typecheck && pnpm run lint && pnpm run format && pnpm run knip",

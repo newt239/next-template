@@ -20,7 +20,7 @@ import {
 } from "react-aria-components";
 import { twMerge } from "tailwind-merge";
 
-import { cx } from "#/lib/primitive";
+import { cx } from "#/lib/primitive.ts";
 
 type TabsProps = TabsPrimitiveProps & {
   ref?: React.RefObject<HTMLDivElement>;

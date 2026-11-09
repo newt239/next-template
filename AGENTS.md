@@ -105,9 +105,10 @@ src/
 ### インポートとパスエイリアス
 
 - 同階層でないモジュールをインポートする場合は、**相対パスではなくパスエイリアスを使用してください**。
-- プロジェクトでは `#/` が `src/` にマップされています。例: `#/components/ui/button` → `src/components/ui/button`。
+- `package.json` の `imports` (Subpath Imports) で `#/` を `src/` にマップしています。`tsconfig.json` の `paths` は使いません。
+- `#/` のインポートには `.ts` / `.tsx` の拡張子を必ず付けてください。Subpath Imports は拡張子を補完しないため、省略すると解決できません。例: `#/components/ui/button.tsx` → `src/components/ui/button.tsx`。
 - **同一 feature 内**（例: `features/task/actions/` から `features/task/lib/type.ts`）や**同一ディレクトリ内**のインポートでは相対パス（`../lib/type` など）を使用して構いません。
-- **別の feature・app・components・lib・types・hooks を参照する場合**は、必ず `#/` から始まるパスエイリアスで記述してください。例: `import { Button } from "#/components/ui/button"`。
+- **別の feature・app・components・lib・types・hooks を参照する場合**は、必ず `#/` から始まるパスエイリアスで記述してください。例: `import { Button } from "#/components/ui/button.tsx"`。
 
 ## コーディングガイドライン
 
@@ -179,8 +180,8 @@ Server Actionsは`"use server"`を付けた時点で、UIを経由せずとも�
 
 import { z } from "zod";
 
-import { CreateTaskRequestSchema } from "#/features/task/lib/schema";
-import { getSession } from "#/lib/better-auth/helper";
+import { CreateTaskRequestSchema } from "#/features/task/lib/schema.ts";
+import { getSession } from "#/lib/better-auth/helper.ts";
 
 export const createTask = async (data: { title: string }) => {
   try {
@@ -204,7 +205,7 @@ export const createTask = async (data: { title: string }) => {
 import "server-only";
 import { cacheLife, cacheTag } from "next/cache";
 
-import { GetTasksQuerySchema } from "#/features/task/lib/schema";
+import { GetTasksQuerySchema } from "#/features/task/lib/schema.ts";
 
 export const getTasks = async (userId: string, options?: { limit?: number; offset?: number }) => {
   "use cache";

@@ -5,13 +5,13 @@ import { useState, useTransition } from "react";
 
 import { useRouter } from "next/navigation";
 
-import { Button } from "#/components/ui/button";
-import { Label } from "#/components/ui/field";
-import { Input } from "#/components/ui/input";
-import { Text } from "#/components/ui/text";
-import { TextField } from "#/components/ui/text-field";
-import { SignInRequestSchema } from "#/features/auth/lib/schema";
-import { authClient } from "#/lib/better-auth/client";
+import { Button } from "#/components/ui/button.tsx";
+import { Label } from "#/components/ui/field.tsx";
+import { Input } from "#/components/ui/input.tsx";
+import { TextField } from "#/components/ui/text-field.tsx";
+import { Text } from "#/components/ui/text.tsx";
+import { SignInRequestSchema } from "#/features/auth/lib/schema.ts";
+import { authClient } from "#/lib/better-auth/client.ts";
 
 type SignInFormProps = {
   redirectTo: Route;

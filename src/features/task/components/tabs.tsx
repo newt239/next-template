@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 
-import { Tab, TabList, TabPanel, Tabs } from "#/components/ui/tabs";
+import { Tab, TabList, TabPanel, Tabs } from "#/components/ui/tabs.tsx";
 
-import type { TaskStatus } from "#/features/task/lib/type";
+import type { TaskStatus } from "#/features/task/lib/type.ts";
 
 type TaskTabsProps = {
   status: TaskStatus;

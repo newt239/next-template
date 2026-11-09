@@ -2,10 +2,10 @@
 
 import { ComputerDesktopIcon, MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 
-import { useTheme } from "#/components/providers/use-theme";
-import { Button } from "#/components/ui/button";
+import { useTheme } from "#/components/providers/use-theme.ts";
+import { Button } from "#/components/ui/button.tsx";
 
-import type { Theme } from "#/components/providers/theme";
+import type { Theme } from "#/components/providers/theme.ts";
 
 const nextTheme: Record<Theme, Theme> = {
   dark: "system",

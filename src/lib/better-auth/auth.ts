@@ -2,9 +2,9 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
 
-import { DBClient } from "#/lib/drizzle/client";
-import { account, rateLimit, session, user, verification } from "#/lib/drizzle/schema";
-import { env } from "#/lib/env";
+import { DBClient } from "#/lib/drizzle/client.ts";
+import { account, rateLimit, session, user, verification } from "#/lib/drizzle/schema.ts";
+import { env } from "#/lib/env.ts";
 
 export const auth = betterAuth({
   appName: "next-template",

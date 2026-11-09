@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
-import { AppBar } from "#/components/layout/app-bar";
-import { AppBarSkeleton } from "#/components/layout/app-bar-skeleton";
+import { AppBarSkeleton } from "#/components/layout/app-bar-skeleton.tsx";
+import { AppBar } from "#/components/layout/app-bar.tsx";
 
 const ProtectedLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => (
   <>

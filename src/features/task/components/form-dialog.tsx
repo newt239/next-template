@@ -4,10 +4,10 @@ import { useState } from "react";
 
 import { PlusIcon } from "@heroicons/react/24/solid";
 
-import { Button } from "#/components/ui/button";
-import { DialogBody, DialogHeader } from "#/components/ui/dialog";
-import { Modal, ModalContent } from "#/components/ui/modal";
-import { TaskForm } from "#/features/task/components/form";
+import { Button } from "#/components/ui/button.tsx";
+import { DialogBody, DialogHeader } from "#/components/ui/dialog.tsx";
+import { Modal, ModalContent } from "#/components/ui/modal.tsx";
+import { TaskForm } from "#/features/task/components/form.tsx";
 
 export const TaskFormDialog = () => {
   const [isOpen, setIsOpen] = useState(false);

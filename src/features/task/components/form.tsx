@@ -5,11 +5,11 @@ import { useState, useTransition } from "react";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { toast } from "sonner";
 
-import { Button } from "#/components/ui/button";
-import { Input } from "#/components/ui/input";
-import { Text } from "#/components/ui/text";
-import { TextField } from "#/components/ui/text-field";
-import { createTask } from "#/features/task/actions/create";
+import { Button } from "#/components/ui/button.tsx";
+import { Input } from "#/components/ui/input.tsx";
+import { TextField } from "#/components/ui/text-field.tsx";
+import { Text } from "#/components/ui/text.tsx";
+import { createTask } from "#/features/task/actions/create.ts";
 
 type TaskFormProps = {
   onSuccess?: () => void;

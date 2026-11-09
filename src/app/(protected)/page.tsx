@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
-import { Heading } from "#/components/ui/heading";
-import { TaskFormDialog } from "#/features/task/components/form-dialog";
-import { TaskListSkeleton } from "#/features/task/components/list-skeleton";
-import { TaskTabsFetcher } from "#/features/task/components/tabs-fetcher";
+import { Heading } from "#/components/ui/heading.tsx";
+import { TaskFormDialog } from "#/features/task/components/form-dialog.tsx";
+import { TaskListSkeleton } from "#/features/task/components/list-skeleton.tsx";
+import { TaskTabsFetcher } from "#/features/task/components/tabs-fetcher.tsx";
 
 export const metadata: Metadata = {
   title: "タスク一覧",

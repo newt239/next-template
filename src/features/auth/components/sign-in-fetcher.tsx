@@ -1,9 +1,9 @@
 import "server-only";
 import { redirect } from "next/navigation";
 
-import { SignInForm } from "#/features/auth/components/sign-in-form";
-import { RedirectToSchema } from "#/features/auth/lib/schema";
-import { getSession } from "#/lib/better-auth/helper";
+import { SignInForm } from "#/features/auth/components/sign-in-form.tsx";
+import { RedirectToSchema } from "#/features/auth/lib/schema.ts";
+import { getSession } from "#/lib/better-auth/helper.ts";
 
 type SignInFetcherProps = {
   searchParams: Promise<{ redirectTo?: string | string[] }>;
