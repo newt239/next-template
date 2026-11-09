@@ -19,7 +19,15 @@ export const SignInRequestSchema = z.object({
 // アプリ内の絶対パスであることを Zod で検証済みのため typedRoutes の Route として扱う
 export const RedirectToSchema = z
   .string()
-  .regex(/^\/(?![/\\])/, "不正なリダイレクト先です")
+  .transform((value, ctx) => {
+    const base = "http://n";
+    const url = URL.parse(value, base);
+    if (!value.startsWith("/") || url?.origin !== base) {
+      ctx.addIssue({ code: "custom", message: "不正なリダイレクト先です" });
+      return z.NEVER;
+    }
+    return `${url.pathname}${url.search}${url.hash}`;
+  })
   .catch("/")
   // oxlint-disable-next-line typescript/no-unsafe-type-assertion
   .transform((value) => value as Route);
