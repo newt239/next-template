@@ -1,4 +1,4 @@
-import { Skeleton } from "#/components/ui/skeleton";
+import { Skeleton } from "#/components/ui/skeleton.tsx";
 
 export const TaskDetailSkeleton = () => (
   <div role="status" aria-label="タスクを読み込み中" className="space-y-4">

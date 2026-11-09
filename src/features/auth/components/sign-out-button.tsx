@@ -5,8 +5,8 @@ import { useTransition } from "react";
 import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
 
-import { Button } from "#/components/ui/button";
-import { authClient } from "#/lib/better-auth/client";
+import { Button } from "#/components/ui/button.tsx";
+import { authClient } from "#/lib/better-auth/client.ts";
 
 export const SignOutButton = () => {
   const router = useRouter();

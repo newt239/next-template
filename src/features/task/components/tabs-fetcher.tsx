@@ -1,10 +1,10 @@
 import "server-only";
 import { Suspense } from "react";
 
-import { TaskListFetcher } from "#/features/task/components/list-fetcher";
-import { TaskListSkeleton } from "#/features/task/components/list-skeleton";
-import { TaskTabs } from "#/features/task/components/tabs";
-import { TaskStatusSchema } from "#/features/task/lib/schema";
+import { TaskListFetcher } from "#/features/task/components/list-fetcher.tsx";
+import { TaskListSkeleton } from "#/features/task/components/list-skeleton.tsx";
+import { TaskTabs } from "#/features/task/components/tabs.tsx";
+import { TaskStatusSchema } from "#/features/task/lib/schema.ts";
 
 type TaskTabsFetcherProps = {
   searchParams: Promise<{ status?: string | string[] }>;

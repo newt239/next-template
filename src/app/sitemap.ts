@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { SITE_URL } from "#/lib/site";
+import { SITE_URL } from "#/lib/site.ts";
 
 const sitemap = (): MetadataRoute.Sitemap =>
   ["/", "/login", "/register"].map((path) => ({

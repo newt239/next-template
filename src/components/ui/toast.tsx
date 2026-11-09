@@ -5,7 +5,7 @@ import type { CSSProperties } from "react";
 import { type ToasterProps, Toaster as ToasterPrimitive } from "sonner";
 import { twJoin } from "tailwind-merge";
 
-import { useTheme } from "#/components/providers/use-theme";
+import { useTheme } from "#/components/providers/use-theme.ts";
 
 type ToastStyle = CSSProperties & Record<`--${string}`, string>;
 

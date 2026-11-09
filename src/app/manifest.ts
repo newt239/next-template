@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { SITE_NAME } from "#/lib/site";
+import { SITE_NAME } from "#/lib/site.ts";
 
 const manifest = (): MetadataRoute.Manifest => ({
   background_color: "#fafafa",

@@ -1,7 +1,7 @@
-import { Card, CardContent, CardHeader } from "#/components/ui/card";
-import { Heading } from "#/components/ui/heading";
-import { LinkButton } from "#/components/ui/link-button";
-import { Text } from "#/components/ui/text";
+import { Card, CardContent, CardHeader } from "#/components/ui/card.tsx";
+import { Heading } from "#/components/ui/heading.tsx";
+import { LinkButton } from "#/components/ui/link-button.tsx";
+import { Text } from "#/components/ui/text.tsx";
 
 const TaskNotFoundPage = () => (
   <main className="bg-bg min-h-dvh px-4 py-12 sm:px-6 sm:py-16">

@@ -2,9 +2,9 @@ import "server-only";
 import { and, desc, eq } from "drizzle-orm";
 import { cacheLife, cacheTag } from "next/cache";
 
-import { GetTasksQuerySchema, GetTasksResponseSchema } from "#/features/task/lib/schema";
-import { DBClient } from "#/lib/drizzle/client";
-import { taskItems } from "#/lib/drizzle/schema";
+import { GetTasksQuerySchema, GetTasksResponseSchema } from "#/features/task/lib/schema.ts";
+import { DBClient } from "#/lib/drizzle/client.ts";
+import { taskItems } from "#/lib/drizzle/schema.ts";
 
 type GetTasksOptions = {
   isCompleted?: boolean;

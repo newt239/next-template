@@ -2,12 +2,12 @@ import { ArrowLeftIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { Heading } from "#/components/ui/heading";
-import { Text } from "#/components/ui/text";
-import { getTaskById } from "#/features/task/actions/get";
-import { TaskIdParamsSchema } from "#/features/task/lib/schema";
-import { requireSession } from "#/lib/better-auth/helper";
-import { formatDateTime, formatRelativeTime } from "#/lib/time";
+import { Heading } from "#/components/ui/heading.tsx";
+import { Text } from "#/components/ui/text.tsx";
+import { getTaskById } from "#/features/task/actions/get.ts";
+import { TaskIdParamsSchema } from "#/features/task/lib/schema.ts";
+import { requireSession } from "#/lib/better-auth/helper.ts";
+import { formatDateTime, formatRelativeTime } from "#/lib/time.ts";
 
 type TaskDetailProps = {
   params: Promise<{ id: string }>;

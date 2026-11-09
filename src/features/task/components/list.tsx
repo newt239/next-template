@@ -1,8 +1,8 @@
-import { Card, CardContent } from "#/components/ui/card";
-import { Text } from "#/components/ui/text";
-import { TaskItem } from "#/features/task/components/item";
+import { Card, CardContent } from "#/components/ui/card.tsx";
+import { Text } from "#/components/ui/text.tsx";
+import { TaskItem } from "#/features/task/components/item.tsx";
 
-import type { Task } from "#/features/task/lib/type";
+import type { Task } from "#/features/task/lib/type.ts";
 
 type TaskListProps = {
   tasks: Task[];

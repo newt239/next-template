@@ -1,5 +1,5 @@
-import { Card, CardContent } from "#/components/ui/card";
-import { Skeleton } from "#/components/ui/skeleton";
+import { Card, CardContent } from "#/components/ui/card.tsx";
+import { Skeleton } from "#/components/ui/skeleton.tsx";
 
 export const TaskListSkeleton = () => (
   <div role="status" aria-label="タスクを読み込み中" className="flex flex-col gap-4">

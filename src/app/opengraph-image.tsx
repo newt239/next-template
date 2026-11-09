@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-import { SITE_NAME } from "#/lib/site";
+import { SITE_NAME } from "#/lib/site.ts";
 
 export const alt = SITE_NAME;
 

@@ -1,10 +1,10 @@
 "use client";
 
-import { Button } from "#/components/ui/button";
-import { Card, CardContent, CardHeader } from "#/components/ui/card";
-import { Heading } from "#/components/ui/heading";
-import { LinkButton } from "#/components/ui/link-button";
-import { Text } from "#/components/ui/text";
+import { Button } from "#/components/ui/button.tsx";
+import { Card, CardContent, CardHeader } from "#/components/ui/card.tsx";
+import { Heading } from "#/components/ui/heading.tsx";
+import { LinkButton } from "#/components/ui/link-button.tsx";
+import { Text } from "#/components/ui/text.tsx";
 
 type ErrorPageProps = {
   error: Error & { digest?: string };

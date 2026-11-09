@@ -10,7 +10,7 @@ import {
 } from "react-aria-components";
 import { twMerge } from "tailwind-merge";
 
-import { cx } from "#/lib/primitive";
+import { cx } from "#/lib/primitive.ts";
 
 import { type ButtonProps, Button } from "./button";
 

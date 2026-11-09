@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
-import { Heading } from "#/components/ui/heading";
-import { TaskDetail } from "#/features/task/components/detail";
-import { TaskDetailSkeleton } from "#/features/task/components/detail-skeleton";
+import { Heading } from "#/components/ui/heading.tsx";
+import { TaskDetailSkeleton } from "#/features/task/components/detail-skeleton.tsx";
+import { TaskDetail } from "#/features/task/components/detail.tsx";
 
 export const metadata: Metadata = {
   title: "タスク詳細",

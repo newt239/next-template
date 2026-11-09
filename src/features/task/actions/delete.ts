@@ -4,10 +4,10 @@ import { and, eq } from "drizzle-orm";
 import { updateTag } from "next/cache";
 import { z } from "zod";
 
-import { TaskIdSchema, TaskResponseSchema } from "#/features/task/lib/schema";
-import { getSession } from "#/lib/better-auth/helper";
-import { DBClient } from "#/lib/drizzle/client";
-import { taskItems } from "#/lib/drizzle/schema";
+import { TaskIdSchema, TaskResponseSchema } from "#/features/task/lib/schema.ts";
+import { getSession } from "#/lib/better-auth/helper.ts";
+import { DBClient } from "#/lib/drizzle/client.ts";
+import { taskItems } from "#/lib/drizzle/schema.ts";
 
 export const deleteTask = async (id: number) => {
   try {

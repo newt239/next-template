@@ -7,7 +7,7 @@ import {
   Input as InputPrimitive,
 } from "react-aria-components";
 
-import { cx } from "#/lib/primitive";
+import { cx } from "#/lib/primitive.ts";
 
 type InputProps = PrimitiveInputProps & {
   ref?: React.RefObject<HTMLInputElement>;

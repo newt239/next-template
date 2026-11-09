@@ -7,17 +7,17 @@ import Link from "next/link";
 import { ToggleButton } from "react-aria-components";
 import { toast } from "sonner";
 
-import { Button, buttonStyles } from "#/components/ui/button";
-import { Card, CardContent, CardTitle } from "#/components/ui/card";
-import { DialogClose, DialogFooter, DialogHeader } from "#/components/ui/dialog";
-import { ModalContent } from "#/components/ui/modal";
-import { Text } from "#/components/ui/text";
-import { deleteTask } from "#/features/task/actions/delete";
-import { updateTask } from "#/features/task/actions/update";
-import { cx } from "#/lib/primitive";
-import { formatDateTime, formatRelativeTime } from "#/lib/time";
+import { Button, buttonStyles } from "#/components/ui/button.tsx";
+import { Card, CardContent, CardTitle } from "#/components/ui/card.tsx";
+import { DialogClose, DialogFooter, DialogHeader } from "#/components/ui/dialog.tsx";
+import { ModalContent } from "#/components/ui/modal.tsx";
+import { Text } from "#/components/ui/text.tsx";
+import { deleteTask } from "#/features/task/actions/delete.ts";
+import { updateTask } from "#/features/task/actions/update.ts";
+import { cx } from "#/lib/primitive.ts";
+import { formatDateTime, formatRelativeTime } from "#/lib/time.ts";
 
-import type { Task } from "#/features/task/lib/type";
+import type { Task } from "#/features/task/lib/type.ts";
 
 type TaskItemProps = {
   task: Task;

@@ -3,11 +3,11 @@ import { Suspense } from "react";
 
 import Link from "next/link";
 
-import { Card, CardContent, CardHeader } from "#/components/ui/card";
-import { Heading } from "#/components/ui/heading";
-import { Text } from "#/components/ui/text";
-import { AuthFormSkeleton } from "#/features/auth/components/form-skeleton";
-import { SignInFetcher } from "#/features/auth/components/sign-in-fetcher";
+import { Card, CardContent, CardHeader } from "#/components/ui/card.tsx";
+import { Heading } from "#/components/ui/heading.tsx";
+import { Text } from "#/components/ui/text.tsx";
+import { AuthFormSkeleton } from "#/features/auth/components/form-skeleton.tsx";
+import { SignInFetcher } from "#/features/auth/components/sign-in-fetcher.tsx";
 
 export const metadata: Metadata = {
   title: "ログイン",

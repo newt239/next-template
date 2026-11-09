@@ -3,10 +3,10 @@ import type { Metadata } from "next";
 
 import { Geist_Mono, Inter } from "next/font/google";
 
-import { THEME_COLORS, themeScript } from "#/components/providers/theme";
-import { ThemeProvider } from "#/components/providers/theme-provider";
-import { Toast } from "#/components/ui/toast";
-import { SITE_NAME, SITE_URL } from "#/lib/site";
+import { ThemeProvider } from "#/components/providers/theme-provider.tsx";
+import { THEME_COLORS, themeScript } from "#/components/providers/theme.ts";
+import { Toast } from "#/components/ui/toast.tsx";
+import { SITE_NAME, SITE_URL } from "#/lib/site.ts";
 
 const inter = Inter({
   display: "swap",

@@ -1,8 +1,8 @@
 import "server-only";
-import { ThemeToggle } from "#/components/layout/theme-toggle";
-import { Text } from "#/components/ui/text";
-import { SignOutButton } from "#/features/auth/components/sign-out-button";
-import { requireSession } from "#/lib/better-auth/helper";
+import { ThemeToggle } from "#/components/layout/theme-toggle.tsx";
+import { Text } from "#/components/ui/text.tsx";
+import { SignOutButton } from "#/features/auth/components/sign-out-button.tsx";
+import { requireSession } from "#/lib/better-auth/helper.ts";
 
 export const AppBar = async () => {
   const session = await requireSession();

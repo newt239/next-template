@@ -1,7 +1,7 @@
 import { twMerge } from "tailwind-merge";
 import { tv } from "tailwind-variants";
 
-import { cx } from "#/lib/primitive";
+import { cx } from "#/lib/primitive.ts";
 
 import { Link } from "./link";
 

@@ -6,9 +6,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "moduleResolution": "bundler",
-    "paths": {
-      "#/*": ["./src/*"]
-    },
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "strict": true,
     "noUnusedLocals": true,

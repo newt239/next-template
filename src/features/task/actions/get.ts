@@ -2,9 +2,9 @@ import "server-only";
 import { and, eq } from "drizzle-orm";
 import { cacheLife, cacheTag } from "next/cache";
 
-import { TaskIdSchema, TaskResponseSchema } from "#/features/task/lib/schema";
-import { DBClient } from "#/lib/drizzle/client";
-import { taskItems } from "#/lib/drizzle/schema";
+import { TaskIdSchema, TaskResponseSchema } from "#/features/task/lib/schema.ts";
+import { DBClient } from "#/lib/drizzle/client.ts";
+import { taskItems } from "#/lib/drizzle/schema.ts";
 
 export const getTaskById = async (userId: string, id: number) => {
   "use cache";
