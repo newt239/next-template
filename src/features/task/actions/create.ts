@@ -1,7 +1,7 @@
 "use server";
 
 import { updateTag } from "next/cache";
-import { z } from "zod";
+import * as z from "zod";
 
 import { CreateTaskRequestSchema, TaskResponseSchema } from "#/features/task/lib/schema.ts";
 import { getSession } from "#/lib/better-auth/helper.ts";

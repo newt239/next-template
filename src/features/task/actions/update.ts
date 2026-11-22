@@ -2,7 +2,7 @@
 
 import { and, eq } from "drizzle-orm";
 import { updateTag } from "next/cache";
-import { z } from "zod";
+import * as z from "zod";
 
 import {
   TaskIdSchema,

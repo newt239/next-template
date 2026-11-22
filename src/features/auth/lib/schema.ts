@@ -1,6 +1,6 @@
 import type { Route } from "next";
 
-import { z } from "zod";
+import * as z from "zod";
 
 export const SignUpRequestSchema = z.object({
   email: z.email("メールアドレスの形式が正しくありません"),

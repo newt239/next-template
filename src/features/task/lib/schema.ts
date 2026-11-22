@@ -1,4 +1,4 @@
-import { z } from "zod";
+import * as z from "zod";
 
 const CreatedAtSchema = z.union([z.date(), z.number().int().min(0)]).transform((value) => {
   if (value instanceof Date) {
