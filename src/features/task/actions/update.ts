@@ -2,7 +2,6 @@
 
 import { and, eq } from "drizzle-orm";
 import { updateTag } from "next/cache";
-import * as z from "zod";
 
 import {
   TaskIdSchema,
@@ -20,12 +19,19 @@ export const updateTask = async (id: number, data: { title?: string; isCompleted
       return { error: "ログインが必要です", success: false } as const;
     }
 
-    const taskId = TaskIdSchema.parse(id);
-    const body = UpdateTaskRequestSchema.parse(data);
+    const taskId = TaskIdSchema.safeParse(id);
+    if (!taskId.success) {
+      return { error: taskId.error.issues[0].message, success: false } as const;
+    }
+
+    const body = UpdateTaskRequestSchema.safeParse(data);
+    if (!body.success) {
+      return { error: body.error.issues[0].message, success: false } as const;
+    }
 
     const updatedTasks = await DBClient.update(taskItems)
-      .set(body)
-      .where(and(eq(taskItems.id, taskId), eq(taskItems.userId, session.user.id)))
+      .set(body.data)
+      .where(and(eq(taskItems.id, taskId.data), eq(taskItems.userId, session.user.id)))
       .returning();
     const task = updatedTasks.at(0);
 
@@ -42,7 +48,7 @@ export const updateTask = async (id: number, data: { title?: string; isCompleted
   } catch (error) {
     console.error("タスク更新エラー:", error);
     return {
-      error: error instanceof z.ZodError ? error.issues[0].message : "タスクの更新に失敗しました",
+      error: "タスクの更新に失敗しました",
       success: false,
     } as const;
   }
