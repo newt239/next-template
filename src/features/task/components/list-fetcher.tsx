@@ -11,11 +11,11 @@ type TaskListFetcherProps = {
 
 export const TaskListFetcher = async ({ status }: TaskListFetcherProps) => {
   const session = await requireSession();
-  const response = await getTasks(session.user.id, { isCompleted: status === "completed" });
+  const tasks = await getTasks(session.user.id, status === "completed");
 
   return (
     <TaskList
-      tasks={response.tasks}
+      tasks={tasks}
       emptyMessage={
         status === "completed" ? "完了済みのタスクはありません" : "未着手のタスクはありません"
       }

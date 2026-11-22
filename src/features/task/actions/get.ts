@@ -2,7 +2,7 @@ import "server-only";
 import { and, eq } from "drizzle-orm";
 import { cacheLife, cacheTag } from "next/cache";
 
-import { TaskIdSchema, TaskResponseSchema } from "#/features/task/lib/schema.ts";
+import { TaskResponseSchema } from "#/features/task/lib/schema.ts";
 import { DBClient } from "#/lib/drizzle/client.ts";
 import { taskItems } from "#/lib/drizzle/schema.ts";
 
@@ -18,11 +18,9 @@ export const getTaskById = async (userId: string, id: number) => {
   cacheTag(`task-${userId}-${id}`);
 
   try {
-    const validId = TaskIdSchema.parse(id);
-
     const tasks = await DBClient.select()
       .from(taskItems)
-      .where(and(eq(taskItems.id, validId), eq(taskItems.userId, userId)))
+      .where(and(eq(taskItems.id, id), eq(taskItems.userId, userId)))
       .limit(1);
     const task = tasks.at(0);
 

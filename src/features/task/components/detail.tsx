@@ -22,8 +22,7 @@ export const TaskDetail = async ({ params }: Readonly<TaskDetailProps>) => {
   }
 
   const session = await requireSession();
-  const id = Number(parsedParams.data.id);
-  const task = await getTaskById(session.user.id, id);
+  const task = await getTaskById(session.user.id, parsedParams.data.id);
 
   if (!task) {
     notFound();
