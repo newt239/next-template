@@ -131,6 +131,7 @@ src/
 
 - Zod スキーマの変数名は PascalCase で命名し、末尾に `Schema` を付けてください。
 - エクスポートしない内部スキーマも同様に PascalCase で命名してください。
+- Zod は `import * as z from "zod"` でインポートしてください。
 
 ### コメントの禁止
 
@@ -162,7 +163,8 @@ src/
 - **Server Actions**: フォーム操作などのクライアントからの操作には`"use server"`ディレクティブを使用したServer Actionsを使用します
 - **データフェッチ関数**: 初期レンダリングのためのデータ取得には`import "server-only"`のみを使用した通常のサーバー関数を使用します
 - **サーバーサイドファイル**: すべてのサーバーサイドで実行されるファイルには`import "server-only"`を付与してください
-- **バリデーション**: すべてのServer Actionsとデータフェッチ関数ではZodスキーマを使用したバリデーションを実装してください
+- **バリデーション**: Server Actionsの引数や`params`・`searchParams`など、外部入力を受け取る境界でZodスキーマによる検証を行ってください。型の付いたサーバー内部の値を再検証する必要はありません
+- Server Actionsの入力は`safeParse`で検証し、失敗時のみZodのメッセージを返してください。`catch`では固定のエラーメッセージを返します
 
 #### 認可は必ずデータ層で行う
 
@@ -178,8 +180,6 @@ Server Actionsは`"use server"`を付けた時点で、UIを経由せずとも�
 ```ts
 "use server";
 
-import { z } from "zod";
-
 import { CreateTaskRequestSchema } from "#/features/task/lib/schema.ts";
 import { getSession } from "#/lib/better-auth/helper.ts";
 
@@ -190,7 +190,10 @@ export const createTask = async (data: { title: string }) => {
       return { error: "ログインが必要です", success: false } as const;
     }
 
-    const body = CreateTaskRequestSchema.parse(data);
+    const body = CreateTaskRequestSchema.safeParse(data);
+    if (!body.success) {
+      return { error: body.error.issues[0].message, success: false } as const;
+    }
     // 処理...
     return { success: true, task: result } as const;
   } catch (error) {
@@ -205,18 +208,15 @@ export const createTask = async (data: { title: string }) => {
 import "server-only";
 import { cacheLife, cacheTag } from "next/cache";
 
-import { GetTasksQuerySchema } from "#/features/task/lib/schema.ts";
-
-export const getTasks = async (userId: string, options?: { limit?: number; offset?: number }) => {
+export const getTasks = async (userId: string, isCompleted: boolean) => {
   "use cache";
 
   cacheLife({ expire: 3600, revalidate: 300, stale: 60 });
   cacheTag(`tasks-${userId}`);
 
   try {
-    const query = GetTasksQuerySchema.parse(options);
     // 処理...
-    return response;
+    return tasks;
   } catch (error) {
     throw new Error("エラーメッセージ", { cause: error });
   }

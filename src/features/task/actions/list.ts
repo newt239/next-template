@@ -1,18 +1,13 @@
 import "server-only";
 import { and, desc, eq } from "drizzle-orm";
 import { cacheLife, cacheTag } from "next/cache";
+import * as z from "zod";
 
-import { GetTasksQuerySchema, GetTasksResponseSchema } from "#/features/task/lib/schema.ts";
+import { TaskResponseSchema } from "#/features/task/lib/schema.ts";
 import { DBClient } from "#/lib/drizzle/client.ts";
 import { taskItems } from "#/lib/drizzle/schema.ts";
 
-type GetTasksOptions = {
-  isCompleted?: boolean;
-  limit?: number;
-  offset?: number;
-};
-
-export const getTasks = async (userId: string, options?: GetTasksOptions) => {
+export const getTasks = async (userId: string, isCompleted: boolean) => {
   "use cache";
 
   cacheLife({
@@ -24,28 +19,13 @@ export const getTasks = async (userId: string, options?: GetTasksOptions) => {
   cacheTag(`tasks-${userId}`);
 
   try {
-    const query = GetTasksQuerySchema.parse({
-      isCompleted: options?.isCompleted,
-      limit: options?.limit,
-      offset: options?.offset,
-    });
-
     const tasks = await DBClient.select()
       .from(taskItems)
-      .where(
-        and(
-          eq(taskItems.userId, userId),
-          query.isCompleted === undefined
-            ? undefined
-            : eq(taskItems.isCompleted, query.isCompleted),
-        ),
-      )
+      .where(and(eq(taskItems.userId, userId), eq(taskItems.isCompleted, isCompleted)))
       .orderBy(desc(taskItems.createdAt), desc(taskItems.id))
-      .limit(query.limit ?? 100)
-      .offset(query.offset ?? 0);
+      .limit(100);
 
-    const response = GetTasksResponseSchema.parse({ tasks });
-    return response;
+    return z.array(TaskResponseSchema).parse(tasks);
   } catch (error) {
     console.error("タスク一覧取得エラー:", error);
     throw new Error("サーバーエラーが発生しました", { cause: error });

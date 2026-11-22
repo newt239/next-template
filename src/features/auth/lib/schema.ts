@@ -1,6 +1,6 @@
 import type { Route } from "next";
 
-import { z } from "zod";
+import * as z from "zod";
 
 export const SignUpRequestSchema = z.object({
   email: z.email("メールアドレスの形式が正しくありません"),
@@ -19,12 +19,11 @@ export const SignInRequestSchema = z.object({
 // アプリ内の絶対パスであることを Zod で検証済みのため typedRoutes の Route として扱う
 export const RedirectToSchema = z
   .string()
-  .transform((value, ctx) => {
+  .transform((value) => {
     const base = "http://n";
     const url = URL.parse(value, base);
     if (!value.startsWith("/") || url?.origin !== base) {
-      ctx.addIssue({ code: "custom", message: "不正なリダイレクト先です" });
-      return z.NEVER;
+      return "/";
     }
     return `${url.pathname}${url.search}${url.hash}`;
   })

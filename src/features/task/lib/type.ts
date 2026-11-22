@@ -1,6 +1,6 @@
 import type { TaskResponseSchema, TaskStatusSchema } from "./schema";
 
-import type { z } from "zod";
+import type * as z from "zod";
 
 export type Task = z.infer<typeof TaskResponseSchema>;
 

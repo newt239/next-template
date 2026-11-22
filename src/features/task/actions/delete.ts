@@ -2,7 +2,6 @@
 
 import { and, eq } from "drizzle-orm";
 import { updateTag } from "next/cache";
-import { z } from "zod";
 
 import { TaskIdSchema, TaskResponseSchema } from "#/features/task/lib/schema.ts";
 import { getSession } from "#/lib/better-auth/helper.ts";
@@ -16,10 +15,13 @@ export const deleteTask = async (id: number) => {
       return { error: "ログインが必要です", success: false } as const;
     }
 
-    const taskId = TaskIdSchema.parse(id);
+    const taskId = TaskIdSchema.safeParse(id);
+    if (!taskId.success) {
+      return { error: taskId.error.issues[0].message, success: false } as const;
+    }
 
     const deletedTasks = await DBClient.delete(taskItems)
-      .where(and(eq(taskItems.id, taskId), eq(taskItems.userId, session.user.id)))
+      .where(and(eq(taskItems.id, taskId.data), eq(taskItems.userId, session.user.id)))
       .returning();
     const task = deletedTasks.at(0);
 
@@ -36,7 +38,7 @@ export const deleteTask = async (id: number) => {
   } catch (error) {
     console.error("タスク削除エラー:", error);
     return {
-      error: error instanceof z.ZodError ? error.issues[0].message : "タスクの削除に失敗しました",
+      error: "タスクの削除に失敗しました",
       success: false,
     } as const;
   }

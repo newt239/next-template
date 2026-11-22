@@ -1,7 +1,6 @@
 "use server";
 
 import { updateTag } from "next/cache";
-import { z } from "zod";
 
 import { CreateTaskRequestSchema, TaskResponseSchema } from "#/features/task/lib/schema.ts";
 import { getSession } from "#/lib/better-auth/helper.ts";
@@ -15,12 +14,15 @@ export const createTask = async (data: { title: string }) => {
       return { error: "ログインが必要です", success: false } as const;
     }
 
-    const body = CreateTaskRequestSchema.parse(data);
+    const body = CreateTaskRequestSchema.safeParse(data);
+    if (!body.success) {
+      return { error: body.error.issues[0].message, success: false } as const;
+    }
 
     const [task] = await DBClient.insert(taskItems)
       .values({
         isCompleted: false,
-        title: body.title,
+        title: body.data.title,
         userId: session.user.id,
       })
       .returning();
@@ -34,7 +36,7 @@ export const createTask = async (data: { title: string }) => {
   } catch (error) {
     console.error("タスク作成エラー:", error);
     return {
-      error: error instanceof z.ZodError ? error.issues[0].message : "タスクの作成に失敗しました",
+      error: "タスクの作成に失敗しました",
       success: false,
     } as const;
   }
